@@ -34,7 +34,7 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">{title}</h2>
           <h4 className="text-2xl font-bold mb-2 font-[family-name:var(--font-imFell)]">{subtitle}</h4>
           
-          <p className="text-sm mb-4">{text}</p>
+          <p className="text-lg font-semibold mb-4 font-[family-name:var(--font-imFell)]">{text}</p>
           <Link href={href}>
           <button className={`font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${fromColor} ${toColor}`}>
             {buttonText}
@@ -50,7 +50,7 @@ export default function Home() {
         <CardWithBackground 
           title="Lawful" 
           subtitle="(Standard Character)"
-          text="This is the description for the first card." 
+          text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook" 
           buttonText="Create Character"
           href="/standard"
           fromColor="from-sky-600" 
@@ -60,7 +60,7 @@ export default function Home() {
         <CardWithBackground 
           title="Neutral" 
           subtitle="(Quick Character)"
-          text="This is the description for the second card." 
+          text="Choose a race, class and aligment, then create the character with a single click." 
           buttonText="Create Character"
           href="/quick" 
           fromColor="from-emerald-600"
@@ -69,8 +69,8 @@ export default function Home() {
         />
         <CardWithBackground 
           title="Chaotic" 
-          subtitle="Custom Character"
-          text="This is the description for the third card." 
+          subtitle="(Custom Character)"
+          text="Manually input level and ability scores, start with a million silver. Pure chaos." 
           buttonText="Create Character" 
           href="/custom"
           fromColor="from-rose-600"
