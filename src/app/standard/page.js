@@ -2,14 +2,15 @@
 
 import { AccordionCustom } from "../ui/Accordion";
 import { Dropdown } from "../ui/DropDown";
-const dropdownItems = [{title: "item 1", value: "1"},];
+
+
 
 export default function Standard() {
   // The accordion component iterates over this array to create the standard page layout
   const CharacterInfo = () => {
     return (
      
-      <Dropdown />
+      <Dropdown dropdownItems={dropdownItems} dropdownName={"Class Select"}/>
    
     );
   };
@@ -18,6 +19,7 @@ export default function Standard() {
     { title: "Character Info", content: <CharacterInfo /> },
   ];
 
+  const dropdownItems = [{title: "item 1", value: 1},{title: "item 2", value: 2}];
 
 
   return (

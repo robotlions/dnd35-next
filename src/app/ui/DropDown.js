@@ -1,12 +1,13 @@
-export const Dropdown = (props) => {
+export function Dropdown(props) {
   return (
     <div>
-      <label htmlFor={props.dropdownName}></label>
-      <select name="test">
-        <option value="rigatoni">Rigatoni</option>
-        <option value="dave">Dave</option>
-        <option value="pumpernickel">Pumpernickel</option>
-        <option value="reeses">Reeses</option>
+      <label htmlFor={props.dropdownName}>{props.dropdownName}</label>
+      <select name={props.dropdownName}>
+        {props.dropdownItems.map((item, index)=>{
+          return(
+            <option key={index} value={item.value}>{item.title}</option>
+          )
+        })}
       </select>
     </div>
   );
