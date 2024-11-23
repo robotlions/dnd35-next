@@ -40,7 +40,7 @@ export function AccordionCustom(props) {
                 openIndex === index ? "max-h-screen" : "max-h-0"
               }`}
             >
-              <div className="px-6 py-4 text-gray-600 text-base">{item.content}</div>
+              <div className="px-6 py-4 text-gray-600 text-base min-h-52">{item.content}</div>
             </div>
             <br/>
           </div>
