@@ -13,7 +13,7 @@ const TopNav = () => {
     { linkName: "Standard Character", href: "/standard" },
     {
       linkName: "Quick Character",
-      href: "/standard",
+      href: "/quick",
     },
     { linkName: "Custom Character", href: "/custom" },
     
@@ -40,7 +40,7 @@ const TopNav = () => {
           },
         )}
         >
-        <p className="hidden md:block">{link.linkName}</p>
+        <p className="hidden md:block font-bold text-xl mb-2 font-[family-name:var(--font-imFellSC)]">{link.linkName}</p>
       </Link>
       </li>
     )})
@@ -54,7 +54,8 @@ const TopNav = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-center" >
-             <><h6>Rolled School</h6><p>D&D 3.5 Character Creator</p></>
+             <><h2 className="text-4xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
+             Rolled School</h2><p className="font-bold text-xl mb-2 font-[family-name:var(--font-imFell)]">D&D 3.5 Character Creator</p></>
             </Link>
           </div>
 
@@ -105,7 +106,7 @@ const TopNav = () => {
           <div className="hidden md:flex md:items-center md:space-x-4">
           <ul className="flex justify-between items-center mx-5 text-base">
                 <LinkMap />
-                <Link href="https://robotlions.com" className="font-semibold ml-5">robotlions.com</Link>
+                <Link href="https://robotlions.com" className="font-bold text-xl mb-2 font-[family-name:var(--font-imFell)] ml-5">robotlions.com</Link>
             </ul>
           </div>
         </div>
