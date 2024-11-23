@@ -10,6 +10,8 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'parchment': '#F5E6C1',
+        'flame': '#ff4500',
       },
     },
   },
