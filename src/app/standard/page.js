@@ -4,6 +4,9 @@ import { AccordionCustom } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
 import { BaseAttack } from "../components/BaseAttack";
+import { StartingSilver } from "../components/Inventory";
+import * as Skills from "../components/Skills";
+
 
 export default function Standard() {
   const [modeChosen, setModeChosen] = useState(false);
@@ -169,31 +172,99 @@ export default function Standard() {
             munchkinMode={munchkinMode}
           />
         </div>
-        <div className="col">
-                    <CharInfo.SavingThrows
-                      level={level}
-                      selectedClass={selectedClass}
-                      dex={dex}
-                      con={con}
-                      wis={wis}
-                    />
-                  </div>
-                  <div className="col">
-                    <BaseAttack
-                      str={str}
-                      level={level}
-                      selectedClass={selectedClass}
-                      setBaseAttack={setBaseAttack}
-                    />
-                  </div>
+        <div>
+          <CharInfo.SavingThrows
+            level={level}
+            selectedClass={selectedClass}
+            dex={dex}
+            con={con}
+            wis={wis}
+          />
+        </div>
+        <div>
+          <BaseAttack
+            str={str}
+            level={level}
+            selectedClass={selectedClass}
+            setBaseAttack={setBaseAttack}
+          />
+        </div>
       </div>
     </>
+  );
+
+  const moneyHeader = (
+    <div className="accTitle">
+      <h2>Money</h2>
+      <span className="text-lg">{totalSilver > 0 && <div>{totalSilver} silver</div>}</span>
+    </div>
+  );
+
+  const moneyBlock = (
+    <div>
+      <p>Silver: {totalSilver}</p>
+      <StartingSilver
+        setWeaponsMoney={setWeaponsMoney}
+        setArmorMoney={setArmorMoney}
+        totalSilver={totalSilver}
+        selectedClass={selectedClass}
+        setTotalSilver={setTotalSilver}
+        munchkinMode={munchkinMode}
+      />
+    </div>
+  );
+
+  const skillsHeader = (
+
+    <div className="accTitle">
+                  <h2>Skills</h2>
+
+                  {learnedSkillsArray.length > 0 && (
+                    <div className="text-base">
+                      <div>
+                        <span>
+                          <em>Class</em>
+                        </span>
+                        {learnedSkillsArray
+                          .filter((item) => item[selectedClass] === true)
+                          .map((item, index) => (
+                            <span key={index}> - {item.skillName}</span>
+                          ))}
+                      </div>
+                      <div>
+                        <span>
+                          <em>Cross-class</em>
+                        </span>
+                        {learnedSkillsArray
+                          .filter((item) => item[selectedClass] === false)
+                          .map((item, index) => (
+                            <span key={index}> - {item.skillName}</span>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+  );
+
+  const skillsBlock = (
+
+    <>
+     <Skills.SkillsMain
+                  level={level}
+                  int={int}
+                  selectedRace={selectedRace}
+                  selectedClass={selectedClass}
+                  setLearnedSkillsArray={setLearnedSkillsArray}
+                  setSkillPoints={setSkillPoints}
+                /></>
   );
   // The accordion component iterates over this array to create the standard page layout
 
   const accordionItems = [
     { title: charInfoHeader, content: charInfoBlock },
     { title: abilitiesHeader, content: abilitiesBlock },
+    { title: moneyHeader, content: moneyBlock },
+    {title: skillsHeader, content: skillsBlock},
   ];
   return (
     <div className="justify-items-center">
