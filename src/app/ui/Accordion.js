@@ -17,7 +17,7 @@ export function AccordionCustom(props) {
               onClick={() => toggleAccordion(index)}
               className="flex justify-between rounded items-center w-full py-4 px-6 text-left text-gray-600 hover:bg-gray-200 focus:outline-none text-lg bg-gray-100"
             >
-              <span>{item.title}</span>
+              <span className="text-3xl font-black font-[family-name:var(--font-imFellSC)]">{item.title}</span>
               <svg
                 className={`w-5 h-5 transform transition-transform ${
                   openIndex === index ? "rotate-180" : ""
@@ -40,7 +40,7 @@ export function AccordionCustom(props) {
                 openIndex === index ? "max-h-screen" : "max-h-0"
               }`}
             >
-              <div className="px-6 py-4 text-gray-600 text-base min-h-52">{item.content}</div>
+              <div className="px-6 py-4 text-gray-600 text-base min-h-52 font-[family-name:var(--font-imFell)]">{item.content}</div>
             </div>
             <br/>
           </div>

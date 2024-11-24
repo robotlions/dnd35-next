@@ -25,6 +25,7 @@ export const CharName = (props) => {
 
   const nameInput = (
     <input
+      className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
       type="text"
       placeholder="Character Name"
       onChange={(e) => {
@@ -36,9 +37,14 @@ export const CharName = (props) => {
   );
 
   const nameDisplay = (
-    <button className="nameDisplay" onClick={() => setEditing(true)}>
-      {thisState}
-    </button>
+    <div className="text-xl">
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => setEditing(true)}
+      >
+        {thisState}
+      </button>
+    </div>
   );
 
   return <div>{editing === true ? nameInput : nameDisplay}</div>;
@@ -50,9 +56,9 @@ export const Level = (props) => {
 
   const levelInput = (
     <Dropdown
-      onSelect={(eventKey) => {
-        setThisState(eventKey);
-        props.setLevel(parseInt(eventKey));
+      onSelect={(value) => {
+        setThisState(value);
+        props.setLevel(parseInt(value));
         props.setBasicEdited(true);
       }}
     >
@@ -60,26 +66,26 @@ export const Level = (props) => {
         variant="secondary rounded-0 bg-gradient"
         title={thisState}
       >
-        <Dropdown.Item eventKey={1}>1</Dropdown.Item>
-        <Dropdown.Item eventKey={2}>2</Dropdown.Item>
-        <Dropdown.Item eventKey={3}>3</Dropdown.Item>
-        <Dropdown.Item eventKey={4}>4</Dropdown.Item>
-        <Dropdown.Item eventKey={5}>5</Dropdown.Item>
-        <Dropdown.Item eventKey={6}>6</Dropdown.Item>
-        <Dropdown.Item eventKey={7}>7</Dropdown.Item>
-        <Dropdown.Item eventKey={8}>8</Dropdown.Item>
-        <Dropdown.Item eventKey={9}>9</Dropdown.Item>
-        <Dropdown.Item eventKey={10}>10</Dropdown.Item>
-        <Dropdown.Item eventKey={11}>11</Dropdown.Item>
-        <Dropdown.Item eventKey={12}>12</Dropdown.Item>
-        <Dropdown.Item eventKey={13}>13</Dropdown.Item>
-        <Dropdown.Item eventKey={14}>14</Dropdown.Item>
-        <Dropdown.Item eventKey={15}>15</Dropdown.Item>
-        <Dropdown.Item eventKey={16}>16</Dropdown.Item>
-        <Dropdown.Item eventKey={17}>17</Dropdown.Item>
-        <Dropdown.Item eventKey={18}>18</Dropdown.Item>
-        <Dropdown.Item eventKey={19}>19</Dropdown.Item>
-        <Dropdown.Item eventKey={20}>20</Dropdown.Item>
+        <Dropdown.Item value={1}>1</Dropdown.Item>
+        <Dropdown.Item value={2}>2</Dropdown.Item>
+        <Dropdown.Item value={3}>3</Dropdown.Item>
+        <Dropdown.Item value={4}>4</Dropdown.Item>
+        <Dropdown.Item value={5}>5</Dropdown.Item>
+        <Dropdown.Item value={6}>6</Dropdown.Item>
+        <Dropdown.Item value={7}>7</Dropdown.Item>
+        <Dropdown.Item value={8}>8</Dropdown.Item>
+        <Dropdown.Item value={9}>9</Dropdown.Item>
+        <Dropdown.Item value={10}>10</Dropdown.Item>
+        <Dropdown.Item value={11}>11</Dropdown.Item>
+        <Dropdown.Item value={12}>12</Dropdown.Item>
+        <Dropdown.Item value={13}>13</Dropdown.Item>
+        <Dropdown.Item value={14}>14</Dropdown.Item>
+        <Dropdown.Item value={15}>15</Dropdown.Item>
+        <Dropdown.Item value={16}>16</Dropdown.Item>
+        <Dropdown.Item value={17}>17</Dropdown.Item>
+        <Dropdown.Item value={18}>18</Dropdown.Item>
+        <Dropdown.Item value={19}>19</Dropdown.Item>
+        <Dropdown.Item value={20}>20</Dropdown.Item>
       </DropdownButton>
     </Dropdown>
   );
@@ -182,15 +188,15 @@ export const AlignmentSelect = (props) => {
   }
 
   const alignmentDropdownItems = [
-    { eventKey: "Lawful Good", value: "Lawful Good" },
-    { eventKey: "Neutral Good", value: "Neutral Good" },
-    { eventKey: "Chaotic Good", value: "Chaotic Good" },
-    { eventKey: "Lawful Neutral", value: "Lawful Neutral" },
-    { eventKey: "True Neutral", value: "True Neutral" },
-    { eventKey: "Chaotic Neutral", value: "Chaotic Neutral" },
-    { eventKey: "Lawful Evil", value: "Lawful Evil" },
-    { eventKey: "Neutral Evil", value: "Neutral Evil" },
-    { eventKey: "Chaotic Evil", value: "Chaotic Evil" },
+    { eventkey: "Lawful Good", value: "Lawful Good" },
+    { eventkey: "Neutral Good", value: "Neutral Good" },
+    { eventkey: "Chaotic Good", value: "Chaotic Good" },
+    { eventkey: "Lawful Neutral", value: "Lawful Neutral" },
+    { eventkey: "True Neutral", value: "True Neutral" },
+    { eventkey: "Chaotic Neutral", value: "Chaotic Neutral" },
+    { eventkey: "Lawful Evil", value: "Lawful Evil" },
+    { eventkey: "Neutral Evil", value: "Neutral Evil" },
+    { eventkey: "Chaotic Evil", value: "Chaotic Evil" },
   ];
 
   return (
@@ -206,10 +212,61 @@ export const AlignmentSelect = (props) => {
       {alignmentDropdownItems.map((item, index) => {
         return (
           <option key={index} value={item.value}>
-            {item.eventKey}
+            {item.value}
           </option>
         );
       })}
+    </select>
+  );
+};
+
+export const ClassSelect = (props) => {
+  const [thisState, setThisState] = useState("Fighter");
+
+  return (
+    <select
+      defaultValue={"Fighter"}
+      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      onChange={(e) => {
+        setThisState(e.target.value);
+        props.setBasicEdited(true);
+        props.setSelectedClass(e.target.value);
+      }}
+    >
+      <option value="Barbarian">Barbarian</option>
+      <option value="Bard">Bard</option>
+      <option value="Cleric">Cleric</option>
+      <option value="Druid">Druid</option>
+      <option value="Fighter">Fighter</option>
+      <option value="Monk">Monk</option>
+      <option value="Paladin">Paladin</option>
+      <option value="Ranger">Ranger</option>
+      <option value="Rogue">Rogue</option>
+      <option value="Sorcerer">Sorcerer</option>
+      <option value="Wizard">Wizard</option>
+    </select>
+  );
+};
+
+export const RaceSelect = (props) => {
+  const [thisState, setThisState] = useState("human");
+
+  return (
+    <select
+      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      onChange={(e) => {
+        props.setBasicEdited(true);
+        setThisState(e.target.value);
+        props.setSelectedRace(e.target.value);
+      }}
+    >
+      <option value="human">Human</option>
+      <option value="dwarf">Dwarf</option>
+      <option value="elf">Elf</option>
+      <option value="gnome">Gnome</option>
+      <option value="halfElf">Half-elf</option>
+      <option value="halfOrc">Half-orc</option>
+      <option value="halfling">Halfling</option>
     </select>
   );
 };

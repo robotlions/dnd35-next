@@ -19,7 +19,7 @@ import { RaceInfo } from '../Races/RaceTables';
       <option eventkey="halfling">Halfling</option>
     </select>
   )
-  }
+  };
   
   
 
