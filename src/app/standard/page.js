@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { AccordionCustom } from "../ui/Accordion";
-import { Dropdown } from "../ui/DropDown";
 import { AlignmentSelect } from "../components/CharInfo";
 
 
@@ -12,9 +11,9 @@ export default function Standard() {
   
   const CharacterInfo = () => {
     return (
-     
+     <>
       <AlignmentSelect setAlignment={setAlignment} alignment={alignment}/>
-   
+   </>
     );
   };
   

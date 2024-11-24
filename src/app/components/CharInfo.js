@@ -3,7 +3,6 @@ import * as RaceBonuses from "../Races/AbilBonuses";
 import * as ClassTables from "../Classes/ClassTables";
 import * as RaceTables from "../Races/RaceTables";
 import * as SavingThrowTables from "../Classes/SavingThrowsTables";
-import { Dropdown } from "../ui/DropDown";
 
 function rando(min, max) {
   return Math.floor(Math.random() * max) + min;
@@ -191,45 +190,37 @@ export const SavingThrows = (props) => {
 };
 
 export const AlignmentSelect = (props) => {
-  const [thisState, setThisState] = useState("Lawful Good");
+
+  function handleSelect(e){
+    props.setAlignment(e.target.value);
+  }
 
   const alignmentDropdownItems = [
-    {displayName: "Lawful Good", value: "Lawful Good"},
-    {displayName: "Neutral Good", value: "Neutral Good"},
-    {displayName: "Chaotic Good", value: "Chaotic Good"},
-    {displayName: "Lawful Neutral", value: "Lawful Neutral"},
-    {displayName: "True Neutral", value: "True Neutral"},
-    {displayName: "Chaotic Neutral", value: "Chaotic Neutral"},
-    {displayName: "Lawful Evil", value: "Lawful Evil"},
-    {displayName: "Neutral Evil", value: "Neutral Evil"},
-    {displayName: "Chaotic Evil", value: "Chaotic Evil"},
+    {eventKey: "Lawful Good", value: "Lawful Good"},
+    {eventKey: "Neutral Good", value: "Neutral Good"},
+    {eventKey: "Chaotic Good", value: "Chaotic Good"},
+    {eventKey: "Lawful Neutral", value: "Lawful Neutral"},
+    {eventKey: "True Neutral", value: "True Neutral"},
+    {eventKey: "Chaotic Neutral", value: "Chaotic Neutral"},
+    {eventKey: "Lawful Evil", value: "Lawful Evil"},
+    {eventKey: "Neutral Evil", value: "Neutral Evil"},
+    {eventKey: "Chaotic Evil", value: "Chaotic Evil"},
 
   ]
 
   return (
-    // <Dropdown
-    //   onSelect={(eventKey) => {
-    //     setThisState(eventKey);
-    //     props.setAlignment(eventKey);
-    //     props.setBasicEdited(true);
-    //   }}
-    // >
-    //   <DropdownButton variant="secondary rounded-0 bg-gradient" title={thisState}>
-    //     <Dropdown.Item eventKey="Lawful Good">Lawful Good</Dropdown.Item>
-    //     <Dropdown.Item eventKey="Neutral Good">Neutral Good</Dropdown.Item>
-    //     <Dropdown.Item eventKey="Chaotic Good">Chaotic Good</Dropdown.Item>
-    //     <Dropdown.Item eventKey="Lawful Neutral">Lawful Neutral</Dropdown.Item>
-    //     <Dropdown.Item eventKey="True Neutral">True Neutral</Dropdown.Item>
-    //     <Dropdown.Item eventKey="Chaotic Neutral">
-    //       Chaotic Neutral
-    //     </Dropdown.Item>
-    //     <Dropdown.Item eventKey="Lawful Evil">Lawful Evil</Dropdown.Item>
-    //     <Dropdown.Item eventKey="Neutral Evil">Neutral Evil</Dropdown.Item>
-    //     <Dropdown.Item eventKey="Chaotic Evil">ChaoticEvil</Dropdown.Item>
-    //   </DropdownButton>
-    // </Dropdown>
-    <>
-    <Dropdown setState={props.setAlignment} dropdownItems={alignmentDropdownItems} dropdownName={"Alignment Select"}/>
-    <p>{props.alignment}</p></>
+    
+    
+    <div>
+  <label htmlFor="alignments" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose Alignment</label>
+  <select value={props.alignment} onChange={(e)=>handleSelect(e)} id="alignments" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option value="Choose" disabled>Choose Alignment</option>
+        {alignmentDropdownItems.map((item, index)=>{
+          return(
+            <option key={index} value={item.value}>{item.eventKey}</option>
+          )
+        })}
+      </select>
+    </div>
   );
 };
