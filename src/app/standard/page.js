@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { AccordionCustom } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
+import { NewScores } from "../components/AbilityScores";
+import { BaseAttack } from "../components/BaseAttack";
 
 export default function Standard() {
   const [modeChosen, setModeChosen] = useState(false);
@@ -54,18 +56,16 @@ export default function Standard() {
               selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)}{" "}
             {selectedClass}
           </p>
-          <div className="text-xl">
-          <span style={{ fontWeight: "bold" }}>Level: </span>
-          <span style={{ marginRight: 10 }}>{level}</span>
+          <div className="text-lg">
+            <span style={{ fontWeight: "bold" }}>Level: </span>
+            <span style={{ marginRight: 10 }}>{level}</span>
 
-          <span style={{ fontWeight: "bold" }}>Hit Points: </span>
-          <span style={{ marginRight: 10 }}>{hp}</span>
+            <span style={{ fontWeight: "bold" }}>Hit Points: </span>
+            <span style={{ marginRight: 10 }}>{hp}</span>
 
-          <span style={{ fontWeight: "bold" }}>
-            Armor Class:{" "}
-          </span>
-          {ac}
-        </div>
+            <span style={{ fontWeight: "bold" }}>Armor Class: </span>
+            {ac}
+          </div>
         </div>
       )}
     </div>
@@ -130,9 +130,71 @@ export default function Standard() {
       </div>
     </>
   );
+
+  const abilitiesHeader = (
+    <div className="accTitle">
+      <h2>Abilities and Saves</h2>
+      {rolled === true && (
+        <div className="text-lg">
+          <span style={{ fontWeight: "bold" }}>Str </span>
+          {str}&nbsp;
+          <span style={{ fontWeight: "bold" }}>Dex </span>
+          {dex}&nbsp;
+          <span style={{ fontWeight: "bold" }}>Con </span>
+          {con}&nbsp;
+          <span style={{ fontWeight: "bold" }}>Int </span>
+          {int}&nbsp;
+          <span style={{ fontWeight: "bold" }}>Wis </span>
+          {wis}&nbsp;
+          <span style={{ fontWeight: "bold" }}>Chr </span>
+          {chr}&nbsp;
+        </div>
+      )}
+    </div>
+  );
+
+  const abilitiesBlock = (
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-5">
+        <div className="col-span-3">
+          <NewScores
+            setStr={setStr}
+            setChr={setChr}
+            setInt={setInt}
+            setWis={setWis}
+            setDex={setDex}
+            setCon={setCon}
+            selectedRace={selectedRace}
+            setRolled={setRolled}
+            munchkinMode={munchkinMode}
+          />
+        </div>
+        <div className="col">
+                    <CharInfo.SavingThrows
+                      level={level}
+                      selectedClass={selectedClass}
+                      dex={dex}
+                      con={con}
+                      wis={wis}
+                    />
+                  </div>
+                  <div className="col">
+                    <BaseAttack
+                      str={str}
+                      level={level}
+                      selectedClass={selectedClass}
+                      setBaseAttack={setBaseAttack}
+                    />
+                  </div>
+      </div>
+    </>
+  );
   // The accordion component iterates over this array to create the standard page layout
 
-  const accordionItems = [{ title: charInfoHeader, content: charInfoBlock }];
+  const accordionItems = [
+    { title: charInfoHeader, content: charInfoBlock },
+    { title: abilitiesHeader, content: abilitiesBlock },
+  ];
   return (
     <div className="justify-items-center">
       <div className="w-10/12 mt-10">
