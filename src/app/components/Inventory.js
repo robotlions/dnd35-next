@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import { ArmorTable } from "../Equipment/ArmorTables";
 import { ShieldTable } from "../Equipment/ArmorTables";
 import * as WeaponTables from "../Equipment/WeaponTables";
 // import button from "react-bootstrap/button";
 // import Modal from "react-bootstrap/Modal";
+import { Modal } from "@material-tailwind/react";
 
 function rando(min, max) {
   return Math.floor(Math.random() * max) + min;
@@ -11,7 +13,7 @@ function rando(min, max) {
 
 //in a previous release, the total silver was calculated by the starting silver minus
 //  the sum of these two equations. I've sinced changed the way the silver is calculated,
-  // but I'm holding on to these two functions just in case.
+// but I'm holding on to these two functions just in case.
 
 //   function armorCost() {
 //   return armorArray.reduce((a, b) => a + b.cost, 0);
@@ -21,8 +23,8 @@ function rando(min, max) {
 //   return weaponArray.reduce((a, b) => a + b.cost, 0);
 // }
 
-function armorBonusTotal(){
-  return armorArray.reduce((a,b) => a + b.armorBonus, 0);
+function armorBonusTotal() {
+  return armorArray.reduce((a, b) => a + b.armorBonus, 0);
 }
 
 const dObj = {
@@ -39,8 +41,6 @@ const dObj = {
   Wizard: 3,
 };
 
-
-
 let armorArray = [];
 let weaponArray = [];
 
@@ -50,11 +50,10 @@ export const ArmorMain = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   const purchasedArmor = armorArray.map((item, index) => (
-    <div key={index} className="row">
+    <div key={index} className="grid grid-cols-6">
       <div className="col">
-        <p style={{fontWeight: "bold"}}>{item.armorName}</p>
+        <p style={{ fontWeight: "bold" }}>{item.armorName}</p>
       </div>
       <div className="col">
         <p>Armor Bonus: {item.armorBonus}</p>
@@ -75,16 +74,21 @@ export const ArmorMain = (props) => {
         <p>Speed 20': {item.speed20}</p>
       </div>
       <div className="col">
-        <button variant="warning bg-gradient" onClick={() => removeItem(item, index)}>Remove</button>
+        <button
+          variant="warning bg-gradient"
+          onClick={() => removeItem(item, index)}
+        >
+          Remove
+        </button>
       </div>
     </div>
   ));
 
-  function removeItem(item, index){
+  function removeItem(item, index) {
     armorArray.splice(index, 1);
-    props.setArmorMoney(props.armorMoney-item.cost);
-    props.setTotalSilver(props.totalSilver+item.cost);
-    props.setArmorBonusTotal(armorBonusTotal())
+    props.setArmorMoney(props.armorMoney - item.cost);
+    props.setTotalSilver(props.totalSilver + item.cost);
+    props.setArmorBonusTotal(armorBonusTotal());
   }
 
   // function addItem(item){
@@ -98,117 +102,85 @@ export const ArmorMain = (props) => {
   //   }
   // }
 
-  function handleCheck(event, item){
+  function handleCheck(event, item) {
     if (event.target.checked === true) {
-      if(item.cost < props.totalSilver){
+      if (item.cost < props.totalSilver) {
         armorArray.push(item);
-        props.setArmorMoney(props.armorMoney+item.cost);
-        props.setTotalSilver(props.totalSilver-item.cost);
+        props.setArmorMoney(props.armorMoney + item.cost);
+        props.setTotalSilver(props.totalSilver - item.cost);
         props.setArmorBonusTotal(armorBonusTotal());
-        }
-        else{
-          return(
-          alert("Not enough money, chump!"),
-          event.target.checked = false
-          )
-        }
+      } else {
+        return (
+          alert("Not enough money, chump!"), (event.target.checked = false)
+        );
+      }
+    }
+    if (event.target.checked === false) {
+      let i = armorArray.indexOf(item);
+      armorArray.splice(i, 1);
+      props.setArmorMoney(props.armorMoney - item.cost);
+      props.setTotalSilver(props.totalSilver + item.cost);
+      props.setArmorBonusTotal(armorBonusTotal());
+    }
   }
-  if(event.target.checked===false){
-    let i = armorArray.indexOf(item);
-    armorArray.splice(i, 1);
-    props.setArmorMoney(props.armorMoney-item.cost);
-    props.setTotalSilver(props.totalSilver+item.cost);
-    props.setArmorBonusTotal(armorBonusTotal())
+
+  function armorDisplay(filter) {
+    return Object.values(ArmorTable)
+      .filter((item) => item.cat === filter)
+      .map((item, index) => (
+        <div key={index} className="grid grid-cols-6">
+          <div className="col-1">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={item.featName}
+              onChange={(event) => handleCheck(event, item)}
+            />
+          </div>
+          <div className="col-3">{item.armorName}</div>
+          <div className="col-2">{item.cost}</div>
+          <div className="col-2">{item.armorBonus}</div>
+          <div className="col-2">{item.maxDexBonus}</div>
+          <div className="col-2">{item.armorCheck}</div>
+        </div>
+      ));
   }
-}
-
-  function armorDisplay(filter){
-    return(
-   Object.values(ArmorTable).filter((item)=>item.cat===filter).map((item, index) => (
-    <div key={index} className="row">
-      <div className="col-1">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        value={item.featName}
-        onChange={(event) => handleCheck(event, item)}
-      />
-      </div>
-      <div className="col-3">
-        {item.armorName}
-      </div>
-      <div className="col-2">
-        {item.cost}
-      </div>
-      <div className="col-2">
-        {item.armorBonus}
-      </div>
-      <div className="col-2">
-        {item.maxDexBonus}
-      </div>
-      <div className="col-2">
-        {item.armorCheck}
-      </div>
-     
-    </div>
-  )))};
-
-  
 
   const shieldDisplay = Object.values(ShieldTable).map((item, index) => (
-    <div key={index} className="row">
+    <div key={index} className="grid grid-cols-6">
       <div className="col-1">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        value={item.featName}
-        onChange={(event) => handleCheck(event, item)}
-      />
+        <input
+          className="form-check-input"
+          type="checkbox"
+          value={item.featName}
+          onChange={(event) => handleCheck(event, item)}
+        />
       </div>
-      <div className="col-3">
-        {item.armorName}
-      </div>
-      <div className="col-2">
-        {item.cost}
-      </div>
-      <div className="col-2">
-        {item.armorBonus}
-      </div>
-      <div className="col-2">
-        {item.maxDexBonus}
-      </div>
-      <div className="col-2">
-        {item.armorCheck}
-      </div>
-     
+      <div className="col-3">{item.armorName}</div>
+      <div className="col-2">{item.cost}</div>
+      <div className="col-2">{item.armorBonus}</div>
+      <div className="col-2">{item.maxDexBonus}</div>
+      <div className="col-2">{item.armorCheck}</div>
     </div>
   ));
 
-useEffect(()=>{ 
-  props.setArmorArray(armorArray)
-}, [props]);
-  
+  useEffect(() => {
+    props.setArmorArray(armorArray);
+  }, [props]);
 
   return (
     <>
-     
+    <div className="row">
+            <div className="text-lg">Silver: {props.totalSilver}</div>
+          </div>
+         {armorArray.length > 0 && <h3 className="text-xl font-semibold">Purchased Armor</h3> }
       <div>{purchasedArmor}</div>
-     
 
-      <button variant="secondary rounded-0 bg-gradient" onClick={handleShow}>
-        Buy Armor and Shields
-      </button>
-
-      <Modal size="lg" show={show} onHide={handleClose}>
-        <Modal.Header closebutton>
-          <Modal.Title>Add Armor</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="row">
-            <div>Silver: {props.totalSilver}</div>
-          <div className="col-1">
-              
-            </div>
+      <div>
+        <div>
+        <h3 className="text-xl font-semibold">Armor Shop</h3>
+          <div className="grid grid-cols-6">
+            <div></div>
             <div className="col-3">
               <p>Armor</p>
             </div>
@@ -233,14 +205,9 @@ useEffect(()=>{
           {armorDisplay("heavy")}
           <h5>Shields</h5>
           {shieldDisplay}
-        </Modal.Body>
-        <Modal.Footer>
-          <button variant="secondary rounded-0 bg-gradient" onClick={handleClose}>
-            Close
-          </button>
-         
-        </Modal.Footer>
-      </Modal>
+        </div>
+        <div></div>
+      </div>
     </>
   );
 };
@@ -251,32 +218,30 @@ export const WeaponsMain = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  function handleCheck(event, item){
+  function handleCheck(event, item) {
     if (event.target.checked === true) {
-      if(item.cost < props.totalSilver){
+      if (item.cost < props.totalSilver) {
         weaponArray.push(item);
-        props.setWeaponsMoney(props.weaponsMoney+item.cost);
-        props.setTotalSilver(props.totalSilver-item.cost);
-        }
-        else{
-          return(
-          alert("Not enough money, chump!"),
-          event.target.checked = false
-          )
-        }
-  }
-  if(event.target.checked===false){
-    let i = weaponArray.indexOf(item);
-    weaponArray.splice(i, 1);
-    props.setWeaponsMoney(props.weaponsMoney-item.cost);
-    props.setTotalSilver(props.totalSilver+item.cost);
-  }
+        props.setWeaponsMoney(props.weaponsMoney + item.cost);
+        props.setTotalSilver(props.totalSilver - item.cost);
+      } else {
+        return (
+          alert("Not enough money, chump!"), (event.target.checked = false)
+        );
+      }
+    }
+    if (event.target.checked === false) {
+      let i = weaponArray.indexOf(item);
+      weaponArray.splice(i, 1);
+      props.setWeaponsMoney(props.weaponsMoney - item.cost);
+      props.setTotalSilver(props.totalSilver + item.cost);
+    }
   }
 
   const purchasedWeapons = weaponArray.map((item, index) => (
-    <div key={index} className="row">
+    <div key={index} className="grid grid-cols-6">
       <div className="col">
-        <p style={{fontWeight: "bold"}}>{item.weaponName}</p>
+        <p style={{ fontWeight: "bold" }}>{item.weaponName}</p>
       </div>
       <div className="col">
         <p>Damage, Small: {item.dmgS}</p>
@@ -293,17 +258,22 @@ export const WeaponsMain = (props) => {
       <div className="col">
         <p>Type: {item.type}</p>
       </div>
-      
+
       <div className="col">
-        <button variant="warning bg-gradient" onClick={() => removeItem(item, index)}>Remove</button>
+        <button
+          variant="warning bg-gradient"
+          onClick={() => removeItem(item, index)}
+        >
+          Remove
+        </button>
       </div>
     </div>
   ));
 
-  function removeItem(item, index){
+  function removeItem(item, index) {
     weaponArray.splice(index, 1);
-    props.setWeaponsMoney(props.weaponsMoney-item.cost);
-    props.setTotalSilver(props.totalSilver+item.cost);
+    props.setWeaponsMoney(props.weaponsMoney - item.cost);
+    props.setTotalSilver(props.totalSilver + item.cost);
   }
 
   // function addItem(item){
@@ -316,61 +286,44 @@ export const WeaponsMain = (props) => {
   //   }
   // }
 
-  function weaponDisplay(filter){
-return(
-   Object.values(WeaponTables.weaponsList).filter((item)=>item.cat===filter).map((item, index) => (
-    <div key={index} className="row">
-      <div className="col-1">
-      <input
-        className="form-check-input"
-        type="checkbox"
-        value={item.featName}
-        onChange={(event) => handleCheck(event, item)}
-      />
-      </div>
-      <div className="col-3">
-        {item.weaponName}
-      </div>
-      <div className="col-2">
-        {item.cost}
-      </div>
-      <div className="col-2">
-        {item.dmgS}
-      </div>
-      <div className="col-2">
-        {item.dmgM}
-      </div>
-      <div className="col-2">
-        {item.range}
-      </div>
-     
-    </div>
-  )))};
+  function weaponDisplay(filter) {
+    return Object.values(WeaponTables.weaponsList)
+      .filter((item) => item.cat === filter)
+      .map((item, index) => (
+        <div key={index} className="grid grid-cols-6">
+          <div className="col-1">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={item.featName}
+              onChange={(event) => handleCheck(event, item)}
+            />
+          </div>
+          <div className="col-3">{item.weaponName}</div>
+          <div className="col-2">{item.cost}</div>
+          <div className="col-2">{item.dmgS}</div>
+          <div className="col-2">{item.dmgM}</div>
+          <div className="col-2">{item.range}</div>
+        </div>
+      ));
+  }
 
-  useEffect(()=>{
-    props.setWeaponArray(weaponArray)
-  },[props])
+  useEffect(() => {
+    props.setWeaponArray(weaponArray);
+  }, [props]);
 
   return (
     <>
-     
-      <div>{purchasedWeapons}</div>
-     
-
-      <button variant="secondary rounded-0 bg-gradient" onClick={handleShow}>
-        Buy Weapons
-      </button>
-
-      <Modal size="lg" show={show} onHide={handleClose}>
-        <Modal.Header closebutton>
-          <Modal.Title>Add Weapons</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="row">
             <div>Silver: {props.totalSilver}</div>
-          <div className="col-1">
-              
-            </div>
+{weaponArray.length>0 && <h3 className="text-xl font-semibold">Purchased Weapons</h3>}
+      <div>{purchasedWeapons}</div>
+
+     
+      
+          <div className="">
+            <h3 className="text-xl font-semibold">Weapons Shop</h3>
+            <div className="grid grid-cols-6">
+            <div className="col-1"></div>
             <div className="col-3">
               <p>Weapon</p>
             </div>
@@ -386,6 +339,7 @@ return(
             <div className="col-2">
               <p>Range</p>
             </div>
+            </div>
           </div>
           <h5>Simple Weapons</h5>
           {weaponDisplay("simple")}
@@ -395,20 +349,10 @@ return(
           {weaponDisplay("exotic")}
           <h5>Ammunition</h5>
           {weaponDisplay("ammunition")}
-        </Modal.Body>
-        <Modal.Footer>
-          <button variant="secondary rounded-0 bg-gradient" onClick={handleClose}>
-            Close
-          </button>
-         
-        </Modal.Footer>
-      </Modal>
+        
     </>
   );
 };
-
-
-
 
 export const StartingSilver = (props) => {
   function genSilver() {
@@ -421,71 +365,69 @@ export const StartingSilver = (props) => {
       : props.setTotalSilver(rolledGold * 100);
   }
 
-  const normalMoney = props.totalSilver === 0 ? (
-    <button variant="secondary rounded-0 bg-gradient" onClick={() => genSilver()}>
-      Roll Starting Money
-    </button>
-  ) : (
-    <button
-      variant="secondary rounded-0 bg-gradient"
-      onClick={() => {
-        props.setTotalSilver(0);
-        props.setArmorMoney(0);
-        props.setWeaponsMoney(0);
-        armorArray = [];
-        weaponArray = [];
-      }}
-    >
-      Reset money and inventory
-    </button>
-  );
+  const normalMoney =
+    props.totalSilver === 0 ? (
+      <button
+        variant="secondary rounded-0 bg-gradient"
+        onClick={() => genSilver()}
+      >
+        Roll Starting Money
+      </button>
+    ) : (
+      <button
+        variant="secondary rounded-0 bg-gradient"
+        onClick={() => {
+          props.setTotalSilver(0);
+          props.setArmorMoney(0);
+          props.setWeaponsMoney(0);
+          armorArray = [];
+          weaponArray = [];
+        }}
+      >
+        Reset money and inventory
+      </button>
+    );
 
-
-
-
-  return (
-    <>
-    {!props.munchkinMode && normalMoney}
-     
-    </>
-  );
+  return <>{!props.munchkinMode && normalMoney}</>;
 };
-
 
 export const WeaponsAndArmorQuick = (props) => {
   // const [show, setShow] = useState(false);
 
-//  function buyArmor(){
-//   Object.values(ArmorTable).filter((item)=>item.startingEquipment.includes(props.selectedClass)).map((item, index) => (armorArray.push(item)
-//   ))
-//   setShow(!show);
-//   console.log(armorArray)
-//  }
-
+  //  function buyArmor(){
+  //   Object.values(ArmorTable).filter((item)=>item.startingEquipment.includes(props.selectedClass)).map((item, index) => (armorArray.push(item)
+  //   ))
+  //   setShow(!show);
+  //   console.log(armorArray)
+  //  }
 
   const purchasedArmor = armorArray.map((item, index) => (
-    <div key={index} className="row" style={{fontSize:"small",lineHeight:.9}}>
+    <div
+      key={index}
+      className="row"
+      style={{ fontSize: "small", lineHeight: 0.9 }}
+    >
       <div className="col-4">
-        <p style={{fontWeight: "bold"}}>{item.armorName}</p>
+        <p style={{ fontWeight: "bold" }}>{item.armorName}</p>
       </div>
       <div className="col-4">
         <p>Armor Bonus: {item.armorBonus}</p>
       </div>
-     
+
       <div className="col-4">
         <p>Armor Check: {item.armorCheck}</p>
       </div>
-     
-      
     </div>
   ));
 
-  
-
   const purchasedWeapons = weaponArray.map((item, index) => (
-    <div key={index} className="row" style={{fontSize:"small",lineHeight:.9}}>
+    <div
+      key={index}
+      className="row"
+      style={{ fontSize: "small", lineHeight: 0.9 }}
+    >
       <div className="col-4">
-        <p style={{fontWeight: "bold"}}>{item.weaponName}</p>
+        <p style={{ fontWeight: "bold" }}>{item.weaponName}</p>
       </div>
       <div className="col-4">
         <p>Damage: {item.dmgM}</p>
@@ -493,38 +435,34 @@ export const WeaponsAndArmorQuick = (props) => {
       <div className="col-4">
         <p>Type: {item.type}</p>
       </div>
-      
     </div>
   ));
 
-
-useEffect(()=>{ 
-  if(props.quickCreate===true){
-    armorArray=[];
-    weaponArray=[];
-    props.setArmorArray([]);
-    props.setWeaponArray([]);
-  Object.values(ArmorTable).filter((item)=>item.startingEquipment.includes(props.selectedClass)).map((item, index) => (armorArray.push(item)
-))
-Object.values(WeaponTables.weaponsList).filter((item)=>item.startingEquipment.includes(props.selectedClass)).map((item, index) => (weaponArray.push(item)
-   
-))
-Object.values(ShieldTable).filter((item)=>item.startingEquipment.includes(props.selectedClass)).map((item, index) => (armorArray.push(item)
-   
-))
-  props.setArmorArray(armorArray);
-  props.setWeaponArray(weaponArray);
-  props.setArmorBonusTotal(armorBonusTotal());
-
-}
-}, [props.quickCreate, props.selectedClass]);
-  
+  useEffect(() => {
+    if (props.quickCreate === true) {
+      armorArray = [];
+      weaponArray = [];
+      props.setArmorArray([]);
+      props.setWeaponArray([]);
+      Object.values(ArmorTable)
+        .filter((item) => item.startingEquipment.includes(props.selectedClass))
+        .map((item, index) => armorArray.push(item));
+      Object.values(WeaponTables.weaponsList)
+        .filter((item) => item.startingEquipment.includes(props.selectedClass))
+        .map((item, index) => weaponArray.push(item));
+      Object.values(ShieldTable)
+        .filter((item) => item.startingEquipment.includes(props.selectedClass))
+        .map((item, index) => armorArray.push(item));
+      props.setArmorArray(armorArray);
+      props.setWeaponArray(weaponArray);
+      props.setArmorBonusTotal(armorBonusTotal());
+    }
+  }, [props.quickCreate, props.selectedClass]);
 
   return (
     <>
       <div>{purchasedArmor}</div>
-      <div>{purchasedWeapons}</div> 
+      <div>{purchasedWeapons}</div>
     </>
   );
 };
-

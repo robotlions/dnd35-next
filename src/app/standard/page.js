@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { AccordionCustom } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
@@ -8,6 +8,7 @@ import { StartingSilver } from "../components/Inventory";
 import * as Skills from "../components/Skills";
 import * as Feats from "../components/Feats";
 import * as Spells from "../components/Spells";
+import * as Inventory from "../components/Inventory";
 
 export default function Standard() {
   const [modeChosen, setModeChosen] = useState(false);
@@ -64,6 +65,46 @@ export default function Standard() {
       setSpellCaster(false);
     }
   }, [selectedClass]);
+
+  function weaponHeaderDisplay() {
+    let counts = {};
+    weaponArray.forEach(function (x) {
+      counts[x.weaponName] = (counts[x.weaponName] || 0) + 1;
+    });
+    let weaponSet = [...new Set(weaponArray)];
+
+    return weaponSet.map((item, index) => (
+      <div key={index}>
+        <p style={{ fontWeight: "bold" }}>
+          {counts[item.weaponName] > 1 && counts[item.weaponName]}{" "}
+          {item.weaponName} -{" "}
+          <span style={{ fontWeight: "normal" }}>
+            Damage: {item.dmgS}/{item.dmgM}
+          </span>
+        </p>
+      </div>
+    ));
+  }
+
+  function armorHeaderDisplay() {
+    let counts = {};
+    armorArray.forEach(function (x) {
+      counts[x.armorName] = (counts[x.armorName] || 0) + 1;
+    });
+    let armorSet = [...new Set(armorArray)];
+
+    return armorSet.map((item, index) => (
+      <div key={index}>
+        <p style={{ fontWeight: "bold" }}>
+          {counts[item.armorName] > 1 && counts[item.armorName]}{" "}
+          {item.armorName} -{" "}
+          <span style={{ fontWeight: "normal" }}>
+            Armor Bonus: {item.armorBonus}
+          </span>
+        </p>
+      </div>
+    ));
+  }
 
   const charInfoHeader = (
     <div className="accTitle">
@@ -299,21 +340,70 @@ export default function Standard() {
   );
 
   const spellsContent = (
-<div>
-    {spellCaster === true ? (
-      <Spells.SpellsMain
-        level={level}
+    <div>
+      {spellCaster === true ? (
+        <Spells.SpellsMain
+          level={level}
+          updated={updated}
+          setUpdated={setUpdated}
+          selectedClass={selectedClass}
+          setSpellArray={setSpellArray}
+          int={int}
+          wis={wis}
+          chr={chr}
+        />
+      ) : (
+        `${selectedClass} is not a spellcasting class.`
+      )}
+    </div>
+  );
+
+  const armorHeader = (
+    <div>
+      <div className="accTitle">
+        <h2>Armor</h2>
+
+        {armorHeaderDisplay()}
+      </div>
+    </div>
+  );
+
+  const armorContent = (
+    <div className="text-sm">
+      <Inventory.ArmorMain
+        setArmorBonusTotal={setArmorBonusTotal}
+        totalSilver={totalSilver}
+        setTotalSilver={setTotalSilver}
+        setArmorMoney={setArmorMoney}
         updated={updated}
         setUpdated={setUpdated}
-        selectedClass={selectedClass}
-        setSpellArray={setSpellArray}
-        int={int}
-        wis={wis}
-        chr={chr}
+        setArmorArray={setArmorArray}
+        weaponsMoney={weaponsMoney}
       />
-    ) : (
-      `${selectedClass} is not a spellcasting class.`
-    )}
+    </div>
+  );
+
+  const weaponsHeader = (
+    <div>
+      <div className="accTitle">
+        <h2>Weapons</h2>
+
+        {weaponHeaderDisplay()}
+      </div>
+    </div>
+  );
+
+  const weaponsContent = (
+    <div className="text-sm">
+      <Inventory.WeaponsMain
+                  totalSilver={totalSilver}
+                  setTotalSilver={setTotalSilver}
+                  setWeaponsMoney={setWeaponsMoney}
+                  updated={updated}
+                  setUpdated={setUpdated}
+                  setWeaponArray={setWeaponArray}
+                  armorMoney={armorMoney}
+                />
     </div>
   )
 
@@ -323,9 +413,11 @@ export default function Standard() {
     { title: charInfoHeader, content: charInfoContent },
     { title: abilitiesHeader, content: abilitiesContent },
     { title: moneyHeader, content: moneyContent },
+    { title: armorHeader, content: armorContent },
+    {title: weaponsHeader, content: weaponsContent},
     { title: skillsHeader, content: skillsContent },
     { title: featsHeader, content: featsContent },
-    {title: "Spells", content: spellsContent}
+    { title: "Spells", content: spellsContent },
   ];
   return (
     <div className="justify-items-center">
