@@ -3,9 +3,6 @@ import React from "react";
 import { ArmorTable } from "../Equipment/ArmorTables";
 import { ShieldTable } from "../Equipment/ArmorTables";
 import * as WeaponTables from "../Equipment/WeaponTables";
-// import button from "react-bootstrap/button";
-// import Modal from "react-bootstrap/Modal";
-import { Modal } from "@material-tailwind/react";
 
 function rando(min, max) {
   return Math.floor(Math.random() * max) + min;
