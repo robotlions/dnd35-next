@@ -1,16 +1,19 @@
 "use client";
-
+import { useState } from "react";
 import { AccordionCustom } from "../ui/Accordion";
 import { Dropdown } from "../ui/DropDown";
+import { AlignmentSelect } from "../components/CharInfo";
 
 
 
 export default function Standard() {
   // The accordion component iterates over this array to create the standard page layout
+  const [alignment, setAlignment] = useState("Lawful Good")
+  
   const CharacterInfo = () => {
     return (
      
-      <Dropdown dropdownItems={dropdownItems} dropdownName={"Class Select"}/>
+      <AlignmentSelect setAlignment={setAlignment} alignment={alignment}/>
    
     );
   };
@@ -19,7 +22,6 @@ export default function Standard() {
     { title: "Character Info", content: <CharacterInfo /> },
   ];
 
-  const dropdownItems = [{title: "item 1", value: 1},{title: "item 2", value: 2}];
 
 
   return (

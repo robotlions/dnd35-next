@@ -193,27 +193,43 @@ export const SavingThrows = (props) => {
 export const AlignmentSelect = (props) => {
   const [thisState, setThisState] = useState("Lawful Good");
 
+  const alignmentDropdownItems = [
+    {displayName: "Lawful Good", value: "Lawful Good"},
+    {displayName: "Neutral Good", value: "Neutral Good"},
+    {displayName: "Chaotic Good", value: "Chaotic Good"},
+    {displayName: "Lawful Neutral", value: "Lawful Neutral"},
+    {displayName: "True Neutral", value: "True Neutral"},
+    {displayName: "Chaotic Neutral", value: "Chaotic Neutral"},
+    {displayName: "Lawful Evil", value: "Lawful Evil"},
+    {displayName: "Neutral Evil", value: "Neutral Evil"},
+    {displayName: "Chaotic Evil", value: "Chaotic Evil"},
+
+  ]
+
   return (
-    <Dropdown
-      onSelect={(eventKey) => {
-        setThisState(eventKey);
-        props.setAlignment(eventKey);
-        props.setBasicEdited(true);
-      }}
-    >
-      <DropdownButton variant="secondary rounded-0 bg-gradient" title={thisState}>
-        <Dropdown.Item eventKey="Lawful Good">Lawful Good</Dropdown.Item>
-        <Dropdown.Item eventKey="Neutral Good">Neutral Good</Dropdown.Item>
-        <Dropdown.Item eventKey="Chaotic Good">Chaotic Good</Dropdown.Item>
-        <Dropdown.Item eventKey="Lawful Neutral">Lawful Neutral</Dropdown.Item>
-        <Dropdown.Item eventKey="True Neutral">True Neutral</Dropdown.Item>
-        <Dropdown.Item eventKey="Chaotic Neutral">
-          Chaotic Neutral
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="Lawful Evil">Lawful Evil</Dropdown.Item>
-        <Dropdown.Item eventKey="Neutral Evil">Neutral Evil</Dropdown.Item>
-        <Dropdown.Item eventKey="Chaotic Evil">ChaoticEvil</Dropdown.Item>
-      </DropdownButton>
-    </Dropdown>
+    // <Dropdown
+    //   onSelect={(eventKey) => {
+    //     setThisState(eventKey);
+    //     props.setAlignment(eventKey);
+    //     props.setBasicEdited(true);
+    //   }}
+    // >
+    //   <DropdownButton variant="secondary rounded-0 bg-gradient" title={thisState}>
+    //     <Dropdown.Item eventKey="Lawful Good">Lawful Good</Dropdown.Item>
+    //     <Dropdown.Item eventKey="Neutral Good">Neutral Good</Dropdown.Item>
+    //     <Dropdown.Item eventKey="Chaotic Good">Chaotic Good</Dropdown.Item>
+    //     <Dropdown.Item eventKey="Lawful Neutral">Lawful Neutral</Dropdown.Item>
+    //     <Dropdown.Item eventKey="True Neutral">True Neutral</Dropdown.Item>
+    //     <Dropdown.Item eventKey="Chaotic Neutral">
+    //       Chaotic Neutral
+    //     </Dropdown.Item>
+    //     <Dropdown.Item eventKey="Lawful Evil">Lawful Evil</Dropdown.Item>
+    //     <Dropdown.Item eventKey="Neutral Evil">Neutral Evil</Dropdown.Item>
+    //     <Dropdown.Item eventKey="Chaotic Evil">ChaoticEvil</Dropdown.Item>
+    //   </DropdownButton>
+    // </Dropdown>
+    <>
+    <Dropdown setState={props.setAlignment} dropdownItems={alignmentDropdownItems} dropdownName={"Alignment Select"}/>
+    <p>{props.alignment}</p></>
   );
 };
