@@ -1,12 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AccordionCustom } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
 import { BaseAttack } from "../components/BaseAttack";
 import { StartingSilver } from "../components/Inventory";
 import * as Skills from "../components/Skills";
-
+import * as Feats from "../components/Feats";
+import * as Spells from "../components/Spells";
 
 export default function Standard() {
   const [modeChosen, setModeChosen] = useState(false);
@@ -48,6 +49,22 @@ export default function Standard() {
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
 
+  useEffect(() => {
+    if (
+      selectedClass === "Wizard" ||
+      selectedClass === "Bard" ||
+      selectedClass === "Paladin" ||
+      selectedClass === "Sorcerer" ||
+      selectedClass === "Druid" ||
+      selectedClass === "Ranger" ||
+      selectedClass === "Cleric"
+    ) {
+      setSpellCaster(true);
+    } else {
+      setSpellCaster(false);
+    }
+  }, [selectedClass]);
+
   const charInfoHeader = (
     <div className="accTitle">
       <h2>{nameCheck}</h2>
@@ -74,7 +91,7 @@ export default function Standard() {
     </div>
   );
 
-  const charInfoBlock = (
+  const charInfoContent = (
     <>
       <div className="grid grid-cols-1 md:grid-cols-5">
         <div className="col-span-2">
@@ -156,7 +173,7 @@ export default function Standard() {
     </div>
   );
 
-  const abilitiesBlock = (
+  const abilitiesContent = (
     <>
       <div className="grid grid-cols-1 md:grid-cols-5">
         <div className="col-span-3">
@@ -196,11 +213,13 @@ export default function Standard() {
   const moneyHeader = (
     <div className="accTitle">
       <h2>Money</h2>
-      <span className="text-lg">{totalSilver > 0 && <div>{totalSilver} silver</div>}</span>
+      <span className="text-lg">
+        {totalSilver > 0 && <div>{totalSilver} silver</div>}
+      </span>
     </div>
   );
 
-  const moneyBlock = (
+  const moneyContent = (
     <div>
       <p>Silver: {totalSilver}</p>
       <StartingSilver
@@ -215,56 +234,98 @@ export default function Standard() {
   );
 
   const skillsHeader = (
-
     <div className="accTitle">
-                  <h2>Skills</h2>
+      <h2>Skills</h2>
 
-                  {learnedSkillsArray.length > 0 && (
-                    <div className="text-base">
-                      <div>
-                        <span>
-                          <em>Class</em>
-                        </span>
-                        {learnedSkillsArray
-                          .filter((item) => item[selectedClass] === true)
-                          .map((item, index) => (
-                            <span key={index}> - {item.skillName}</span>
-                          ))}
-                      </div>
-                      <div>
-                        <span>
-                          <em>Cross-class</em>
-                        </span>
-                        {learnedSkillsArray
-                          .filter((item) => item[selectedClass] === false)
-                          .map((item, index) => (
-                            <span key={index}> - {item.skillName}</span>
-                          ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+      {learnedSkillsArray.length > 0 && (
+        <div className="text-base">
+          <div>
+            <span>
+              <em>Class</em>
+            </span>
+            {learnedSkillsArray
+              .filter((item) => item[selectedClass] === true)
+              .map((item, index) => (
+                <span key={index}> - {item.skillName}</span>
+              ))}
+          </div>
+          <div>
+            <span>
+              <em>Cross-class</em>
+            </span>
+            {learnedSkillsArray
+              .filter((item) => item[selectedClass] === false)
+              .map((item, index) => (
+                <span key={index}> - {item.skillName}</span>
+              ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 
-  const skillsBlock = (
-
+  const skillsContent = (
     <>
-     <Skills.SkillsMain
-                  level={level}
-                  int={int}
-                  selectedRace={selectedRace}
-                  selectedClass={selectedClass}
-                  setLearnedSkillsArray={setLearnedSkillsArray}
-                  setSkillPoints={setSkillPoints}
-                /></>
+      <Skills.SkillsMain
+        level={level}
+        int={int}
+        selectedRace={selectedRace}
+        selectedClass={selectedClass}
+        setLearnedSkillsArray={setLearnedSkillsArray}
+        setSkillPoints={setSkillPoints}
+      />
+    </>
   );
+
+  const featsHeader = (
+    <div className="accTitle">
+      <h2>Feats</h2>
+      {featArray.map((item, index) => (
+        <div key={index}>{item.featName}</div>
+      ))}
+    </div>
+  );
+
+  const featsContent = (
+    <div>
+      <Feats.FeatsMain
+        featsSlots={featSlots}
+        setFeatSlots={setFeatSlots}
+        setFeatArray={setFeatArray}
+        selectedRace={selectedRace}
+        level={level}
+      />
+    </div>
+  );
+
+  const spellsContent = (
+<div>
+    {spellCaster === true ? (
+      <Spells.SpellsMain
+        level={level}
+        updated={updated}
+        setUpdated={setUpdated}
+        selectedClass={selectedClass}
+        setSpellArray={setSpellArray}
+        int={int}
+        wis={wis}
+        chr={chr}
+      />
+    ) : (
+      `${selectedClass} is not a spellcasting class.`
+    )}
+    </div>
+  )
+
   // The accordion component iterates over this array to create the standard page layout
 
   const accordionItems = [
-    { title: charInfoHeader, content: charInfoBlock },
-    { title: abilitiesHeader, content: abilitiesBlock },
-    { title: moneyHeader, content: moneyBlock },
-    {title: skillsHeader, content: skillsBlock},
+    { title: charInfoHeader, content: charInfoContent },
+    { title: abilitiesHeader, content: abilitiesContent },
+    { title: moneyHeader, content: moneyContent },
+    { title: skillsHeader, content: skillsContent },
+    { title: featsHeader, content: featsContent },
+    {title: "Spells", content: spellsContent}
   ];
   return (
     <div className="justify-items-center">
