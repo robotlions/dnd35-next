@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, Fragment } from "react";
-import { AccordionCustom } from "../ui/Accordion";
+import { AccordionMulti } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
 import { BaseAttack } from "../components/BaseAttack";
@@ -11,8 +11,6 @@ import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 
 export default function Standard() {
-  const [modeChosen, setModeChosen] = useState(false);
-  const [quickMode, setQuickMode] = useState(false);
   const [selectedRace, setSelectedRace] = useState("human");
   const [selectedClass, setSelectedClass] = useState("Fighter");
   const [con, setCon] = useState(10);
@@ -40,7 +38,6 @@ export default function Standard() {
   const [rolled, setRolled] = useState(false);
   const [featArray, setFeatArray] = useState([]);
   const [featSlots, setFeatSlots] = useState(0);
-  const [fontThemeFantasy, setFontThemeFantasy] = useState(false);
   const [munchkinMode, setMunchkinMode] = useState(false);
   const [basicEdited, setBasicEdited] = useState(false);
   const [spellCaster, setSpellCaster] = useState(false);
@@ -369,7 +366,7 @@ export default function Standard() {
   );
 
   const armorContent = (
-    <div className="text-sm">
+    <div className="text-xs">
       <Inventory.ArmorMain
         setArmorBonusTotal={setArmorBonusTotal}
         totalSilver={totalSilver}
@@ -394,18 +391,18 @@ export default function Standard() {
   );
 
   const weaponsContent = (
-    <div className="text-sm">
+    <div className="text-xs">
       <Inventory.WeaponsMain
-                  totalSilver={totalSilver}
-                  setTotalSilver={setTotalSilver}
-                  setWeaponsMoney={setWeaponsMoney}
-                  updated={updated}
-                  setUpdated={setUpdated}
-                  setWeaponArray={setWeaponArray}
-                  armorMoney={armorMoney}
-                />
+        totalSilver={totalSilver}
+        setTotalSilver={setTotalSilver}
+        setWeaponsMoney={setWeaponsMoney}
+        updated={updated}
+        setUpdated={setUpdated}
+        setWeaponArray={setWeaponArray}
+        armorMoney={armorMoney}
+      />
     </div>
-  )
+  );
 
   // The accordion component iterates over this array to create the standard page layout
 
@@ -414,7 +411,7 @@ export default function Standard() {
     { title: abilitiesHeader, content: abilitiesContent },
     { title: moneyHeader, content: moneyContent },
     { title: armorHeader, content: armorContent },
-    {title: weaponsHeader, content: weaponsContent},
+    { title: weaponsHeader, content: weaponsContent },
     { title: skillsHeader, content: skillsContent },
     { title: featsHeader, content: featsContent },
     { title: "Spells", content: spellsContent },
@@ -422,7 +419,7 @@ export default function Standard() {
   return (
     <div className="justify-items-center">
       <div className="w-10/12 mt-10">
-        <AccordionCustom accordionItems={accordionItems} />
+        <AccordionMulti accordionItems={accordionItems} />
       </div>
     </div>
   );

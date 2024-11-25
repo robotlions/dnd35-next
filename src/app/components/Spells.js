@@ -47,9 +47,9 @@ export const SpellListing = (props) => {
             type="checkbox"
             value={item.spellName}
             onChange={(event) => handleCheck(event, item)}
-          />
+          />&nbsp;
           <label
-            style={{ fontWeight: "bold" }}
+            
             className="form-check-label"
             htmlFor="flexCheckDefault"
           >
@@ -60,62 +60,62 @@ export const SpellListing = (props) => {
   }
 
   return (
-    <div>
-      <h6>Level 0</h6>
-      <div className="grid grid-cols-2 md:grid-cols-4">{displayList(0)}</div>
+    <div className="text-xs">
+      <h6 className="font-semibold">Level 0</h6>
+      <div className="grid grid-cols-2 md:grid-cols-5">{displayList(0)}</div>
 
       {displayList(1).length > 0 && (
         <>
-          <h6>Level 1</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(1)}</div>
+          <h6 className="font-semibold">Level 1</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(1)}</div>
         </>
       )}
       {displayList(2).length > 0 && (
         <>
-          <h6>Level 2</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(2)}</div>
+          <h6 className="font-semibold">Level 2</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(2)}</div>
         </>
       )}
       {displayList(3).length > 0 && (
         <>
-          <h6>Level 3</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(3)}</div>
+          <h6 className="font-semibold">Level 3</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(3)}</div>
         </>
       )}
       {displayList(4).length > 0 && (
         <>
-          <h6>Level 4</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(4)}</div>
+          <h6 className="font-semibold">Level 4</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(4)}</div>
         </>
       )}
       {displayList(5).length > 0 && (
         <>
-          <h6>Level 5</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(5)}</div>
+          <h6 className="font-semibold">Level 5</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(5)}</div>
         </>
       )}
       {displayList(6).length > 0 && (
         <>
-          <h6>Level 6</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(6)}</div>
+          <h6 className="font-semibold">Level 6</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(6)}</div>
         </>
       )}
       {displayList(7).length > 0 && (
         <>
-          <h6>Level 7</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(7)}</div>
+          <h6 className="font-semibold">Level 7</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(7)}</div>
         </>
       )}
       {displayList(8).length > 0 && (
         <>
-          <h6>Level 8</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(8)}</div>
+          <h6 className="font-semibold">Level 8</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(8)}</div>
         </>
       )}
       {displayList(9).length > 0 && (
         <>
-          <h6>Level 9</h6>
-          <div className="grid grid-cols-2 md:grid-cols-4">{displayList(9)}</div>
+          <h6 className="font-semibold">Level 9</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(9)}</div>
         </>
       )}
     </div>
@@ -295,7 +295,7 @@ export const QuickSpellsMain = (props) => {
   ));
 
   if (loaded) {
-    return <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{spellDisplay}</div>;
+    return <div className="grid grid-cols-2 md:grid-cols-5 gap-3">{spellDisplay}</div>;
   } else {
     return <div></div>;
   }

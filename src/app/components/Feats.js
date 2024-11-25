@@ -80,14 +80,16 @@ export const FeatsMain = (props) => {
   }
 
   return (
-    <div>
-      <p>Available feats: {featSlots}</p>
-      <h5>General Feats</h5>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{featDisplay("general")}</div>
-      <h5>Item Creation Feats</h5>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{featDisplay("item")}</div>
-      <h5>Metamagic Feats</h5>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="text-xs">
+      <h2 className="text-xl font-semibold">Available feats: {featSlots}</h2>
+      <h5 className="text-lg font-semibold">General Feats</h5>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">{featDisplay("general")}</div>
+      <br/>
+      <h5 className="text-lg font-semibold">Item Creation Feats</h5>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">{featDisplay("item")}</div>
+      <br/>
+      <h5 className="text-lg font-semibold">Metamagic Feats</h5>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {featDisplay("metamagic")}
       </div>
     </div>

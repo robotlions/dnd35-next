@@ -86,11 +86,7 @@ export const SkillEntry = (props) => {
   }
 
   function subtractSkillRank() {
-    if (skillRank === 1) {
-      let i = learnedSkills.indexOf(props.item);
-      learnedSkills.splice(i, 1);
-      props.triggerArray();
-    }
+    
 
     if (skillRank === 0) {
       return alert("This skill can't go any lower.");
@@ -108,18 +104,24 @@ export const SkillEntry = (props) => {
       props.setSkillPoints(props.skillPoints + 2);
       learnedSkills[iOfA].skillLevel = skillRank - 1;
     }
+    if (skillRank === 1) {
+      let i = learnedSkills.indexOf(props.item);
+      learnedSkills.splice(i, 1);
+      props.triggerArray();
+      
+    }
   }
 
   return (
-    <div style={{ fontSize: "small" }}>
-      <button variant="light" onClick={() => addSkillRank()}>
+    <div>
+      <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={() => addSkillRank()}>
         +
       </button>{" "}
       {skillRank}{" "}
-      <button variant="light" onClick={() => subtractSkillRank()}>
+      <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={() => subtractSkillRank()}>
         -
       </button>{" "}
-      <em>{props.item.skillName}</em>
+      {props.item.skillName}
     </div>
   );
 };

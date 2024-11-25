@@ -125,8 +125,8 @@ export const ArmorMain = (props) => {
     return Object.values(ArmorTable)
       .filter((item) => item.cat === filter)
       .map((item, index) => (
-        <div key={index} className="grid grid-cols-6">
-          <div className="col-1">
+        <div key={index} className="grid grid-cols-12">
+          <div className="col-span-1">
             <input
               className="form-check-input"
               type="checkbox"
@@ -134,18 +134,18 @@ export const ArmorMain = (props) => {
               onChange={(event) => handleCheck(event, item)}
             />
           </div>
-          <div className="col-3">{item.armorName}</div>
-          <div className="col-2">{item.cost}</div>
-          <div className="col-2">{item.armorBonus}</div>
-          <div className="col-2">{item.maxDexBonus}</div>
-          <div className="col-2">{item.armorCheck}</div>
+          <div className="col-span-3">{item.armorName}</div>
+          <div className="col-span-2">{item.cost}</div>
+          <div className="col-span-2">{item.armorBonus}</div>
+          <div className="col-span-2">{item.maxDexBonus}</div>
+          <div className="col-span-2">{item.armorCheck}</div>
         </div>
       ));
   }
 
   const shieldDisplay = Object.values(ShieldTable).map((item, index) => (
-    <div key={index} className="grid grid-cols-6">
-      <div className="col-1">
+    <div key={index} className="grid grid-cols-12">
+      <div className="col-span-1">
         <input
           className="form-check-input"
           type="checkbox"
@@ -153,11 +153,11 @@ export const ArmorMain = (props) => {
           onChange={(event) => handleCheck(event, item)}
         />
       </div>
-      <div className="col-3">{item.armorName}</div>
-      <div className="col-2">{item.cost}</div>
-      <div className="col-2">{item.armorBonus}</div>
-      <div className="col-2">{item.maxDexBonus}</div>
-      <div className="col-2">{item.armorCheck}</div>
+      <div className="col-span-3">{item.armorName}</div>
+      <div className="col-span-2">{item.cost}</div>
+      <div className="col-span-2">{item.armorBonus}</div>
+      <div className="col-span-2">{item.maxDexBonus}</div>
+      <div className="col-span-2">{item.armorCheck}</div>
     </div>
   ));
 
@@ -176,32 +176,47 @@ export const ArmorMain = (props) => {
       <div>
         <div>
         <h3 className="text-xl font-semibold">Armor Shop</h3>
-          <div className="grid grid-cols-6">
-            <div></div>
-            <div className="col-3">
+        <div className="grid grid-cols-1 md:grid-cols-4">
+        <div className="grid grid-cols-12 font-semibold">
+            <div className="col-span-1"></div>
+            <div className="col-span-3">
               <p>Armor</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Cost</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Armor Bonus</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Max Dex Bonus</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Armor Check</p>
             </div>
           </div>
-          <h5>Light Armor</h5>
+          </div>
+        
+
+          <h5 className="font-semibold">Light Armor</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
           {armorDisplay("light")}
-          <h5>Medium Armor</h5>
+          </div>
+          <br/>
+          <h5 className="font-semibold">Medium Armor</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
           {armorDisplay("medium")}
-          <h5>Heavy Armor</h5>
+          </div>
+          <br/>
+          <h5 className="font-semibold">Heavy Armor</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
           {armorDisplay("heavy")}
-          <h5>Shields</h5>
+          </div>
+          <br/>
+          <h5 className="font-semibold">Shields</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
           {shieldDisplay}
+          </div>
         </div>
         <div></div>
       </div>
@@ -287,8 +302,8 @@ export const WeaponsMain = (props) => {
     return Object.values(WeaponTables.weaponsList)
       .filter((item) => item.cat === filter)
       .map((item, index) => (
-        <div key={index} className="grid grid-cols-6">
-          <div className="col-1">
+        <div key={index} className="grid grid-cols-12">
+          <div className="col-span-1">
             <input
               className="form-check-input"
               type="checkbox"
@@ -296,11 +311,11 @@ export const WeaponsMain = (props) => {
               onChange={(event) => handleCheck(event, item)}
             />
           </div>
-          <div className="col-3">{item.weaponName}</div>
-          <div className="col-2">{item.cost}</div>
-          <div className="col-2">{item.dmgS}</div>
-          <div className="col-2">{item.dmgM}</div>
-          <div className="col-2">{item.range}</div>
+          <div className="col-span-3">{item.weaponName}</div>
+          <div className="col-span-2">{item.cost}</div>
+          <div className="col-span-2">{item.dmgS}</div>
+          <div className="col-span-2">{item.dmgM}</div>
+          <div className="col-span-2">{item.range}</div>
         </div>
       ));
   }
@@ -319,34 +334,47 @@ export const WeaponsMain = (props) => {
       
           <div className="">
             <h3 className="text-xl font-semibold">Weapons Shop</h3>
-            <div className="grid grid-cols-6">
-            <div className="col-1"></div>
-            <div className="col-3">
+            <div className="grid grid-cols-1 md:grid-cols-4">
+            <div className="grid grid-cols-12 font-semibold">
+            <div className="col-span-1"></div>
+            <div className="col-span-3">
               <p>Weapon</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Cost</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Damage Small</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Damage Medium</p>
             </div>
-            <div className="col-2">
+            <div className="col-span-2">
               <p>Range</p>
             </div>
             </div>
           </div>
-          <h5>Simple Weapons</h5>
+          <h5 className="font-semibold">Simple Weapons</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
+
           {weaponDisplay("simple")}
-          <h5>Martial Weapons</h5>
+          </div>
+          <br/>
+          <h5 className="font-semibold">Martial Weapons</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
           {weaponDisplay("martial")}
-          <h5>Exotic Weapons</h5>
+          </div>
+          <br/>
+          <h5 className="font-semibold">Exotic Weapons</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
           {weaponDisplay("exotic")}
-          <h5>Ammunition</h5>
+          </div>
+          <br/>
+          <h5 className="font-semibold">Ammunition</h5>
+          <div className="grid grid-cols-1 md:grid-cols-4">
           {weaponDisplay("ammunition")}
-        
+          </div>
+        </div>
     </>
   );
 };
