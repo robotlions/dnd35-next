@@ -73,7 +73,7 @@ export default function Standard() {
 
     return weaponSet.map((item, index) => (
       <div key={index}>
-        <p style={{ fontWeight: "bold" }}>
+        <p className="text-lg font-semibold">
           {counts[item.weaponName] > 1 && counts[item.weaponName]}{" "}
           {item.weaponName} -{" "}
           <span style={{ fontWeight: "normal" }}>
@@ -93,7 +93,7 @@ export default function Standard() {
 
     return armorSet.map((item, index) => (
       <div key={index}>
-        <p style={{ fontWeight: "bold" }}>
+        <p className="text-lg font-semibold">
           {counts[item.armorName] > 1 && counts[item.armorName]}{" "}
           {item.armorName} -{" "}
           <span style={{ fontWeight: "normal" }}>
@@ -131,30 +131,34 @@ export default function Standard() {
   );
 
   const charInfoContent = (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-5">
-        <div className="col-span-2">
+    <div className="text-lg">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
+        <div className="col-span-1 md:col-span-2">
           <CharInfo.CharName
             setCharName={setCharName}
             setBasicEdited={setBasicEdited}
           />
         </div>
+        <div className="col-span-1 ">
         <CharInfo.AlignmentSelect
           alignment={alignment}
           setAlignment={setAlignment}
-        />
+        /></div>
+        <div className="col-span-1">
         <CharInfo.RaceSelect
           setBasicEdited={setBasicEdited}
           setSelectedRace={setSelectedRace}
-        />
+        /></div>
+        <div className="col-span-1">
         <CharInfo.ClassSelect
           setBasicEdited={setBasicEdited}
           setSelectedClass={setSelectedClass}
-        />
+        /></div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-5">
+      <br/>
+      <div className="grid grid-cols-3 md:grid-cols-3">
         <div>
-          Level
+          <span className="font-semibold">Level</span>
           {munchkinMode === true ? (
             <CharInfo.Level
               setBasicEdited={setBasicEdited}
@@ -164,8 +168,8 @@ export default function Standard() {
             <p>1</p>
           )}
         </div>
-        <div className="col">
-          Hit Points
+        <div>
+          <span className="font-semibold">Hit Points</span>
           <CharInfo.HitPoints
             setHP={setHP}
             level={level}
@@ -177,7 +181,7 @@ export default function Standard() {
           />
         </div>
         <div className="col">
-          Armor Class
+          <span className="font-semibold">Armor Class</span>
           <CharInfo.ArmorClass
             setAC={setAC}
             armorBonusTotal={armorBonusTotal}
@@ -187,11 +191,11 @@ export default function Standard() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 
   const abilitiesHeader = (
-    <div className="accTitle">
+    <div>
       <h2>Abilities and Saves</h2>
       {rolled === true && (
         <div className="text-lg">
@@ -213,9 +217,9 @@ export default function Standard() {
   );
 
   const abilitiesContent = (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-5">
-        <div className="col-span-3">
+    <div className="text-lg">
+      <div className="grid grid-cols-1 md:grid-cols-12">
+        <div className="col-span-8">
           <NewScores
             setStr={setStr}
             setChr={setChr}
@@ -228,7 +232,7 @@ export default function Standard() {
             munchkinMode={munchkinMode}
           />
         </div>
-        <div>
+        <div className="col-span-2">
           <CharInfo.SavingThrows
             level={level}
             selectedClass={selectedClass}
@@ -237,7 +241,7 @@ export default function Standard() {
             wis={wis}
           />
         </div>
-        <div>
+        <div className="col-span-2">
           <BaseAttack
             str={str}
             level={level}
@@ -246,7 +250,7 @@ export default function Standard() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 
   const moneyHeader = (
@@ -260,7 +264,8 @@ export default function Standard() {
 
   const moneyContent = (
     <div>
-      <p>Silver: {totalSilver}</p>
+      <p className="text-xl font-semibold">Silver: {totalSilver}</p>
+      <br/>
       <StartingSilver
         setWeaponsMoney={setWeaponsMoney}
         setArmorMoney={setArmorMoney}

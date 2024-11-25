@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as RaceBonuses from "../Races/AbilBonuses";
 
 function rando(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function roll() {
@@ -50,7 +50,10 @@ export const NewScores = (props) => {
   const [chr, setChr] = useState(10);
 
   const rerollButton = (
-    <button variant="secondary rounded-0 bg-gradient" onClick={() => rollButton()}>
+    <button
+      className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+      onClick={() => rollButton()}
+    >
       Roll Abilities
     </button>
   );
@@ -70,11 +73,11 @@ export const NewScores = (props) => {
       <table>
         <thead>
           <tr>
-            <th>Ability</th>
-            <th>Roll</th>
-            <th>Racial Bonus</th>
-            <th>Total Score</th>
-            <th>Modifier</th>
+            <th style={{ paddingRight: 10 }}>Ability</th>
+            <th style={{ paddingRight: 10 }}>Roll</th>
+            <th style={{ paddingRight: 10 }}>Racial Bonus</th>
+            <th style={{ paddingRight: 10 }}>Total Score</th>
+            <th style={{ paddingRight: 10 }}>Modifier</th>
           </tr>
         </thead>
         <tbody>

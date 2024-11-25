@@ -44,16 +44,13 @@ let weaponArray = [];
 export const ArmorMain = (props) => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   const purchasedArmor = armorArray.map((item, index) => (
-    <div key={index} className="grid grid-cols-6">
+    <div key={index} className="grid grid-cols-8">
       <div className="col">
         <p style={{ fontWeight: "bold" }}>{item.armorName}</p>
       </div>
       <div className="col">
-        <p>Armor Bonus: {item.armorBonus}</p>
+        <p className="col">Armor Bonus: {item.armorBonus}</p>
       </div>
       <div className="col">
         <p>Max Dex Bonus: {item.maxDexBonus}</p>
@@ -72,7 +69,7 @@ export const ArmorMain = (props) => {
       </div>
       <div className="col">
         <button
-          variant="warning bg-gradient"
+          className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
           onClick={() => removeItem(item, index)}
         >
           Remove
@@ -251,7 +248,7 @@ export const WeaponsMain = (props) => {
   }
 
   const purchasedWeapons = weaponArray.map((item, index) => (
-    <div key={index} className="grid grid-cols-6">
+    <div key={index} className="grid grid-cols-8">
       <div className="col">
         <p style={{ fontWeight: "bold" }}>{item.weaponName}</p>
       </div>
@@ -273,7 +270,8 @@ export const WeaponsMain = (props) => {
 
       <div className="col">
         <button
-          variant="warning bg-gradient"
+                    className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+
           onClick={() => removeItem(item, index)}
         >
           Remove
@@ -393,14 +391,14 @@ export const StartingSilver = (props) => {
   const normalMoney =
     props.totalSilver === 0 ? (
       <button
-        variant="secondary rounded-0 bg-gradient"
+        className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
         onClick={() => genSilver()}
       >
         Roll Starting Money
       </button>
     ) : (
       <button
-        variant="secondary rounded-0 bg-gradient"
+        className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
         onClick={() => {
           props.setTotalSilver(0);
           props.setArmorMoney(0);
