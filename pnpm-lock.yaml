@@ -20,6 +20,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-66855b96-20241106
         version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
+      react-to-print:
+        specifier: ^3.0.2
+        version: 3.0.2(react@19.0.0-rc-66855b96-20241106)
     devDependencies:
       eslint:
         specifier: ^8
@@ -1325,6 +1328,11 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-to-print@3.0.2:
+    resolution: {integrity: sha512-FS/Z4LLq0bgWaxd7obygFQ8yRFdKW74iE8fIVjFFsPJWIXmuL8CIO+4me1Hj44lrlxQ00gscSNb3BRM8olbwXg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ~19
 
   react@19.0.0-rc-66855b96-20241106:
     resolution: {integrity: sha512-klH7xkT71SxRCx4hb1hly5FJB21Hz0ACyxbXYAECEqssUjtJeFUAaI2U1DgJAzkGEnvEm3DkxuBchMC/9K4ipg==}
@@ -3038,6 +3046,10 @@ snapshots:
       scheduler: 0.25.0-rc-66855b96-20241106
 
   react-is@16.13.1: {}
+
+  react-to-print@3.0.2(react@19.0.0-rc-66855b96-20241106):
+    dependencies:
+      react: 19.0.0-rc-66855b96-20241106
 
   react@19.0.0-rc-66855b96-20241106: {}
 

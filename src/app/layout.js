@@ -32,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${raleway.variable} ${imFellSC.variable} ${imFell.variable} antialiased`}>
+      <body className={`${raleway.variable} ${imFellSC.variable} ${imFell.variable} bg-gray-50 antialiased`}>
         <TopNav />
         {children}
       </body>

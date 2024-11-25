@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import { AccordionMulti } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
@@ -10,6 +10,7 @@ import * as Feats from "../components/Feats";
 import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
+import { useReactToPrint } from "react-to-print";
 import Modal from "../ui/Modal";
 import Link from "next/link";
 
@@ -51,7 +52,7 @@ export default function Standard() {
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
-
+  const handlePrint = useReactToPrint({ contentRef });
 
   useEffect(() => {
     if (
@@ -145,22 +146,25 @@ export default function Standard() {
           />
         </div>
         <div className="col-span-1 ">
-        <CharInfo.AlignmentSelect
-          alignment={alignment}
-          setAlignment={setAlignment}
-        /></div>
+          <CharInfo.AlignmentSelect
+            alignment={alignment}
+            setAlignment={setAlignment}
+          />
+        </div>
         <div className="col-span-1">
-        <CharInfo.RaceSelect
-          setBasicEdited={setBasicEdited}
-          setSelectedRace={setSelectedRace}
-        /></div>
+          <CharInfo.RaceSelect
+            setBasicEdited={setBasicEdited}
+            setSelectedRace={setSelectedRace}
+          />
+        </div>
         <div className="col-span-1">
-        <CharInfo.ClassSelect
-          setBasicEdited={setBasicEdited}
-          setSelectedClass={setSelectedClass}
-        /></div>
+          <CharInfo.ClassSelect
+            setBasicEdited={setBasicEdited}
+            setSelectedClass={setSelectedClass}
+          />
+        </div>
       </div>
-      <br/>
+      <br />
       <div className="grid grid-cols-3 md:grid-cols-3">
         <div>
           <span className="font-semibold">Level</span>
@@ -270,7 +274,7 @@ export default function Standard() {
   const moneyContent = (
     <div>
       <p className="text-xl font-semibold">Silver: {totalSilver}</p>
-      <br/>
+      <br />
       <StartingSilver
         setWeaponsMoney={setWeaponsMoney}
         setArmorMoney={setArmorMoney}
@@ -432,60 +436,67 @@ export default function Standard() {
       <div className="w-10/12 mt-10">
         <AccordionMulti accordionItems={accordionItems} />
       </div>
-      <div className="mb-32 mt-10">
-      <Link href="/">
-      <button
-          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
-          >Start Over</button>
-      </Link>
-      </div>
+
       {/* start modal test */}
       <div className="flex flex-col items-center justify-center p-4">
-      {/* Button to open modal */}
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-      >
-        Open Modal
-      </button>
-
-      {/* Modal */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-bold">{charName}</h2>
-        <div>
-        <ComponentToPrint
-                  ref={contentRef}
-                  charName={charName}
-                  selectedClass={selectedClass}
-                  selectedRace={selectedRace}
-                  level={level}
-                  ac={ac}
-                  str={str}
-                  int={int}
-                  wis={wis}
-                  dex={dex}
-                  con={con}
-                  chr={chr}
-                  alignment={alignment}
-                  hp={hp}
-                  silver={totalSilver}
-                  armorArray={armorArray}
-                  weaponArray={weaponArray}
-                  learnedSkillsArray={learnedSkillsArray}
-                  featArray={featArray}
-                  spellArray={spellArray}
-                  baseAttack={baseAttack}
-                />
-
-        </div>
+        {/* Button to open modal */}
         <button
-          onClick={() => setIsModalOpen(false)}
-          className="px-4 py-2 mt-4 text-white bg-red-500 rounded hover:bg-red-600"
+          onClick={() => setIsModalOpen(true)}
+          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
         >
-          Close
+          View and Print
         </button>
-      </Modal>
-    </div>
+
+        {/* Modal */}
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">{charName}</h2>
+          <div>
+            <ComponentToPrint
+              ref={contentRef}
+              charName={charName}
+              selectedClass={selectedClass}
+              selectedRace={selectedRace}
+              level={level}
+              ac={ac}
+              str={str}
+              int={int}
+              wis={wis}
+              dex={dex}
+              con={con}
+              chr={chr}
+              alignment={alignment}
+              hp={hp}
+              silver={totalSilver}
+              armorArray={armorArray}
+              weaponArray={weaponArray}
+              learnedSkillsArray={learnedSkillsArray}
+              featArray={featArray}
+              spellArray={spellArray}
+              baseAttack={baseAttack}
+            />
+          </div>
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-sky-600 to-sky-400 rounded hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-300"
+          >
+            Close
+          </button>
+          &nbsp;
+          <button
+            onClick={handlePrint}
+            className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-emerald-600 to-emerald-400 rounded hover:bg-gradient-to-b hover:from-emerald-400 hover:to-emerald-300"
+          >
+            Print Character
+          </button>
+        </Modal>
+      </div>
+      <div className="mb-32 mt-10">
+        <Link href="/">
+          <button className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-600 to-gray-400">
+            Start Over
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
