@@ -9,6 +9,7 @@ import * as Skills from "../components/Skills";
 import * as Feats from "../components/Feats";
 import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
+import Link from "next/link";
 
 export default function Standard() {
   const [selectedRace, setSelectedRace] = useState("human");
@@ -420,6 +421,11 @@ export default function Standard() {
     <div className="justify-items-center">
       <div className="w-10/12 mt-10">
         <AccordionMulti accordionItems={accordionItems} />
+      </div>
+      <div className="mb-32 mt-10">
+      <Link href="/">
+      <button>Start Over</button>
+      </Link>
       </div>
     </div>
   );

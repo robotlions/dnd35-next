@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-// import button from "react-bootstrap/button";
 import { skillTables } from "../Classes/Skills/SkillsTables";
 import * as RaceBonuses from "../Races/AbilBonuses";
-
 
 const classSkillPoints = {
   Barbarian: 4,
@@ -47,8 +45,8 @@ export const SkillEntry = (props) => {
       return alert("Not enough skill points");
     }
 
-    if (props.skillPoints < 2 && classSkill === false){
-      return alert("Not enough skill points")
+    if (props.skillPoints < 2 && classSkill === false) {
+      return alert("Not enough skill points");
     }
 
     if (classSkill === true && skillRank === props.level + 3) {
@@ -86,8 +84,6 @@ export const SkillEntry = (props) => {
   }
 
   function subtractSkillRank() {
-    
-
     if (skillRank === 0) {
       return alert("This skill can't go any lower.");
     }
@@ -108,17 +104,22 @@ export const SkillEntry = (props) => {
       let i = learnedSkills.indexOf(props.item);
       learnedSkills.splice(i, 1);
       props.triggerArray();
-      
     }
   }
 
   return (
     <div>
-      <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={() => addSkillRank()}>
+      <button
+        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        onClick={() => addSkillRank()}
+      >
         +
       </button>{" "}
       {skillRank}{" "}
-      <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={() => subtractSkillRank()}>
+      <button
+        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        onClick={() => subtractSkillRank()}
+      >
         -
       </button>{" "}
       {props.item.skillName}
@@ -209,7 +210,9 @@ export const SkillsMain = (props) => {
         Skill Points Remaining: {skillPoints}
       </div>
       <br />
-      <div className="grid grid-cols-2 md:grid-cols-4">{skillDisplayCrossClass}</div>
+      <div className="grid grid-cols-2 md:grid-cols-4">
+        {skillDisplayCrossClass}
+      </div>
     </>
   );
 };
@@ -227,11 +230,13 @@ export const SkillsQuick = (props) => {
       props.setLearnedSkillsArray([]);
       Object.values(skillTables)
         // .filter((item) => item.startingSkill.includes(props.selectedClass))
-        .filter((item) =>item[props.selectedClass]===true)
+        .filter((item) => item[props.selectedClass] === true)
         .map((item, index) => learnedSkills.push(item));
       learnedSkills.map((item) => (item.skillLevel = 4));
       let difference =
-        learnedSkills.length - (quickClassSkillPoints[props.selectedClass]+ calculateModifier(props.int + racialBonus.bonusInt));
+        learnedSkills.length -
+        (quickClassSkillPoints[props.selectedClass] +
+          calculateModifier(props.int + racialBonus.bonusInt));
       for (let i = 0; i < difference; i++) {
         let v = rando(0, learnedSkills.length - 1);
         learnedSkills.splice(v, 1);
@@ -242,8 +247,8 @@ export const SkillsQuick = (props) => {
   }, [props.quickCreate, props.selectedClass, props.selectedRace, props.int]);
 
   const quickSkillsDisplay = learnedSkills.map((item, index) => (
-    <span style={{fontSize:"small"}} key={index}>
-      {item.skillName} ({item.skillLevel})<br/>
+    <span style={{ fontSize: "small" }} key={index}>
+      {item.skillName} ({item.skillLevel})<br />
     </span>
   ));
 
