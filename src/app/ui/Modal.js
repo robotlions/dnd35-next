@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         </button>
 
         {/* Modal content */}
-        <div>{children}</div>
+        <div className="max-h-[90vh] overflow-y-auto p-6>">{children}</div>
       </div>
     </div>
   );

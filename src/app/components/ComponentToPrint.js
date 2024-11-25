@@ -4,6 +4,7 @@ import * as RaceBonuses from "../Races/AbilBonuses";
 import * as CharInfo from './CharInfo';
 import { RaceInfo } from "../Races/RaceTables";
 import * as KnownSpells from "../Spells/KnownSpells";
+import Image from "next/image";
 
 export const ComponentToPrint = forwardRef((props, ref) => {
   function calculateModifier(abil) {
@@ -190,23 +191,19 @@ export const ComponentToPrint = forwardRef((props, ref) => {
 
   return (
     <div className="container" ref={ref}>
-      <div className="row">
-        <div
-          className="col-12"
-          style={{ textAlign: "center", marginBottom: 10, paddingTop: 20 }}
-        >
-          <img
+        <div className="flex justify-center">
+          <Image
             alt="vintage d&d logo"
             style={{ maxWidth: "30%" }}
             src={dndLogo}
-          ></img>
-          <h4 style={{ marginTop: 10 }}>Character Record Sheet</h4>
-        </div>
-      </div>
-      <div className="grid grid-cols 3" style={{fontSize: "small"}}>
-        <div className="">Name: {props.charName}</div>
-        <div className="">Class: {props.selectedClass}</div>
-        <div className="">Race: {RaceInfo[props.selectedRace].raceName}</div>
+          ></Image>
+          </div>
+
+          
+      <div className="grid grid-cols-3" style={{fontSize: "small"}}>
+        <div>Name: {props.charName}</div>
+        <div>Class: {props.selectedClass}</div>
+        <div>Race: {RaceInfo[props.selectedRace].raceName}</div>
       </div>
       <div className="grid grid-cols-3" style={{ fontSize: "small", marginBottom: 10 }}>
         <div className="">Alignment: {props.alignment}</div>
@@ -327,53 +324,55 @@ export const ComponentToPrint = forwardRef((props, ref) => {
       <br/>
       <h6>Armor</h6>
 
-      <div className="row inventoryBox">
+      <div className="border-solid border-2 border-black p-1">
         {armorHeaderDisplay()}
       </div>
       <h6>Weapons</h6>
 
-      <div className="row inventoryBox">
+      <div className="border-solid border-2 border-black p-1">
         {weaponHeaderDisplay()}
       </div>
       <div className="pagebreak"></div>
       <h6>Skills</h6>
 
-      <div className="row skillsBox">
+      <div className="border-solid border-2 border-black p-1">
         {props.learnedSkillsArray.length > 0 && (
-          <div>
-            <div>
-              <span>
-                <em>Class</em>
-              </span>
+          <>
+            
+                <em className="text-sm">Class</em>
+              <div className="grid grid-cols-3 sm:grid-cols-7">
               {props.learnedSkillsArray
                 .filter((item) => item[props.selectedClass] === true)
                 .map((item, index) => (
-                  <span style={{fontSize:"small"}}key={index}> - {item.skillName} ({item.skillLevel})</span>
+                  <span className="text-xs" key={index}> - {item.skillName} ({item.skillLevel})</span>
                 ))}
             </div>
-            <div>
-              <span>
-                <em>Cross-class</em>
-              </span>
+            
+              
+                <em className="text-sm">Cross-class</em>
+              <div className="grid grid-cols-3 sm:grid-cols-7">
               {props.learnedSkillsArray
                 .filter((item) => item[props.selectedClass] === false)
                 .map((item, index) => (
-                  <span key={index}> - {item.skillName} ({item.skillLevel})</span>
+                  <span className="text-xs" key={index}> - {item.skillName} ({item.skillLevel})</span>
                 ))}
             </div>
-          </div>
+          </>
         )}
       </div>
       <h6>Feats</h6>
-
-      <div className="row skillsBox">
+<div className="border-solid border-2 border-black p-1">
+      <div className="grid grid-cols-3 sm:grid-cols-7">
         {props.featArray.map((item, index) => (
                   <div style={{fontSize:"small"}}key={index}>{item.featName}</div>
                 ))}
       </div>
+      </div>
       <div className="row d-flex flex-row flex-wrap">
         <h6>Spells</h6>
+        <div className="border-solid border-2 border-black p-1">
       {showSpells()}
+    </div>
     </div>
     </div>
   );
