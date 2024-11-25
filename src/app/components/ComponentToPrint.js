@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import dndLogo from "../images/dndLogo.png";
+import dndLogo from "../../../public/images/dndLogo.png";
 import * as RaceBonuses from "../Races/AbilBonuses";
 import * as CharInfo from './CharInfo';
 import { RaceInfo } from "../Races/RaceTables";
@@ -18,7 +18,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
     let armorSet = [...new Set(props.armorArray)];
 
     return armorSet.map((item, index) => (
-      <div style={{fontSize: "x-small"}}className="row" key={index}>
+      <div style={{fontSize: "x-small"}}className="grid grid-cols-2 md:grid-cols-8" key={index}>
         
           <div className="col" style={{ fontWeight: "bold" }}>
             {counts[item.armorName] > 1 && counts[item.armorName]}{" "}
@@ -57,7 +57,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
     let weaponSet = [...new Set(props.weaponArray)];
 
     return weaponSet.map((item, index) => (
-      <div style={{fontSize: "x-small"}} className="row" key={index}>
+      <div style={{fontSize: "x-small"}} className="grid grid-cols-2 md:grid-cols-8" key={index}>
         <div className="col" style={{ fontWeight: "bold" }}>
           {counts[item.weaponName] > 1 && counts[item.weaponName]}{" "}
           {item.weaponName}
@@ -203,18 +203,18 @@ export const ComponentToPrint = forwardRef((props, ref) => {
           <h4 style={{ marginTop: 10 }}>Character Record Sheet</h4>
         </div>
       </div>
-      <div className="row" style={{fontSize: "small"}}>
-        <div className="col-4">Name: {props.charName}</div>
-        <div className="col-4">Class: {props.selectedClass}</div>
-        <div className="col-4">Race: {RaceInfo[props.selectedRace].raceName}</div>
+      <div className="grid grid-cols 3" style={{fontSize: "small"}}>
+        <div className="">Name: {props.charName}</div>
+        <div className="">Class: {props.selectedClass}</div>
+        <div className="">Race: {RaceInfo[props.selectedRace].raceName}</div>
       </div>
-      <div className="row" style={{ fontSize: "small", marginBottom: 10 }}>
-        <div className="col-4">Alignment: {props.alignment}</div>
-        <div className="col-4">Hit Points: {props.hp}</div>
-        <div className="col-4">Level: {props.level}</div>
+      <div className="grid grid-cols-3" style={{ fontSize: "small", marginBottom: 10 }}>
+        <div className="">Alignment: {props.alignment}</div>
+        <div className="">Hit Points: {props.hp}</div>
+        <div className="">Level: {props.level}</div>
       </div>
-      <div className="row" style={{fontSize: "small"}}>
-        <div className="col-6">
+      <div className="grid grid-cols-12" style={{fontSize: "small"}}>
+        <div className="col-span-6">
       <table>
         <thead>
           <tr>
@@ -303,7 +303,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
       </table>
      
       </div>
-      <div className="col-3">
+      <div className="col-span-3">
       <CharInfo.SavingThrows
                     level={props.level}
                     selectedClass={props.selectedClass}
@@ -312,7 +312,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
                     wis={props.wis}
                   />
       </div>
-      <div style={{textAlign: "center"}}className="col-3">
+      <div style={{textAlign: "center"}}className="col-span-3">
         <h6>Base Attack</h6>
       <p>{props.baseAttack}</p>
       <h6>Armor Class</h6>

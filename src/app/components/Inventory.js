@@ -67,14 +67,14 @@ export const ArmorMain = (props) => {
       <div className="col">
         <p>Speed 20': {item.speed20}</p>
       </div>
-      <div className="col">
+      {/* <div className="col">
         <button
           className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
           onClick={() => removeItem(item, index)}
         >
           Remove
         </button>
-      </div>
+      </div> */}
     </div>
   ));
 
@@ -164,56 +164,55 @@ export const ArmorMain = (props) => {
 
   return (
     <>
-    <div className="row">
-            <div className="text-lg">Silver: {props.totalSilver}</div>
-          </div>
-         {armorArray.length > 0 && <h3 className="text-xl font-semibold">Purchased Armor</h3> }
+      <div className="row">
+        <div className="text-lg">Silver: {props.totalSilver}</div>
+      </div>
+      {armorArray.length > 0 && (
+        <h3 className="text-xl font-semibold">Purchased Armor</h3>
+      )}
       <div>{purchasedArmor}</div>
 
       <div>
         <div>
-        <h3 className="text-xl font-semibold">Armor Shop</h3>
-        <div className="grid grid-cols-1 md:grid-cols-4">
-        <div className="grid grid-cols-12 font-semibold">
-            <div className="col-span-1"></div>
-            <div className="col-span-3">
-              <p>Armor</p>
-            </div>
-            <div className="col-span-2">
-              <p>Cost</p>
-            </div>
-            <div className="col-span-2">
-              <p>Armor Bonus</p>
-            </div>
-            <div className="col-span-2">
-              <p>Max Dex Bonus</p>
-            </div>
-            <div className="col-span-2">
-              <p>Armor Check</p>
+          <h3 className="text-xl font-semibold">Armor Shop</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4">
+            <div className="grid grid-cols-12 font-semibold">
+              <div className="col-span-1"></div>
+              <div className="col-span-3">
+                <p>Armor</p>
+              </div>
+              <div className="col-span-2">
+                <p>Cost</p>
+              </div>
+              <div className="col-span-2">
+                <p>Armor Bonus</p>
+              </div>
+              <div className="col-span-2">
+                <p>Max Dex Bonus</p>
+              </div>
+              <div className="col-span-2">
+                <p>Armor Check</p>
+              </div>
             </div>
           </div>
-          </div>
-        
 
           <h5 className="font-semibold">Light Armor</h5>
           <div className="grid grid-cols-1 md:grid-cols-4">
-          {armorDisplay("light")}
+            {armorDisplay("light")}
           </div>
-          <br/>
+          <br />
           <h5 className="font-semibold">Medium Armor</h5>
           <div className="grid grid-cols-1 md:grid-cols-4">
-          {armorDisplay("medium")}
+            {armorDisplay("medium")}
           </div>
-          <br/>
+          <br />
           <h5 className="font-semibold">Heavy Armor</h5>
           <div className="grid grid-cols-1 md:grid-cols-4">
-          {armorDisplay("heavy")}
+            {armorDisplay("heavy")}
           </div>
-          <br/>
+          <br />
           <h5 className="font-semibold">Shields</h5>
-          <div className="grid grid-cols-1 md:grid-cols-4">
-          {shieldDisplay}
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4">{shieldDisplay}</div>
         </div>
         <div></div>
       </div>
@@ -223,9 +222,6 @@ export const ArmorMain = (props) => {
 
 export const WeaponsMain = (props) => {
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   function handleCheck(event, item) {
     if (event.target.checked === true) {
@@ -248,35 +244,34 @@ export const WeaponsMain = (props) => {
   }
 
   const purchasedWeapons = weaponArray.map((item, index) => (
-    <div key={index} className="grid grid-cols-8">
-      <div className="col">
+    <div key={index} className="grid grid-cols-2 md:grid-cols-8">
+      <div>
         <p style={{ fontWeight: "bold" }}>{item.weaponName}</p>
       </div>
-      <div className="col">
+      <div>
         <p>Damage, Small: {item.dmgS}</p>
       </div>
-      <div className="col">
+      <div>
         <p>Damage, Medium: {item.dmgM}</p>
       </div>
-      <div className="col">
+      <div>
         <p>Critical: {item.critical}</p>
       </div>
-      <div className="col">
+      <div>
         <p>Range: {item.range}</p>
       </div>
-      <div className="col">
+      <div>
         <p>Type: {item.type}</p>
       </div>
 
-      <div className="col">
+      {/* <div>
         <button
-                    className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
-
+          className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
           onClick={() => removeItem(item, index)}
         >
           Remove
         </button>
-      </div>
+      </div> */}
     </div>
   ));
 
@@ -324,16 +319,16 @@ export const WeaponsMain = (props) => {
 
   return (
     <>
-            <div>Silver: {props.totalSilver}</div>
-{weaponArray.length>0 && <h3 className="text-xl font-semibold">Purchased Weapons</h3>}
+      <div>Silver: {props.totalSilver}</div>
+      {weaponArray.length > 0 && (
+        <h3 className="text-xl font-semibold">Purchased Weapons</h3>
+      )}
       <div>{purchasedWeapons}</div>
-
-     
-      
-          <div className="">
-            <h3 className="text-xl font-semibold">Weapons Shop</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4">
-            <div className="grid grid-cols-12 font-semibold">
+      <br />
+      <div className="">
+        <h3 className="text-xl font-semibold">Weapons Shop</h3>
+        <div className="grid grid-cols-1 md:grid-cols-4">
+          <div className="grid grid-cols-12 font-semibold">
             <div className="col-span-1"></div>
             <div className="col-span-3">
               <p>Weapon</p>
@@ -350,29 +345,28 @@ export const WeaponsMain = (props) => {
             <div className="col-span-2">
               <p>Range</p>
             </div>
-            </div>
-          </div>
-          <h5 className="font-semibold">Simple Weapons</h5>
-          <div className="grid grid-cols-1 md:grid-cols-4">
-
-          {weaponDisplay("simple")}
-          </div>
-          <br/>
-          <h5 className="font-semibold">Martial Weapons</h5>
-          <div className="grid grid-cols-1 md:grid-cols-4">
-          {weaponDisplay("martial")}
-          </div>
-          <br/>
-          <h5 className="font-semibold">Exotic Weapons</h5>
-          <div className="grid grid-cols-1 md:grid-cols-4">
-          {weaponDisplay("exotic")}
-          </div>
-          <br/>
-          <h5 className="font-semibold">Ammunition</h5>
-          <div className="grid grid-cols-1 md:grid-cols-4">
-          {weaponDisplay("ammunition")}
           </div>
         </div>
+        <h5 className="font-semibold">Simple Weapons</h5>
+        <div className="grid grid-cols-1 md:grid-cols-4">
+          {weaponDisplay("simple")}
+        </div>
+        <br />
+        <h5 className="font-semibold">Martial Weapons</h5>
+        <div className="grid grid-cols-1 md:grid-cols-4">
+          {weaponDisplay("martial")}
+        </div>
+        <br />
+        <h5 className="font-semibold">Exotic Weapons</h5>
+        <div className="grid grid-cols-1 md:grid-cols-4">
+          {weaponDisplay("exotic")}
+        </div>
+        <br />
+        <h5 className="font-semibold">Ammunition</h5>
+        <div className="grid grid-cols-1 md:grid-cols-4">
+          {weaponDisplay("ammunition")}
+        </div>
+      </div>
     </>
   );
 };
@@ -391,14 +385,14 @@ export const StartingSilver = (props) => {
   const normalMoney =
     props.totalSilver === 0 ? (
       <button
-        className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+        className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
         onClick={() => genSilver()}
       >
         Roll Starting Money
       </button>
     ) : (
       <button
-        className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+        className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
         onClick={() => {
           props.setTotalSilver(0);
           props.setArmorMoney(0);

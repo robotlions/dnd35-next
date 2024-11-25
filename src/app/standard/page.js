@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, useRef} from "react";
 import { AccordionMulti } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
@@ -9,6 +9,8 @@ import * as Skills from "../components/Skills";
 import * as Feats from "../components/Feats";
 import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
+import { ComponentToPrint } from "../components/ComponentToPrint";
+import Modal from "../ui/Modal";
 import Link from "next/link";
 
 export default function Standard() {
@@ -45,8 +47,11 @@ export default function Standard() {
   const [show, setShow] = useState(false);
   const [baseAttack, setBaseAttack] = useState(0);
   const [quickCreate, setQuickCreate] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
+  const contentRef = useRef(null);
+
 
   useEffect(() => {
     if (
@@ -429,9 +434,58 @@ export default function Standard() {
       </div>
       <div className="mb-32 mt-10">
       <Link href="/">
-      <button>Start Over</button>
+      <button
+          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+          >Start Over</button>
       </Link>
       </div>
+      {/* start modal test */}
+      <div className="flex flex-col items-center justify-center p-4">
+      {/* Button to open modal */}
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+      >
+        Open Modal
+      </button>
+
+      {/* Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className="text-xl font-bold">{charName}</h2>
+        <div>
+        <ComponentToPrint
+                  ref={contentRef}
+                  charName={charName}
+                  selectedClass={selectedClass}
+                  selectedRace={selectedRace}
+                  level={level}
+                  ac={ac}
+                  str={str}
+                  int={int}
+                  wis={wis}
+                  dex={dex}
+                  con={con}
+                  chr={chr}
+                  alignment={alignment}
+                  hp={hp}
+                  silver={totalSilver}
+                  armorArray={armorArray}
+                  weaponArray={weaponArray}
+                  learnedSkillsArray={learnedSkillsArray}
+                  featArray={featArray}
+                  spellArray={spellArray}
+                  baseAttack={baseAttack}
+                />
+
+        </div>
+        <button
+          onClick={() => setIsModalOpen(false)}
+          className="px-4 py-2 mt-4 text-white bg-red-500 rounded hover:bg-red-600"
+        >
+          Close
+        </button>
+      </Modal>
+    </div>
     </div>
   );
 }

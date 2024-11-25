@@ -51,7 +51,7 @@ export const NewScores = (props) => {
 
   const rerollButton = (
     <button
-      className="font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+      className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
       onClick={() => rollButton()}
     >
       Roll Abilities
@@ -246,7 +246,7 @@ export const NewScores = (props) => {
           </tr>
         </tbody>
       </table>
-      <p style={{ textAlign: "center", marginTop: 10 }}>
+      <p className="mt-5">
         {props.munchkinMode === true
           ? "Chaos Mode. Set abilities manually."
           : rerollButton}
