@@ -145,6 +145,11 @@ export const SpellsMain = (props) => {
     props.setUpdated(!props.updated);
   }
 
+  useEffect(()=>{
+    spArray=[];
+    props.setSpellArray([]);
+  },[props.selectedClass, props.int, props.wis, props.chr])
+
   useEffect(() => {
     // let mod = calculateModifier(props.int);
     let classMod;

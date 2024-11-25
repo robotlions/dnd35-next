@@ -326,6 +326,7 @@ export default function Standard() {
         selectedClass={selectedClass}
         setLearnedSkillsArray={setLearnedSkillsArray}
         setSkillPoints={setSkillPoints}
+        key={[selectedClass,int]}
       />
     </>
   );
@@ -363,6 +364,7 @@ export default function Standard() {
           int={int}
           wis={wis}
           chr={chr}
+          key={[selectedClass, int, wis, chr]}
         />
       ) : (
         `${selectedClass} is not a spellcasting class.`

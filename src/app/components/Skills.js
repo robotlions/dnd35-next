@@ -161,6 +161,12 @@ export const SkillsMain = (props) => {
     props.setLearnedSkillsArray(learnedSkills);
   }
 
+  // this is a test of a function to reset the skills array when the user changes the character's class
+  useEffect(()=>{
+    learnedSkills=[];
+    props.setLearnedSkillsArray([]);
+  },[props.selectedClass])
+
   const skillDisplayClass = Object.values(skillTables)
     .filter((item) => item[props.selectedClass] === true)
     .map((item, index) => (

@@ -169,48 +169,49 @@ export const ComponentToPrint = forwardRef((props, ref) => {
       );
     }
   }
-
+// This constant draws an SVG shield shape and places the armor class (props.ac) in the center
   const shieldSVG = (
-    <svg width="150" height="150" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
-   
-    <path 
-      d="M100 45 
+    <svg
+      width="150"
+      height="150"
+      viewBox="0 0 200 250"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M100 45 
          L150 50 
          Q175 120 100 200 
          Q25 120 50 50 
-         Z"   
-         fill="white"
-      stroke="#000000" 
-      strokeWidth="2" />
-      <text 
-      x="100" 
-      y="80" 
-      textAnchor="middle" 
-      fontSize="20" 
-       className="font-semibold"
-      fill="#000000">
+         Z"
+        fill="white"
+        stroke="#000000"
+        strokeWidth="2"
+      />
+      <text
+        x="100"
+        y="80"
+        textAnchor="middle"
+        fontSize="20"
+        className="font-semibold"
+        fill="#000000"
+      >
         Armor
-    </text>
-    <text 
-      x="100" 
-      y="100" 
-      textAnchor="middle" 
-      fontSize="20" 
-       className="font-semibold"
-      fill="#000000">
+      </text>
+      <text
+        x="100"
+        y="100"
+        textAnchor="middle"
+        fontSize="20"
+        className="font-semibold"
+        fill="#000000"
+      >
         Class
-    </text>
-    <text 
-      x="100" 
-      y="130" 
-      textAnchor="middle" 
-      fontSize="30" 
-       
-      fill="#000000">
+      </text>
+      <text x="100" y="130" textAnchor="middle" fontSize="30" fill="#000000">
         {props.ac}
-    </text>
-  </svg>
-  )
+      </text>
+    </svg>
+  );
 
   return (
     <div className="mx-10 font-[family-name:var(--font-imFell)]" ref={ref}>
@@ -221,21 +222,39 @@ export const ComponentToPrint = forwardRef((props, ref) => {
           src={dndLogo}
         ></Image>
       </div>
-<br/>
+      <br />
       <div className="grid grid-cols-3" style={{ fontSize: "small" }}>
-        <div className="font-semibold">Name: <span className="font-normal">{props.charName}</span></div>
-        <div className="font-semibold">Class: <span className="font-normal">{props.selectedClass}</span></div>
-        <div className="font-semibold">Race: <span className="font-normal">{RaceInfo[props.selectedRace].raceName}</span></div>
+        <div className="font-semibold">
+          Name: <span className="font-normal">{props.charName}</span>
+        </div>
+        <div className="font-semibold">
+          Class: <span className="font-normal">{props.selectedClass}</span>
+        </div>
+        <div className="font-semibold">
+          Race:{" "}
+          <span className="font-normal">
+            {RaceInfo[props.selectedRace].raceName}
+          </span>
+        </div>
       </div>
       <div
         className="grid grid-cols-3"
         style={{ fontSize: "small", marginBottom: 10 }}
       >
-        <div className="font-semibold">Alignment: <span className="font-normal">{props.alignment}</span></div>
-        <div className="font-semibold">Hit Points: <span className="font-normal">{props.hp}</span></div>
-        <div className="font-semibold">Level: <span className="font-normal">{props.level}</span></div>
+        <div className="font-semibold">
+          Alignment: <span className="font-normal">{props.alignment}</span>
+        </div>
+        <div className="font-semibold">
+          Hit Points: <span className="font-normal">{props.hp}</span>
+        </div>
+        <div className="font-semibold">
+          Level: <span className="font-normal">{props.level}</span>
+        </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-12" style={{ fontSize: "small" }}>
+      <div
+        className="grid grid-cols-1 sm:grid-cols-12"
+        style={{ fontSize: "small" }}
+      >
         <div className="col-span-6">
           <table>
             <thead>
@@ -350,7 +369,6 @@ export const ComponentToPrint = forwardRef((props, ref) => {
           <p>{props.baseAttack}</p>
           {/* <h6 className="font-semibold">Armor Class</h6>
           <p>{props.ac}</p> */}
-          
         </div>
         <div>{shieldSVG}</div>
       </div>
@@ -373,7 +391,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
       <div className="border-solid border-2 border-gray-500 p-1">
         {weaponHeaderDisplay()}
       </div>
-      <div className="pagebreak"></div>
+     
       <div className="text-sm font-semibold">Skills</div>
 
       <div className="border-solid border-2 border-gray-500 p-1">
@@ -415,12 +433,11 @@ export const ComponentToPrint = forwardRef((props, ref) => {
           ))}
         </div>
       </div>
-      
-        <div className="text-sm font-semibold">Spells</div>
-        <div className="border-solid border-2 border-gray-500 p-1">
-          {showSpells()}
-        </div>
-      
+      <div className="pagebreak"></div>
+      <div className="text-sm font-semibold">Spells</div>
+      <div className="border-solid border-2 border-gray-500 p-1">
+        {showSpells()}
+      </div>
     </div>
   );
 });
