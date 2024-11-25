@@ -335,7 +335,7 @@ export default function Standard() {
     <div className="accTitle">
       <h2>Feats</h2>
       {featArray.map((item, index) => (
-        <div key={index}>{item.featName}</div>
+        <div className="text-lg" key={index}>{item.featName}</div>
       ))}
     </div>
   );
@@ -348,6 +348,7 @@ export default function Standard() {
         setFeatArray={setFeatArray}
         selectedRace={selectedRace}
         level={level}
+        key={[selectedRace]}
       />
     </div>
   );

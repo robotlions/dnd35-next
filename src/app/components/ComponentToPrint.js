@@ -433,7 +433,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
           ))}
         </div>
       </div>
-      <div className="pagebreak"></div>
+      {/* <div className="pagebreak"></div> */}
       <div className="text-sm font-semibold">Spells</div>
       <div className="border-solid border-2 border-gray-500 p-1">
         {showSpells()}

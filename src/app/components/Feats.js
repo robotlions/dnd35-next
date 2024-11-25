@@ -27,6 +27,12 @@ export const FeatsMain = (props) => {
     props.setFeatSlots(featSlots);
   }, [featSlots, props]);
 
+  useEffect(()=>{
+    featArray = [];
+    props.setFeatSlots(1);
+    props.setFeatArray([]);
+  }, [props.selectedRace])
+
 
   function handleCheck(event, item) {
     if (event.target.checked === true) {
