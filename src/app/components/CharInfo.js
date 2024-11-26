@@ -55,39 +55,37 @@ export const Level = (props) => {
   const [editing, setEditing] = useState(true);
 
   const levelInput = (
-    <Dropdown
-      onSelect={(value) => {
-        setThisState(value);
-        props.setLevel(parseInt(value));
+    <select
+    
+      onChange={(e) => {
+        setThisState(e.target.value);
+        props.setLevel(parseInt(e.target.value));
         props.setBasicEdited(true);
       }}
     >
-      <DropdownButton
-        variant="secondary rounded-0 bg-gradient"
-        title={thisState}
-      >
-        <Dropdown.Item value={1}>1</Dropdown.Item>
-        <Dropdown.Item value={2}>2</Dropdown.Item>
-        <Dropdown.Item value={3}>3</Dropdown.Item>
-        <Dropdown.Item value={4}>4</Dropdown.Item>
-        <Dropdown.Item value={5}>5</Dropdown.Item>
-        <Dropdown.Item value={6}>6</Dropdown.Item>
-        <Dropdown.Item value={7}>7</Dropdown.Item>
-        <Dropdown.Item value={8}>8</Dropdown.Item>
-        <Dropdown.Item value={9}>9</Dropdown.Item>
-        <Dropdown.Item value={10}>10</Dropdown.Item>
-        <Dropdown.Item value={11}>11</Dropdown.Item>
-        <Dropdown.Item value={12}>12</Dropdown.Item>
-        <Dropdown.Item value={13}>13</Dropdown.Item>
-        <Dropdown.Item value={14}>14</Dropdown.Item>
-        <Dropdown.Item value={15}>15</Dropdown.Item>
-        <Dropdown.Item value={16}>16</Dropdown.Item>
-        <Dropdown.Item value={17}>17</Dropdown.Item>
-        <Dropdown.Item value={18}>18</Dropdown.Item>
-        <Dropdown.Item value={19}>19</Dropdown.Item>
-        <Dropdown.Item value={20}>20</Dropdown.Item>
-      </DropdownButton>
-    </Dropdown>
+      
+        <option value={1}>1</option>
+        <option value={2}>2</option>
+        <option value={3}>3</option>
+        <option value={4}>4</option>
+        <option value={5}>5</option>
+        <option value={6}>6</option>
+        <option value={7}>7</option>
+        <option value={8}>8</option>
+        <option value={9}>9</option>
+        <option value={10}>10</option>
+        <option value={11}>11</option>
+        <option value={12}>12</option>
+        <option value={13}>13</option>
+        <option value={14}>14</option>
+        <option value={15}>15</option>
+        <option value={16}>16</option>
+        <option value={17}>17</option>
+        <option value={18}>18</option>
+        <option value={19}>19</option>
+        <option value={20}>20</option>
+      
+    </select>
   );
 
   const levelDisplay = (

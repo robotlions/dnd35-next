@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as RaceBonuses from "../Races/AbilBonuses";
+import { Input } from "@material-tailwind/react";
 
 function rando(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -13,8 +14,28 @@ function roll() {
 }
 
 function calculateModifier(abil) {
-  return -5 + Math.floor(1 * (abil / 2));
+  let calc = -5 + Math.floor(1 * (abil / 2));
+  if(isNaN(calc)){
+  return 0
+  }
+  else{
+    return calc
+  }
+};
+
+function calculateTotal(abil, mod){
+  let calc = abil + mod
+  if (isNaN(calc)){
+    return 0
+  }
+  else{
+    return calc
+  }
 }
+
+
+
+
 
 export const NewScores = (props) => {
   useEffect(() => {
@@ -86,14 +107,19 @@ export const NewScores = (props) => {
             {props.munchkinMode === true ? (
               <td>
                 <input
-                  className="attInput"
+                  type="number"
+                  min={1}
+                  defaultValue={10}
+                  inputMode="numeric"
                   onChange={(e) => {
                     setStr(parseInt(e.target.value));
                     props.setStr(parseInt(e.target.value));
                   }}
+                 
                   placeholder={str || 0}
                   onFocus={(e) => (e.target.placeholder = "")}
                   onBlur={(e) => (e.target.placeholder = str)}
+                  
                 ></input>
               </td>
             ) : (
@@ -104,7 +130,7 @@ export const NewScores = (props) => {
                 ? racialBonus.bonusStr
                 : racialBonus.bonusStr}
             </td>
-            <td className="totalScore">{str + racialBonus.bonusStr}</td>
+            <td className="totalScore">{calculateTotal(str, racialBonus.bonusStr)}</td>
 
             <td>{calculateModifier(str + racialBonus.bonusStr)}</td>
           </tr>
@@ -113,6 +139,9 @@ export const NewScores = (props) => {
             {props.munchkinMode === true ? (
               <td>
                 <input
+                  type="number"
+                  min={1}
+                  defaultValue={10}
                   className="attInput"
                   onChange={(e) => {
                     setDex(parseInt(e.target.value));
@@ -131,7 +160,7 @@ export const NewScores = (props) => {
                 ? racialBonus.bonusDex
                 : racialBonus.bonusDex}
             </td>
-            <td className="totalScore">{dex + racialBonus.bonusDex}</td>
+            <td className="totalScore">{calculateTotal(dex, racialBonus.bonusDex)}</td>
 
             <td>{calculateModifier(dex + racialBonus.bonusDex)}</td>
           </tr>
@@ -140,6 +169,9 @@ export const NewScores = (props) => {
             {props.munchkinMode === true ? (
               <td>
                 <input
+                  type="number"
+                  min={1}
+                  defaultValue={10}
                   className="attInput"
                   onChange={(e) => {
                     setCon(parseInt(e.target.value));
@@ -158,7 +190,7 @@ export const NewScores = (props) => {
                 ? racialBonus.bonusCon
                 : racialBonus.bonusCon}
             </td>
-            <td className="totalScore">{con + racialBonus.bonusCon}</td>
+            <td className="totalScore">{calculateTotal(con, racialBonus.bonusCon)}</td>
 
             <td>{calculateModifier(con + racialBonus.bonusCon)}</td>
           </tr>
@@ -167,6 +199,9 @@ export const NewScores = (props) => {
             {props.munchkinMode === true ? (
               <td>
                 <input
+                  type="number"
+                  min={1}
+                  defaultValue={10}
                   className="attInput"
                   onChange={(e) => {
                     setInt(parseInt(e.target.value));
@@ -185,7 +220,7 @@ export const NewScores = (props) => {
                 ? racialBonus.bonusInt
                 : racialBonus.bonusInt}
             </td>
-            <td className="totalScore">{int + racialBonus.bonusInt}</td>
+            <td className="totalScore">{calculateTotal(int, racialBonus.bonusInt)}</td>
 
             <td>{calculateModifier(int + racialBonus.bonusInt)}</td>
           </tr>
@@ -194,6 +229,9 @@ export const NewScores = (props) => {
             {props.munchkinMode === true ? (
               <td>
                 <input
+                  type="number"
+                  min={1}
+                  defaultValue={10}
                   className="attInput"
                   onChange={(e) => {
                     setWis(parseInt(e.target.value));
@@ -212,7 +250,7 @@ export const NewScores = (props) => {
                 ? racialBonus.bonusWis
                 : racialBonus.bonusWis}
             </td>
-            <td className="totalScore">{wis + racialBonus.bonusWis}</td>
+            <td className="totalScore">{calculateTotal(wis, racialBonus.bonusWis)}</td>
 
             <td>{calculateModifier(wis + racialBonus.bonusWis)}</td>
           </tr>
@@ -222,6 +260,9 @@ export const NewScores = (props) => {
             {props.munchkinMode === true ? (
               <td>
                 <input
+                  type="number"
+                  defaultValue={10}
+                  min={1}
                   className="attInput"
                   onChange={(e) => {
                     setChr(parseInt(e.target.value));
@@ -240,7 +281,7 @@ export const NewScores = (props) => {
                 ? racialBonus.bonusChr
                 : racialBonus.bonusChr}
             </td>
-            <td className="totalScore">{chr + racialBonus.bonusChr}</td>
+            <td className="totalScore">{calculateTotal(chr, racialBonus.bonusChr)}</td>
 
             <td>{calculateModifier(chr + racialBonus.bonusChr)}</td>
           </tr>
