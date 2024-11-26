@@ -421,17 +421,17 @@ export const WeaponsAndArmorQuick = (props) => {
   const purchasedArmor = armorArray.map((item, index) => (
     <div
       key={index}
-      className="row"
-      style={{ fontSize: "small", lineHeight: 0.9 }}
+      className="grid grid-cols-3 text-xs"
+      
     >
-      <div className="col-4">
-        <p style={{ fontWeight: "bold" }}>{item.armorName}</p>
+      <div>
+        <p className="font-semibold">{item.armorName}</p>
       </div>
-      <div className="col-4">
+      <div>
         <p>Armor Bonus: {item.armorBonus}</p>
       </div>
 
-      <div className="col-4">
+      <div>
         <p>Armor Check: {item.armorCheck}</p>
       </div>
     </div>
@@ -440,16 +440,16 @@ export const WeaponsAndArmorQuick = (props) => {
   const purchasedWeapons = weaponArray.map((item, index) => (
     <div
       key={index}
-      className="row"
-      style={{ fontSize: "small", lineHeight: 0.9 }}
+      className="grid grid-cols-3 text-xs"
+      
     >
-      <div className="col-4">
-        <p style={{ fontWeight: "bold" }}>{item.weaponName}</p>
+      <div>
+        <p className="font-semibold">{item.weaponName}</p>
       </div>
-      <div className="col-4">
+      <div>
         <p>Damage: {item.dmgM}</p>
       </div>
-      <div className="col-4">
+      <div>
         <p>Type: {item.type}</p>
       </div>
     </div>
