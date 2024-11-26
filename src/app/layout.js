@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import TopNav from "./ui/TopNav";
+import Link from "next/link";
 
 const raleway = localFont({
   src: "./fonts/Raleway-VariableFont_wght.ttf",
@@ -22,7 +23,8 @@ const imFell = localFont({
 
 
 
-
+const currentDate = new Date();
+  let currentYear = currentDate.getFullYear();
 
 export const metadata = {
   title: "Rolled School",
@@ -35,6 +37,7 @@ export default function RootLayout({ children }) {
       <body className={`${raleway.variable} ${imFellSC.variable} ${imFell.variable} bg-gray-50 antialiased`}>
         <TopNav />
         {children}
+        <p className="font-[family-name:var(--font-imFell)] mt-30 mb-20 text-center">Copyright {currentYear} by <Link href="https://chadmusick.com" className="font-semibold text-lawfulBlue">Chad Musick</Link></p>
       </body>
     </html>
   );

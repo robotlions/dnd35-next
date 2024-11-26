@@ -29,8 +29,10 @@ export const CharName = (props) => {
       type="text"
       placeholder="Character Name"
       onChange={(e) => {
-        setThisState(e.target.value);
         props.setCharName(e.target.value);
+      }}
+      onBlur={(e) => {
+        props.setBasicEdited(true);
       }}
       onKeyDown={handleKeyDown}
     />

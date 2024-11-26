@@ -16,7 +16,6 @@ import { BannerCard } from "../ui/BannerCard";
 import Modal from "../ui/Modal";
 import Link from "next/link";
 import { CustomButton } from "../ui/Buttons";
-import Custom from "../custom/page";
 
 
 
@@ -58,7 +57,7 @@ export default function Standard() {
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
-  const handlePrint = useReactToPrint({ contentRef });
+  const handlePrint = useReactToPrint({ contentRef, documentTitle: `${charName} the ${selectedClass}` });
 
 
   useEffect(() => {
@@ -248,6 +247,7 @@ export default function Standard() {
             selectedRace={selectedRace}
             setRolled={setRolled}
             munchkinMode={munchkinMode}
+            setBasicEdited={setBasicEdited}
           />
         </div>
         <div className="col-span-2">
@@ -511,7 +511,7 @@ export default function Standard() {
         <Link href="/">
           <CustomButton color="gray" label="Back to Home" />
         </Link>
-       <CustomButton color="blue" label="View and Print" onClick={() => setIsModalOpen(true)} />
+       {basicEdited===true && <CustomButton color="blue" label="View and Print" onClick={() => setIsModalOpen(true)} />}
        <CustomButton color="gray" label="Start Over" onClick={() => window.location.reload()} />
       </div>
     </div>

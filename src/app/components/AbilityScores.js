@@ -82,6 +82,7 @@ export const NewScores = (props) => {
     } else {
       setNewRoll(true);
       props.setRolled(true);
+      props.setBasicEdited(true);
     }
   }
 
