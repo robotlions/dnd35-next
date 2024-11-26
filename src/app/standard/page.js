@@ -499,26 +499,19 @@ export default function Standard() {
               baseAttack={baseAttack}
             />
           </div>
-          <button
-            onClick={() => setIsModalOpen(false)}
-            className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-lawfulBlue to-cyan-600 rounded hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-300"
-          >
-            Close
-          </button>
+          <div className="mt-5">
+          <CustomButton color="gray" label="Close" onClick={() => setIsModalOpen(false)} />
           &nbsp;
-          <button
-            onClick={handlePrint}
-            className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-emerald-600 to-emerald-400 rounded hover:bg-gradient-to-b hover:from-emerald-400 hover:to-emerald-300"
-          >
-            Print Character
-          </button>
+          <CustomButton color="blue" label="Print Character" onClick={handlePrint} />
+        </div>
         </Modal>
+        
       </div>
       <div className="flex gap-3 justify-center mb-20">
         <Link href="/">
           <CustomButton color="gray" label="Back to Home" />
         </Link>
-       <CustomButton color="lawful" label="View and Print" onClick={() => setIsModalOpen(true)} />
+       <CustomButton color="blue" label="View and Print" onClick={() => setIsModalOpen(true)} />
        <CustomButton color="gray" label="Start Over" onClick={() => window.location.reload()} />
       </div>
     </div>

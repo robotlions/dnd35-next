@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as RaceBonuses from "../Races/AbilBonuses";
 import { Input } from "@material-tailwind/react";
+import { CustomButton } from "../ui/Buttons";
 
 function rando(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -71,12 +72,7 @@ export const NewScores = (props) => {
   const [chr, setChr] = useState(10);
 
   const rerollButton = (
-    <button
-      className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
-      onClick={() => rollButton()}
-    >
-      Roll Abilities
-    </button>
+   <CustomButton color="blue" label="Roll Abilities"  onClick={() => rollButton()} />
   );
   const racialBonus = RaceBonuses[props.selectedRace];
 

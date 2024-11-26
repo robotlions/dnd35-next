@@ -1,6 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-
+import { useState, useRef } from "react";
 import * as CharInfo from "../components/CharInfo";
 import { BaseAttack } from "../components/BaseAttack";
 import * as Skills from "../components/Skills";
@@ -15,6 +14,7 @@ import { QuickScores } from "../components/QuickScores";
 import { charNames } from "../Data/CharNames";
 import Link from "next/link";
 import Modal from "../ui/Modal";
+import { CustomButton } from "../ui/Buttons";
 
 export default function Quick() {
   const [selectedRace, setSelectedRace] = useState("human");
@@ -130,12 +130,7 @@ export default function Quick() {
         </div>
       </div>
       <div className="flex justify-center mt-5 mb-5">
-        <button
-          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-emerald-600 to-neutralGreen hover:bg-gradient-to-b hover:from-emerald-500 hover:to-emerald-700"
-          onClick={() => createInstantCharacter()}
-        >
-          Go!
-        </button>
+        <CustomButton label="Go!" color="neutral" onClick={() => createInstantCharacter()} />
       </div>
     </>
   );
@@ -343,19 +338,11 @@ export default function Quick() {
             baseAttack={baseAttack}
           />
         </div>
-        <button
-          onClick={() => setIsModalOpen(false)}
-          className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-lawfulBlue to-cyan-600 rounded hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-300"
-        >
-          Close
-        </button>
-        &nbsp;
-        <button
-          onClick={handlePrint}
-          className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-cyan-600 to-lawfulBlue rounded hover:bg-gradient-to-b hover:from-cyan-500 hover:to-cyan-400"
-        >
-          Print Character
-        </button>
+        <div className="mt-5">
+          <CustomButton color="gray" label="Close" onClick={() => setIsModalOpen(false)} />
+          &nbsp;
+          <CustomButton color="blue" label="Print Character" onClick={handlePrint} />
+        </div>
       </Modal>
     </div>
   </>
@@ -371,24 +358,12 @@ export default function Quick() {
 
       <div className="w-10/12 mt-10">
        {characterCreated===false ? introBlock : characterBlock}
-        <div className="flex gap-3 justify-center mb-20">
+        <div className="flex gap-3 justify-center mb-20 mt-20">
           <Link href="/">
-            <button className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700">
-              Back to Home
-            </button>
+            <CustomButton color="gray" label="Back to Home" />
           </Link>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-cyan-600 to-lawfulBlue hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700"
-          >
-            View and Print
-          </button>
-          <button
-            className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700"
-            onClick={() => window.location.reload()}
-          >
-            New Quick Character
-          </button>
+          <CustomButton color="blue" label="View and Print" onClick={() => setIsModalOpen(true)} />
+          <CustomButton color="gray" label="New Quick Character" onClick={() => window.location.reload()} />
         </div>
       </div>
     </div>

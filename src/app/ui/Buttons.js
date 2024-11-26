@@ -10,15 +10,18 @@ export function CustomButton(props) {
       break;
     case "neutral":
       color = "from-emerald-600 to-neutralGreen";
-    break;
+      break;
     case "chaotic":
       color = "from-red-700 to-chaoticRed";
+      break;
+    case "blue":
+      color = " from-sky-500 to-sky-700";
       break;
   }
 
   return (
     <button
-      className={`min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${color} hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700`}
+      className={`min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${color} hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-600`}
       onClick={props.onClick}
     >
       {props.label}

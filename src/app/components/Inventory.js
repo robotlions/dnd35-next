@@ -3,6 +3,7 @@ import React from "react";
 import { ArmorTable } from "../Equipment/ArmorTables";
 import { ShieldTable } from "../Equipment/ArmorTables";
 import * as WeaponTables from "../Equipment/WeaponTables";
+import { CustomButton } from "../ui/Buttons";
 
 function rando(min, max) {
   return Math.floor(Math.random() * max) + min;
@@ -394,12 +395,7 @@ export const StartingSilver = (props) => {
 
   const normalMoney =
     props.totalSilver === 0 ? (
-      <button
-        className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
-        onClick={() => genSilver()}
-      >
-        Roll Starting Money
-      </button>
+      <CustomButton color="blue" label="Roll Starting Money"  onClick={() => genSilver()} />
     ) : null
     
     // (
