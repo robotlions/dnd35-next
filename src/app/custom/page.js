@@ -50,7 +50,6 @@ export default function Custom() {
   const [spellCaster, setSpellCaster] = useState(false);
   const [baseAttack, setBaseAttack] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
@@ -92,9 +91,9 @@ export default function Custom() {
     ));
   }
 
-  if(totalSilver===0){
-    setTotalSilver(100000)
-  };
+  if (totalSilver === 0) {
+    setTotalSilver(100000);
+  }
 
   function armorHeaderDisplay() {
     let counts = {};
@@ -114,9 +113,7 @@ export default function Custom() {
         </p>
       </div>
     ));
-  };
-
-  
+  }
 
   const charInfoHeader = (
     <div className="accTitle">
@@ -334,7 +331,7 @@ export default function Custom() {
         selectedClass={selectedClass}
         setLearnedSkillsArray={setLearnedSkillsArray}
         setSkillPoints={setSkillPoints}
-        key={[selectedClass,int]}
+        key={[selectedClass, int]}
       />
     </>
   );
@@ -343,9 +340,11 @@ export default function Custom() {
     <div className="accTitle">
       <h2>Feats</h2>
       <div className="flex gap-3">
-      {featArray.map((item, index) => (
-        <div className="text-lg" key={index}>{item.featName}</div>
-      ))}
+        {featArray.map((item, index) => (
+          <div className="text-lg" key={index}>
+            {item.featName}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -449,22 +448,25 @@ export default function Custom() {
   return (
     <div className="justify-items-center mt-10">
       <BannerCard
-          title="Chaotic"
-          text="Manually input level and ability scores, start with a million silver. Pure chaos."
-          imageUrl={chaoticTile.src}
-        />
+        title="Chaotic"
+        text="Manually input level and ability scores, start with a million silver. Pure chaos."
+        imageUrl={chaoticTile.src}
+      />
       <div className="w-10/12 mt-10">
-     
-        <AccordionMulti accordionItems={accordionItems} hoverFrom="hover:from-chaoticRed" hoverTo="hover:to-red-900" borderColor="border-chaoticRed"/>
+        <AccordionMulti
+          accordionItems={accordionItems}
+          hoverFrom="hover:from-chaoticRed"
+          hoverTo="hover:to-red-900"
+          borderColor="border-chaoticRed"
+        />
       </div>
 
-     
       <div className="flex flex-col items-center justify-center p-4">
-        
-
         {/* Modal */}
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">{charName}</h2>
+          <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">
+            {charName}
+          </h2>
           <div>
             <ComponentToPrint
               ref={contentRef}
@@ -491,18 +493,34 @@ export default function Custom() {
             />
           </div>
           <div className="mt-5">
-          <CustomButton color="gray" label="Close" onClick={() => setIsModalOpen(false)} />
-          &nbsp;
-          <CustomButton color="blue" label="Print Character" onClick={handlePrint} />
-        </div>
+            <CustomButton
+              color="gray"
+              label="Close"
+              onClick={() => setIsModalOpen(false)}
+            />
+            &nbsp;
+            <CustomButton
+              color="blue"
+              label="Print Character"
+              onClick={handlePrint}
+            />
+          </div>
         </Modal>
       </div>
       <div className="flex gap-3 justify-center mb-20">
         <Link href="/">
           <CustomButton color="gray" label="Back to Home" />
         </Link>
-       <CustomButton color="blue" label="View and Print" onClick={() => setIsModalOpen(true)} />
-       <CustomButton color="gray" label="Start Over" onClick={() => window.location.reload()} />
+        <CustomButton
+          color="blue"
+          label="View and Print"
+          onClick={() => setIsModalOpen(true)}
+        />
+        <CustomButton
+          color="gray"
+          label="Start Over"
+          onClick={() => window.location.reload()}
+        />
       </div>
     </div>
   );
