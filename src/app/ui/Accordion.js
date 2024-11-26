@@ -17,7 +17,7 @@ export function AccordionMulti(props) {
         <div key={index}>
           <button
             onClick={() => toggleAccordion(index)}
-            className="flex justify-between rounded items-center w-full py-4 px-6 text-left text-amber-900 hover:bg-gradient-to-b hover:from-amber-300 hover:to-amber-200 text-lg bg-gradient-to-b from-amber-200 to-parchment shadow"
+            className="flex justify-between rounded items-center w-full py-4 px-6 text-left text-zinc-50 bg-gradient-to-b from-gray-600 to-gray-500 text-lg hover:bg-gradient-to-b hover:from-sky-800 hover:to-sky-700 shadow"
           >
             <span className="text-3xl font-black font-[family-name:var(--font-imFellSC)]">
               {item.title}

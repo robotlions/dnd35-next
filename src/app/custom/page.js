@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { AccordionMulti } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
@@ -11,6 +12,7 @@ import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
+import dndBanner from "../../../public/images/dnd2000Logo.png";
 import Modal from "../ui/Modal";
 import Link from "next/link";
 
@@ -339,9 +341,11 @@ export default function Custom() {
   const featsHeader = (
     <div className="accTitle">
       <h2>Feats</h2>
+      <div className="flex gap-3">
       {featArray.map((item, index) => (
         <div className="text-lg" key={index}>{item.featName}</div>
       ))}
+      </div>
     </div>
   );
 
@@ -442,6 +446,15 @@ export default function Custom() {
   return (
     <div className="justify-items-center">
       <div className="w-10/12 mt-10">
+      <div className="flex justify-center">
+      <Image width={300} src={dndBanner} alt="dungeons and dragons three point five">
+
+      </Image>
+      </div>
+      <div className="text-center mb-10">
+        <h1 className="font-semibold text-4xl font-[family-name:var(--font-imFellSC)] mt-10 mb-2">Chaotic Mode</h1>
+      <h4 className="text-lg font-[family-name:var(--font-imFell)]">Manually set level and abilities. Start with a million silver.</h4>
+      </div>
         <AccordionMulti accordionItems={accordionItems} />
       </div>
 

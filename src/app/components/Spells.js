@@ -57,65 +57,66 @@ export const SpellListing = (props) => {
           </label>
         </div>
       ));
-  }
+  };
+
 
   return (
     <div className="text-xs">
-      <h6 className="font-semibold">Level 0</h6>
-      <div className="grid grid-cols-2 md:grid-cols-5">{displayList(0)}</div>
+      <h6 className="font-semibold">Level 0 - {props.level0} slots remaining</h6>
+      <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(0)}</div>
 
       {displayList(1).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 1</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(1)}</div>
+          <h6 className="font-semibold">Level 1 - {props.level1} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(1)}</div>
         </>
       )}
       {displayList(2).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 2</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(2)}</div>
+          <h6 className="font-semibold">Level 2 - {props.level2} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(2)}</div>
         </>
       )}
       {displayList(3).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 3</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(3)}</div>
+          <h6 className="font-semibold">Level 3 - {props.level3} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(3)}</div>
         </>
       )}
       {displayList(4).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 4</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(4)}</div>
+          <h6 className="font-semibold">Level 4 - {props.level4} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(4)}</div>
         </>
       )}
       {displayList(5).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 5</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(5)}</div>
+          <h6 className="font-semibold">Level 5 - {props.level5} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(5)}</div>
         </>
       )}
       {displayList(6).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 6</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(6)}</div>
+          <h6 className="font-semibold">Level 6 - - {props.level6} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(6)}</div>
         </>
       )}
       {displayList(7).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 7</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(7)}</div>
+          <h6 className="font-semibold">Level 7 - {props.level7} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(7)}</div>
         </>
       )}
       {displayList(8).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 8</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(8)}</div>
+          <h6 className="font-semibold">Level 8 - {props.level8} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(8)}</div>
         </>
       )}
       {displayList(9).length > 0 && (
         <>
-          <h6 className="font-semibold">Level 9</h6>
-          <div className="grid grid-cols-2 md:grid-cols-5">{displayList(9)}</div>
+          <h6 className="font-semibold">Level 9 - {props.level9} slots remaining</h6>
+          <div className="grid grid-cols-2 md:grid-cols-5 mb-1">{displayList(9)}</div>
         </>
       )}
     </div>
@@ -184,17 +185,32 @@ export const SpellsMain = (props) => {
     }
   }, [props.level, props.selectedClass, props.int]);
 
+  let lvlCheck = KnownSpells[props.selectedClass][props.level];
+  let spellObject = SpellLists[props.selectedClass];
+
+  function checkLevel(lvlFilter) {
+    let check = Object.values(spellObject)
+      .filter((item) => lvlCheck[item.level] > 0)
+      .filter((item) => item.level === lvlFilter)
+      return(check)
+  }
+
   return (
     <div>
-      <p>
-        Available Spells: <br />
-        {level0 && `Level 0: ${level0}`} {level1 && `Level 1: ${level1}`}{" "}
-        {level2 && `Level 2: ${level2}`}
-        {level3 && `Level 3: ${level3}`} {level4 && `Level 4: ${level4}`}{" "}
-        {level5 && `Level 5: ${level5}`}
-        {level6 && `Level 6: ${level6}`} {level7 && `Level 7: ${level7}`}{" "}
-        {level8 && `Level 8: ${level8}`} {level9 && `Level 9: ${level9}`}
-      </p>
+      <div className="font-semibold mb-2">
+        Available Spells:</div>
+        <div className="flex gap-3 mb-2">
+        <div>{checkLevel(0).length>0 && `Level 0: ${level0}`}</div>
+        <div> {checkLevel(1).length>0 && `Level 1: ${level1}`}</div>
+        <div>{checkLevel(2).length>0 && `Level 2: ${level2}`}</div>
+        <div>{checkLevel(3).length>0 && `Level 3: ${level3}`}</div>
+        <div>{checkLevel(4).length>0 && `Level 4: ${level4}`}</div>
+        <div>{checkLevel(5).length>0 && `Level 5: ${level5}`}</div>
+        <div>{checkLevel(6).length>0 && `Level 6: ${level6}`}</div>
+        <div>{checkLevel(7).length>0 && `Level 7: ${level7}`}</div>
+       <div>{checkLevel(8).length>0 && `Level 8: ${level8}`}</div>
+       <div>{checkLevel(9).length>0 && `Level 9: ${level9}`}</div>
+      </div>
       <div>
         {props.selectedClass !== "Barbarian" &&
           props.selectedClass !== "Barbarian" &&
