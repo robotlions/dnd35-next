@@ -15,6 +15,7 @@ import { charNames } from "../Data/CharNames";
 import Link from "next/link";
 import Modal from "../ui/Modal";
 import { CustomButton } from "../ui/Buttons";
+import { GenerateWeaponsAndArmorQuick } from "../components/QuickInventory";
 
 export default function Quick() {
   const [selectedRace, setSelectedRace] = useState("human");
@@ -31,7 +32,7 @@ export default function Quick() {
   const [updated, setUpdated] = useState(false);
   const [armorMoney, setArmorMoney] = useState(0);
   const [ac, setAC] = useState(10);
-  const [armorBonusTotal, setArmorBonusTotal] = useState(0);
+  // const [armorBonusTotal, setArmorBonusTotal] = useState(0);
   const [baseAC, setBaseAC] = useState(0);
   const [weaponsMoney, setWeaponsMoney] = useState(0);
   const [alignment, setAlignment] = useState("Lawful Good");
@@ -55,6 +56,54 @@ export default function Quick() {
   function rando(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+  // function armorBonusTotal() {
+  //   return armorArray.reduce((a, b) => a + b.armorBonus, 0);
+  // }
+
+  const armorBonusTotal =
+    armorArray.reduce((a, b) => a + b.armorBonus, 0);
+  
+
+ 
+  const purchasedArmor = armorArray.map((item, index) => (
+    <div
+      key={index}
+      className="grid grid-cols-3 text-xs"
+      
+    >
+      <div>
+        <p className="font-semibold">{item.armorName}</p>
+      </div>
+      <div>
+        <p>Armor Bonus: {item.armorBonus}</p>
+      </div>
+
+      <div>
+        <p>Armor Check: {item.armorCheck}</p>
+      </div>
+    </div>
+  ));
+
+  const purchasedWeapons = weaponArray.map((item, index) => (
+    <div
+      key={index}
+      className="grid grid-cols-3 text-xs"
+      
+    >
+      <div>
+        <p className="font-semibold">{item.weaponName}</p>
+      </div>
+      <div>
+        <p>Damage: {item.dmgM}</p>
+      </div>
+      <div>
+        <p>Type: {item.type}</p>
+      </div>
+    </div>
+  ));
+  
+  
 
   function quickRollStats() {
     let statArray = [];
@@ -103,6 +152,7 @@ export default function Quick() {
     setCharacterCreated(true);
   }
 
+
   const introBlock = (
     <>
       <h5 className="text-center font-semibold text-lg mb-3 font-[family-name:var(--font-imFell)]">
@@ -130,134 +180,140 @@ export default function Quick() {
         </div>
       </div>
       <div className="flex justify-center mt-5 mb-5">
-        <CustomButton label="Go!" color="neutral" onClick={() => createInstantCharacter()} />
+        <CustomButton
+          label="Go!"
+          color="neutral"
+          onClick={() => createInstantCharacter()}
+        />
       </div>
     </>
   );
 
   const characterBlock = (
     <>
-    <h3 className="text-3xl font-semibold text-center mb-10 font-[family-name:var(--font-imFellSC)]">
-      {charName} the{" "}
-      {selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)}{" "}
-      {selectedClass}
-    </h3>
-    <div className="grid grid-cols-12">
-      <div className="col-span-12 md:col-span-4">
-        <p className="font-semibold">
-          Name:{" "}
-          <span className="font-normal">
-            {charName !== "Basic Info" ? charName : ""}
-          </span>
-        </p>
-      </div>
-      <div className="col-span-6 md:col-span-2">
-        <p className="font-semibold">
-          Level: <span className="font-normal">{level}</span>
-        </p>
-      </div>
-      <div className="col-span-6 md:col-span-2">
-        <p className="font-semibold">
-          Race:{" "}
-          <span className="font-medium">
-            {selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)}
-          </span>
-        </p>
-      </div>
-      <div className="col-span-6 md:col-span-2">
-        <p className="font-semibold">
-          Class: <span className="font-medium">{selectedClass}</span>
-        </p>
-      </div>
-      <div className="col-span-6 md:col-span-2">
-        <p className="font-semibold">
-          Alignment: <span className="font-medium">{alignment}</span>
-        </p>
-      </div>
-    </div>
-    <br />
-    <div className="grid grid-cols-12">
-      <div className="col-span-12 md:col-span-4">
-        <QuickScores
-          str={str}
-          chr={chr}
-          int={int}
-          wis={wis}
-          dex={dex}
-          con={con}
-          setStr={setStr}
-          setChr={setChr}
-          setInt={setInt}
-          setWis={setWis}
-          setDex={setDex}
-          setCon={setCon}
-          selectedRace={selectedRace}
-          setRolled={setRolled}
-        />
-        <div>
-          <button className="mt-3" onClick={() => quickRollStats()}>
-            Reroll Stats
-          </button>
+      <h3 className="text-3xl font-semibold text-center mb-10 font-[family-name:var(--font-imFellSC)]">
+        {charName} the{" "}
+        {selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)}{" "}
+        {selectedClass}
+      </h3>
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 md:col-span-4">
+          <p className="font-semibold">
+            Name:{" "}
+            <span className="font-normal">
+              {charName !== "Basic Info" ? charName : ""}
+            </span>
+          </p>
+        </div>
+        <div className="col-span-6 md:col-span-2">
+          <p className="font-semibold">
+            Level: <span className="font-normal">{level}</span>
+          </p>
+        </div>
+        <div className="col-span-6 md:col-span-2">
+          <p className="font-semibold">
+            Race:{" "}
+            <span className="font-medium">
+              {selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)}
+            </span>
+          </p>
+        </div>
+        <div className="col-span-6 md:col-span-2">
+          <p className="font-semibold">
+            Class: <span className="font-medium">{selectedClass}</span>
+          </p>
+        </div>
+        <div className="col-span-6 md:col-span-2">
+          <p className="font-semibold">
+            Alignment: <span className="font-medium">{alignment}</span>
+          </p>
         </div>
       </div>
+      <br />
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 md:col-span-4">
+          <QuickScores
+            str={str}
+            chr={chr}
+            int={int}
+            wis={wis}
+            dex={dex}
+            con={con}
+            setStr={setStr}
+            setChr={setChr}
+            setInt={setInt}
+            setWis={setWis}
+            setDex={setDex}
+            setCon={setCon}
+            selectedRace={selectedRace}
+            setRolled={setRolled}
+          />
+          <div className="mt-3">
+            <CustomButton
+              label="Reroll Stats"
+              color="blue"
+              onClick={() => quickRollStats()}
+            />
+          </div>
+        </div>
 
-      <div
-        className="col-span-6 md:col-span-2"
-        style={{ textAlign: "center" }}
-      >
-        <span style={{ fontWeight: "bold" }}>Hit Points:</span>
-        <CharInfo.HitPoints
-          setHP={setHP}
-          level={level}
-          selectedClass={selectedClass}
-          con={con}
-          setCon={setCon}
-          selectedRace={selectedRace}
-          featArray={featArray}
-        />
+        <div
+          className="col-span-6 md:col-span-2"
+          style={{ textAlign: "center" }}
+        >
+          <span style={{ fontWeight: "bold" }}>Hit Points:</span>
+          <CharInfo.HitPoints
+            setHP={setHP}
+            level={level}
+            selectedClass={selectedClass}
+            con={con}
+            setCon={setCon}
+            selectedRace={selectedRace}
+            featArray={featArray}
+          />
+        </div>
+        <div
+          className="col-span-6 md:col-span-2"
+          style={{ textAlign: "center" }}
+        >
+          <span style={{ fontWeight: "bold" }}>Armor Class:</span>
+          <CharInfo.ArmorClass
+            setAC={setAC}
+            armorBonusTotal={armorBonusTotal}
+            setBaseAC={setBaseAC}
+            dex={dex}
+            selectedRace={selectedRace}
+          />
+        </div>
+        <div
+          className="col-span-6 md:col-span-2"
+          style={{ textAlign: "center" }}
+        >
+          <CharInfo.SavingThrows
+            level={level}
+            selectedClass={selectedClass}
+            dex={dex}
+            con={con}
+            wis={wis}
+          />
+        </div>
+        <div
+          className="col-span-6 md:col-span-2"
+          style={{ textAlign: "center" }}
+        >
+          <BaseAttack
+            str={str}
+            level={level}
+            selectedClass={selectedClass}
+            setBaseAttack={setBaseAttack}
+          />
+        </div>
       </div>
-      <div
-        className="col-span-6 md:col-span-2"
-        style={{ textAlign: "center" }}
-      >
-        <span style={{ fontWeight: "bold" }}>Armor Class:</span>
-        <CharInfo.ArmorClass
-          setAC={setAC}
-          armorBonusTotal={armorBonusTotal}
-          setBaseAC={setBaseAC}
-          dex={dex}
-          selectedRace={selectedRace}
-        />
-      </div>
-      <div
-        className="col-span-6 md:col-span-2"
-        style={{ textAlign: "center" }}
-      >
-        <CharInfo.SavingThrows
-          level={level}
-          selectedClass={selectedClass}
-          dex={dex}
-          con={con}
-          wis={wis}
-        />
-      </div>
-      <div
-        className="col-span-6 md:col-span-2"
-        style={{ textAlign: "center" }}
-      >
-        <BaseAttack
-          str={str}
-          level={level}
-          selectedClass={selectedClass}
-          setBaseAttack={setBaseAttack}
-        />
-      </div>
-    </div>
-    <br />
-    <div className="grid grid-cols-12">
-      <div className="col-span-12 md:col-span-3">
-        <p style={{ fontWeight: "bold" }}>Weapons and Armor</p>
-        <Inventory.WeaponsAndArmorQuick
+      <br />
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 md:col-span-3">
+          <p style={{ fontWeight: "bold" }}>Weapons and Armor</p>
+          {/* <Inventory.WeaponsAndArmorQuick
           setArmorBonusTotal={setArmorBonusTotal}
           totalSilver={totalSilver}
           updated={updated}
@@ -266,87 +322,105 @@ export default function Quick() {
           weaponArray={weaponArray}
           setWeaponArray={setWeaponArray}
           selectedClass={selectedClass}
-          quickCreate={quickCreate}
           armorArray={armorArray}
-
-        />
-      </div>
-
-      <div className="col-span-12 md:col-span-3">
-        <p style={{ fontWeight: "bold" }}>Skills</p>
-        <Skills.SkillsQuick
-          learnedSkillsArray={learnedSkillsArray}
-          setLearnedSkillsArray={setLearnedSkillsArray}
-          selectedClass={selectedClass}
           quickCreate={quickCreate}
-          int={int}
-          selectedRace={selectedRace}
-        />
-      </div>
-      <div className="col-span-12 md:col-span-3">
-        <p style={{ fontWeight: "bold" }}>Feats</p>
-        <Feats.FeatsQuick
-          featArray={featArray}
-          setFeatArray={setFeatArray}
-          selectedClass={selectedClass}
-          quickCreate={quickCreate}
-          selectedRace={selectedRace}
-        />
-      </div>
-      <div className="col-span-12 md:col-span-3">
-        <p style={{ fontWeight: "bold" }}>Spells(level)</p>
-        <Spells.QuickSpellsMain
-          level={level}
-          selectedClass={selectedClass}
-          setSpellArray={setSpellArray}
-          int={int}
-          wis={wis}
-          chr={chr}
-        />
-      </div>
-    </div>
 
-    <div className="flex flex-col items-center justify-center p-4 mt-14">
-      {/* Modal */}
+        /> */}
+        <GenerateWeaponsAndArmorQuick
+          // setArmorBonusTotal={setArmorBonusTotal}
+          weaponArray={weaponArray}
+          selectedClass={selectedClass}
+          armorArray={armorArray}
+          setArmorArray={setArmorArray}
+          setWeaponArray={setWeaponArray}
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">
-          {charName}
-        </h2>
-        <div>
-          <ComponentToPrint
-            ref={contentRef}
-            charName={charName}
-            selectedClass={selectedClass}
-            selectedRace={selectedRace}
-            level={level}
-            ac={ac}
-            str={str}
-            int={int}
-            wis={wis}
-            dex={dex}
-            con={con}
-            chr={chr}
-            alignment={alignment}
-            hp={hp}
-            silver={totalSilver}
-            armorArray={armorArray}
-            weaponArray={weaponArray}
+        />
+         {purchasedArmor}{purchasedWeapons}
+        </div>
+
+        <div className="col-span-12 md:col-span-3">
+          <p style={{ fontWeight: "bold" }}>Skills</p>
+          <Skills.SkillsQuick
             learnedSkillsArray={learnedSkillsArray}
-            featArray={featArray}
-            spellArray={spellArray}
-            baseAttack={baseAttack}
+            setLearnedSkillsArray={setLearnedSkillsArray}
+            selectedClass={selectedClass}
+            quickCreate={quickCreate}
+            int={int}
+            selectedRace={selectedRace}
           />
         </div>
-        <div className="mt-5">
-          <CustomButton color="gray" label="Close" onClick={() => setIsModalOpen(false)} />
-          &nbsp;
-          <CustomButton color="blue" label="Print Character" onClick={handlePrint} />
+        <div className="col-span-12 md:col-span-3">
+          <p style={{ fontWeight: "bold" }}>Feats</p>
+          <Feats.FeatsQuick
+            featArray={featArray}
+            setFeatArray={setFeatArray}
+            selectedClass={selectedClass}
+            quickCreate={quickCreate}
+            selectedRace={selectedRace}
+          />
         </div>
-      </Modal>
-    </div>
-  </>
-  )
+        <div className="col-span-12 md:col-span-3">
+          <p style={{ fontWeight: "bold" }}>Spells(level)</p>
+          <Spells.QuickSpellsMain
+            level={level}
+            selectedClass={selectedClass}
+            setSpellArray={setSpellArray}
+            int={int}
+            wis={wis}
+            chr={chr}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center p-4 mt-14">
+        {/* Modal */}
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">
+            {charName}
+          </h2>
+          <div>
+            <ComponentToPrint
+              ref={contentRef}
+              charName={charName}
+              selectedClass={selectedClass}
+              selectedRace={selectedRace}
+              level={level}
+              ac={ac}
+              str={str}
+              int={int}
+              wis={wis}
+              dex={dex}
+              con={con}
+              chr={chr}
+              alignment={alignment}
+              hp={hp}
+              silver={totalSilver}
+              armorArray={armorArray}
+              weaponArray={weaponArray}
+              learnedSkillsArray={learnedSkillsArray}
+              featArray={featArray}
+              spellArray={spellArray}
+              baseAttack={baseAttack}
+            />
+          </div>
+          <div className="mt-5">
+            <CustomButton
+              color="gray"
+              label="Close"
+              onClick={() => setIsModalOpen(false)}
+            />
+            &nbsp;
+            <CustomButton
+              color="blue"
+              label="Print Character"
+              onClick={handlePrint}
+            />
+          </div>
+        </Modal>
+      </div>
+    </>
+  );
 
   return (
     <div className="justify-items-center mt-10 font-[family-name:var(--font-imFell)]">
@@ -357,13 +431,21 @@ export default function Quick() {
       />
 
       <div className="w-10/12 mt-10">
-       {characterCreated===false ? introBlock : characterBlock}
+        {characterCreated === false ? introBlock : characterBlock}
         <div className="flex gap-3 justify-center mb-20 mt-20">
           <Link href="/">
             <CustomButton color="gray" label="Back to Home" />
           </Link>
-          <CustomButton color="blue" label="View and Print" onClick={() => setIsModalOpen(true)} />
-          <CustomButton color="gray" label="New Quick Character" onClick={() => window.location.reload()} />
+          <CustomButton
+            color="blue"
+            label="View and Print"
+            onClick={() => setIsModalOpen(true)}
+          />
+          <CustomButton
+            color="gray"
+            label="New Quick Character"
+            onClick={() => window.location.reload()}
+          />
         </div>
       </div>
     </div>

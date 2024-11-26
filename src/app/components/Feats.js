@@ -3,54 +3,54 @@ import { useEffect, useState } from "react";
 
 let featArray = [];
 
-export const FeatsMain = (props) => {
-  const [featSlots, setFeatSlots] = useState(1);
-  let lvlCheck = Math.floor(props.level/3);
+export const FeatsMain = ({level, selectedRace, setFeatSlots, setFeatArray}) => {
+  const [featSlotsTemp, setFeatSlotsTemp] = useState(1);
+  let lvlCheck = Math.floor(level/3);
 
 
   useEffect(() => {
-    if (props.selectedRace === "human") {
-      setFeatSlots(2+lvlCheck-featArray.length);
+    if (selectedRace === "human") {
+      setFeatSlotsTemp(2+lvlCheck-featArray.length);
     } else {
-      if (featSlots > 0) {
-        setFeatSlots(1+lvlCheck-featArray.length);
+      if (featSlotsTemp > 0) {
+        setFeatSlotsTemp(1+lvlCheck-featArray.length);
       }
     }
-  }, [props.selectedRace, featSlots, props.level, lvlCheck]);
+  }, [selectedRace, featSlotsTemp, level, lvlCheck]);
 
 
-  const maxFeats = props.selectedRace==='human' ? 2+lvlCheck : 1+lvlCheck
+  const maxFeats = selectedRace==='human' ? 2+lvlCheck : 1+lvlCheck
 
   //right now you can game the system by maxing out your feats, then changing the race to something else then back to human to get an extra slot
 
   useEffect(() => {
-    props.setFeatSlots(featSlots);
-  }, [featSlots, props]);
+    setFeatSlots(featSlotsTemp);
+  }, [featSlotsTemp, setFeatSlots]);
 
   useEffect(()=>{
     featArray = [];
-    props.setFeatSlots(1);
-    props.setFeatArray([]);
-  }, [props.selectedRace])
+    setFeatSlots(1);
+    setFeatArray([]);
+  }, [selectedRace, setFeatArray, setFeatSlots])
 
 
   function handleCheck(event, item) {
     if (event.target.checked === true) {
-      if(featSlots<=0){
+      if(featSlotsTemp<=0){
         return(event.target.checked=false,alert("Your feats are maxed out"))
       }
       featArray.push(item);
-      props.setFeatArray(featArray);
+      setFeatArray(featArray);
 
       // setFeatSlots(featSlots - 1);
-      setFeatSlots(maxFeats - featArray.length);
+      setFeatSlotsTemp(maxFeats - featArray.length);
     }
     if (event.target.checked === false) {
       let i = featArray.indexOf(item);
       featArray.splice(i, 1);
-      props.setFeatArray(featArray);
+      setFeatArray(featArray);
       // setFeatSlots(featSlots + 1);
-      setFeatSlots(maxFeats - featArray.length);
+      setFeatSlotsTemp(maxFeats - featArray.length);
 
     }
   }
@@ -87,7 +87,7 @@ export const FeatsMain = (props) => {
 
   return (
     <div className="text-xs">
-      <h2 className="text-xl font-semibold">Available feats: {featSlots}</h2>
+      <h2 className="text-xl font-semibold">Available feats: {featSlotsTemp}</h2>
       <h5 className="text-lg font-semibold">General Feats</h5>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">{featDisplay("general")}</div>
       <br/>
@@ -102,20 +102,20 @@ export const FeatsMain = (props) => {
   );
 };
 
-export const FeatsQuick = (props) => {
+export const FeatsQuick = ({quickCreate, selectedClass, selectedRace, setFeatArray, int }) => {
   function rando(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 
   useEffect(() => {
-    if (props.quickCreate === true) {
+    if (quickCreate === true) {
       featArray = [];
-      props.setFeatArray([]);
+      setFeatArray([]);
       Object.values(featsTable)
-        .filter((item) =>item.startingFeat.includes(props.selectedClass))
+        .filter((item) =>item.startingFeat.includes(selectedClass))
         .map((item, index) => featArray.push(item));
-        let featSlots = props.selectedRace==="human" ? 2 : 1
+        let featSlots = selectedRace==="human" ? 2 : 1
       let difference =
         featArray.length - featSlots
       for (let i = 0; i < difference; i++) {
@@ -123,9 +123,9 @@ export const FeatsQuick = (props) => {
         featArray.splice(v, 1);
       }
 
-      props.setFeatArray(featArray);
+      setFeatArray(featArray);
     }
-  }, [props.quickCreate, props.selectedClass, props.selectedRace, props.int]);
+  }, [quickCreate, selectedClass, selectedRace, int, setFeatArray]);
 
   const quickSkillsDisplay = featArray.map((item, index) => (
     <span style={{fontSize:"small"}} key={index}>

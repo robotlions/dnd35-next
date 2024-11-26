@@ -43,12 +43,10 @@ const dObj = {
 // let weaponArray = [];
 
 export const ArmorMain = (props) => {
-
   let armorArray = props.armorArray;
-function armorBonusTotal() {
-  return armorArray.reduce((a, b) => a + b.armorBonus, 0);
-}
-
+  function armorBonusTotal() {
+    return armorArray.reduce((a, b) => a + b.armorBonus, 0);
+  }
 
   let purchasedArmor = props.armorArray.map((item, index) => (
     <div key={index} className="grid grid-cols-8">
@@ -68,10 +66,10 @@ function armorBonusTotal() {
         <p>Spell Fail: {item.spellFail}</p>
       </div>
       <div className="col">
-        <p>Speed 30': {item.speed30}</p>
+        <p>Speed 30: {item.speed30}</p>
       </div>
       <div className="col">
-        <p>Speed 20': {item.speed20}</p>
+        <p>Speed 20: {item.speed20}</p>
       </div>
       {/* <div className="col">
         <button
@@ -233,7 +231,6 @@ export const WeaponsMain = (props) => {
 
   let weaponArray = props.weaponArray;
 
-
   function handleCheck(event, item) {
     if (event.target.checked === true) {
       if (item.cost < props.totalSilver) {
@@ -326,7 +323,7 @@ export const WeaponsMain = (props) => {
 
   useEffect(() => {
     props.setWeaponArray(weaponArray);
-  }, [props]);
+  }, [props, weaponArray]);
 
   return (
     <>
@@ -395,106 +392,101 @@ export const StartingSilver = (props) => {
 
   const normalMoney =
     props.totalSilver === 0 ? (
-      <CustomButton color="blue" label="Roll Starting Money"  onClick={() => genSilver()} />
-    ) : null
-    
-    // (
-    //   <button
-    //     className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
-    //     onClick={() => {
-    //       props.setTotalSilver(0);
-    //       props.setArmorMoney(0);
-    //       props.setWeaponsMoney(0);
-    //       props.setArmorArray([]);
-    //       props.setWeaponArray([]);
-    //     }}
-    //   >
-    //     Reset money and inventory
-    //   </button>
-    // );
+      <CustomButton
+        color="blue"
+        label="Roll Starting Money"
+        onClick={() => genSilver()}
+      />
+    ) : null;
+
+  // (
+  //   <button
+  //     className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+  //     onClick={() => {
+  //       props.setTotalSilver(0);
+  //       props.setArmorMoney(0);
+  //       props.setWeaponsMoney(0);
+  //       props.setArmorArray([]);
+  //       props.setWeaponArray([]);
+  //     }}
+  //   >
+  //     Reset money and inventory
+  //   </button>
+  // );
 
   return <>{!props.munchkinMode && normalMoney}</>;
 };
 
-export const WeaponsAndArmorQuick = (props) => {
-  // const [show, setShow] = useState(false);
+// export const WeaponsAndArmorQuick = ({
+//   armorArray,
+//   weaponArray,
+//   quickCreate,
+//   selectedClass,
+//   setArmorArray,
+//   setArmorBonusTotal,
+//   setWeaponArray,
+// }) => {
+//   // let armorArrayTemp = armorArray;
+//   // let weaponArrayTemp = weaponArray;
 
-  //  function buyArmor(){
-  //   Object.values(ArmorTable).filter((item)=>item.startingEquipment.includes(props.selectedClass)).map((item, index) => (armorArray.push(item)
-  //   ))
-  //   setShow(!show);
-  //   console.log(armorArray)
-  //  }
+//   function armorBonusTotal() {
+//     return armorArray.reduce((a, b) => a + b.armorBonus, 0);
+//   }
 
-  let armorArray = props.armorArray;
-  let weaponArray = props.weaponArray;
+//   const purchasedArmor = armorArray.map((item, index) => (
+//     <div key={index} className="grid grid-cols-3 text-xs">
+//       <div>
+//         <p className="font-semibold">{item.armorName}</p>
+//       </div>
+//       <div>
+//         <p>Armor Bonus: {item.armorBonus}</p>
+//       </div>
 
-  function armorBonusTotal() {
-  return armorArray.reduce((a, b) => a + b.armorBonus, 0);
-}
+//       <div>
+//         <p>Armor Check: {item.armorCheck}</p>
+//       </div>
+//     </div>
+//   ));
 
-  const purchasedArmor = props.armorArray.map((item, index) => (
-    <div
-      key={index}
-      className="grid grid-cols-3 text-xs"
-      
-    >
-      <div>
-        <p className="font-semibold">{item.armorName}</p>
-      </div>
-      <div>
-        <p>Armor Bonus: {item.armorBonus}</p>
-      </div>
+//   const purchasedWeapons = weaponArray.map((item, index) => (
+//     <div key={index} className="grid grid-cols-3 text-xs">
+//       <div>
+//         <p className="font-semibold">{item.weaponName}</p>
+//       </div>
+//       <div>
+//         <p>Damage: {item.dmgM}</p>
+//       </div>
+//       <div>
+//         <p>Type: {item.type}</p>
+//       </div>
+//     </div>
+//   ));
 
-      <div>
-        <p>Armor Check: {item.armorCheck}</p>
-      </div>
-    </div>
-  ));
+//   useEffect(() => {
+//     if (quickCreate === true) {
+//       let armorArrayTemp = [];
+//       let weaponArrayTemp = [];
+//       // setArmorArray([]);
+//       // setWeaponArray([]);
+//       Object.values(ArmorTable)
+//         .filter((item) => item.startingEquipment.includes(selectedClass))
+//         .map((item, index) => armorArrayTemp.push(item));
+//       Object.values(WeaponTables.weaponsList)
+//         .filter((item) => item.startingEquipment.includes(selectedClass))
+//         .map((item, index) => weaponArrayTemp.push(item));
+//       Object.values(ShieldTable)
+//         .filter((item) => item.startingEquipment.includes(selectedClass))
+//         .map((item, index) => armorArrayTemp.push(item));
+//       setArmorArray(armorArrayTemp);
+//       setWeaponArray(weaponArrayTemp);
+//       setArmorBonusTotal(armorBonusTotal());
+//     }
+//   }, [quickCreate]);
 
-  const purchasedWeapons = props.weaponArray.map((item, index) => (
-    <div
-      key={index}
-      className="grid grid-cols-3 text-xs"
-      
-    >
-      <div>
-        <p className="font-semibold">{item.weaponName}</p>
-      </div>
-      <div>
-        <p>Damage: {item.dmgM}</p>
-      </div>
-      <div>
-        <p>Type: {item.type}</p>
-      </div>
-    </div>
-  ));
-
-  useEffect(() => {
-    if (props.quickCreate === true) {
-      armorArray = [];
-      weaponArray = [];
-      props.setArmorArray([]);
-      props.setWeaponArray([]);
-      Object.values(ArmorTable)
-        .filter((item) => item.startingEquipment.includes(props.selectedClass))
-        .map((item, index) => armorArray.push(item));
-      Object.values(WeaponTables.weaponsList)
-        .filter((item) => item.startingEquipment.includes(props.selectedClass))
-        .map((item, index) => weaponArray.push(item));
-      Object.values(ShieldTable)
-        .filter((item) => item.startingEquipment.includes(props.selectedClass))
-        .map((item, index) => armorArray.push(item));
-      props.setArmorArray(armorArray);
-      props.setWeaponArray(weaponArray);
-      props.setArmorBonusTotal(armorBonusTotal());
-    }
-  }, [props.quickCreate, props.selectedClass]);
-
-  return (
-    <>
-      <div>{purchasedArmor}</div>
-      <div>{purchasedWeapons}</div>
-    </>
-  );
-};
+//   return (
+//     <>
+//       <div>{purchasedArmor}</div>
+//       <div>{purchasedWeapons}</div>
+//     </>
+//   );
+// };
