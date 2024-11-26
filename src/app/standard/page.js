@@ -15,6 +15,8 @@ import lawfulTile from "../../../public/images/lawfulTile.png";
 import { BannerCard } from "../ui/BannerCard";
 import Modal from "../ui/Modal";
 import Link from "next/link";
+import { CustomButton } from "../ui/Buttons";
+import Custom from "../custom/page";
 
 
 
@@ -514,22 +516,10 @@ export default function Standard() {
       </div>
       <div className="flex gap-3 justify-center mb-20">
         <Link href="/">
-          <button className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700">
-            Back to Home
-          </button>
+          <CustomButton color="gray" label="Back to Home" />
         </Link>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-cyan-600 to-lawfulBlue hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700"
-        >
-          View and Print
-        </button>
-        <button
-          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700"
-          onClick={() => window.location.reload()}
-        >
-          New Quick Character
-        </button>
+       <CustomButton color="lawful" label="View and Print" onClick={() => setIsModalOpen(true)} />
+       <CustomButton color="gray" label="Start Over" onClick={() => window.location.reload()} />
       </div>
     </div>
   );

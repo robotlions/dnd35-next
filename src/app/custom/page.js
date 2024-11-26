@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { AccordionMulti } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
@@ -16,6 +15,7 @@ import { BannerCard } from "../ui/BannerCard";
 import chaoticTile from "../../../public/images/chaoticTile.png";
 import Modal from "../ui/Modal";
 import Link from "next/link";
+import { CustomButton } from "../ui/Buttons";
 
 export default function Custom() {
   const [selectedRace, setSelectedRace] = useState("human");
@@ -48,9 +48,7 @@ export default function Custom() {
   const [munchkinMode, setMunchkinMode] = useState(true);
   const [basicEdited, setBasicEdited] = useState(false);
   const [spellCaster, setSpellCaster] = useState(false);
-  const [show, setShow] = useState(false);
   const [baseAttack, setBaseAttack] = useState(0);
-  const [quickCreate, setQuickCreate] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
 
@@ -520,6 +518,7 @@ export default function Custom() {
           </button>
         </Link>
       </div>
+      <CustomButton label="Test Button" color="lawful" onClick={()=>alert("test successful")}/>
     </div>
   );
 }
