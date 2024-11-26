@@ -12,7 +12,7 @@ import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
-import dndBanner from "../../../public/images/dnd2000Logo.png";
+import { BannerCard } from "../ui/BannerCard";
 import chaoticTile from "../../../public/images/chaoticTile.png";
 import Modal from "../ui/Modal";
 import Link from "next/link";
@@ -118,45 +118,7 @@ export default function Custom() {
     ));
   };
 
-  const CardWithBackground = ({
-    imageUrl,
-    title,
-    text,
-    buttonText,
-    subtitle,
-    fromColor,
-    toColor,
-    href,
-  }) => {
-    return (
-      <div className="relative h-60 w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg">
-        <div
-          className="absolute inset-0 bg-cover bg-center "
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        ></div>
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center text-white">
-          <h2 className="text-5xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
-            {title}
-          </h2>
-          {/* <h4 className="text-2xl font-bold mb-2 font-[family-name:var(--font-imFell)]">
-            {subtitle}
-          </h4> */}
-
-          <p className="text-xl font-semibold mb-4 font-[family-name:var(--font-imFell)]">
-            {text}
-          </p>
-          {/* <Link href={href}>
-            <button
-              className={`font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${fromColor} ${toColor}`}
-            >
-              {buttonText}
-            </button>
-          </Link> */}
-        </div>
-      </div>
-    );
-  };
+  
 
   const charInfoHeader = (
     <div className="accTitle">
@@ -486,7 +448,7 @@ export default function Custom() {
   ];
   return (
     <div className="justify-items-center mt-10">
-      <CardWithBackground
+      <BannerCard
           title="Chaotic"
           text="Manually input level and ability scores, start with a million silver. Pure chaos."
           imageUrl={chaoticTile.src}

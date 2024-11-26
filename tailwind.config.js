@@ -14,6 +14,7 @@ module.exports = {
         'flame': '#ff4500',
         'lawfulBlue':'#0A6583',
         'chaoticRed': '#883035',
+        'neutralGreen': '#173C23',
       },
     },
   },

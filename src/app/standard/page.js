@@ -12,8 +12,8 @@ import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
-import dndBanner from "../../../public/images/dnd2000Logo.png";
 import lawfulTile from "../../../public/images/lawfulTile.png"
+import { BannerCard } from "../ui/BannerCard";
 import Modal from "../ui/Modal";
 import Link from "next/link";
 
@@ -73,30 +73,7 @@ export default function Standard() {
     }
   }, [selectedClass]);
 
-  const CardWithBackground = ({
-    imageUrl,
-    title,
-    text,
-   
-  }) => {
-    return (
-      <div className="relative h-60 w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg">
-        <div
-          className="absolute inset-0 bg-cover bg-center "
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        ></div>
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center text-white">
-          <h2 className="text-5xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
-            {title}
-          </h2>
-          <p className="text-xl font-semibold mb-4 font-[family-name:var(--font-imFell)]">
-            {text}
-          </p>
-        </div>
-      </div>
-    );
-  };
+
 
   function weaponHeaderDisplay() {
     let counts = {};
@@ -468,7 +445,7 @@ export default function Standard() {
   ];
   return (
     <div className="justify-items-center mt-10">
-      <CardWithBackground
+      <BannerCard
           title="Lawful"
           text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook"
           imageUrl={lawfulTile.src}
