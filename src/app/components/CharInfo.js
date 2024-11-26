@@ -141,7 +141,7 @@ export const ArmorClass = (props) => {
   const printAC = 10 + sizeModifier + dexModifier + props.armorBonusTotal;
   useEffect(() => {
     props.setAC(printAC);
-  }, [printAC, props]);
+  }, [printAC, props.armorBonusTotal]);
   return <p>{printAC}</p>;
 };
 

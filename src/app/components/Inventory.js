@@ -20,9 +20,9 @@ function rando(min, max) {
 //   return weaponArray.reduce((a, b) => a + b.cost, 0);
 // }
 
-function armorBonusTotal() {
-  return armorArray.reduce((a, b) => a + b.armorBonus, 0);
-}
+// function armorBonusTotal() {
+//   return armorArray.reduce((a, b) => a + b.armorBonus, 0);
+// }
 
 const dObj = {
   Barbarian: 4,
@@ -38,13 +38,18 @@ const dObj = {
   Wizard: 3,
 };
 
-let armorArray = [];
-let weaponArray = [];
+// let armorArray = [];
+// let weaponArray = [];
 
 export const ArmorMain = (props) => {
-  const [show, setShow] = useState(false);
 
-  const purchasedArmor = armorArray.map((item, index) => (
+  let armorArray = props.armorArray;
+function armorBonusTotal() {
+  return armorArray.reduce((a, b) => a + b.armorBonus, 0);
+}
+
+
+  let purchasedArmor = props.armorArray.map((item, index) => (
     <div key={index} className="grid grid-cols-8">
       <div className="col">
         <p style={{ fontWeight: "bold" }}>{item.armorName}</p>
@@ -103,6 +108,7 @@ export const ArmorMain = (props) => {
         props.setArmorMoney(props.armorMoney + item.cost);
         props.setTotalSilver(props.totalSilver - item.cost);
         props.setArmorBonusTotal(armorBonusTotal());
+        props.setArmorArray(armorArray);
       } else {
         return (
           alert("Not enough money, chump!"), (event.target.checked = false)
@@ -115,6 +121,7 @@ export const ArmorMain = (props) => {
       props.setArmorMoney(props.armorMoney - item.cost);
       props.setTotalSilver(props.totalSilver + item.cost);
       props.setArmorBonusTotal(armorBonusTotal());
+      props.setArmorArray(armorArray);
     }
   }
 
@@ -158,16 +165,16 @@ export const ArmorMain = (props) => {
     </div>
   ));
 
-  useEffect(() => {
-    props.setArmorArray(armorArray);
-  }, [props]);
+  // useEffect(() => {
+  //   props.setArmorArray(armorArray);
+  // }, [props]);
 
   return (
     <>
       <div className="row">
         <div className="text-lg">Silver: {props.totalSilver}</div>
       </div>
-      {armorArray.length > 0 && (
+      {props.armorArray.length > 0 && (
         <h3 className="text-xl font-semibold">Purchased Armor</h3>
       )}
       <div>{purchasedArmor}</div>
@@ -223,6 +230,9 @@ export const ArmorMain = (props) => {
 export const WeaponsMain = (props) => {
   const [show, setShow] = useState(false);
 
+  let weaponArray = props.weaponArray;
+
+
   function handleCheck(event, item) {
     if (event.target.checked === true) {
       if (item.cost < props.totalSilver) {
@@ -243,7 +253,7 @@ export const WeaponsMain = (props) => {
     }
   }
 
-  const purchasedWeapons = weaponArray.map((item, index) => (
+  const purchasedWeapons = props.weaponArray.map((item, index) => (
     <div key={index} className="grid grid-cols-2 md:grid-cols-8">
       <div>
         <p style={{ fontWeight: "bold" }}>{item.weaponName}</p>
@@ -390,20 +400,22 @@ export const StartingSilver = (props) => {
       >
         Roll Starting Money
       </button>
-    ) : (
-      <button
-        className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
-        onClick={() => {
-          props.setTotalSilver(0);
-          props.setArmorMoney(0);
-          props.setWeaponsMoney(0);
-          armorArray = [];
-          weaponArray = [];
-        }}
-      >
-        Reset money and inventory
-      </button>
-    );
+    ) : null
+    
+    // (
+    //   <button
+    //     className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+    //     onClick={() => {
+    //       props.setTotalSilver(0);
+    //       props.setArmorMoney(0);
+    //       props.setWeaponsMoney(0);
+    //       props.setArmorArray([]);
+    //       props.setWeaponArray([]);
+    //     }}
+    //   >
+    //     Reset money and inventory
+    //   </button>
+    // );
 
   return <>{!props.munchkinMode && normalMoney}</>;
 };
@@ -418,7 +430,14 @@ export const WeaponsAndArmorQuick = (props) => {
   //   console.log(armorArray)
   //  }
 
-  const purchasedArmor = armorArray.map((item, index) => (
+  let armorArray = props.armorArray;
+  let weaponArray = props.weaponArray;
+
+  function armorBonusTotal() {
+  return armorArray.reduce((a, b) => a + b.armorBonus, 0);
+}
+
+  const purchasedArmor = props.armorArray.map((item, index) => (
     <div
       key={index}
       className="grid grid-cols-3 text-xs"
@@ -437,7 +456,7 @@ export const WeaponsAndArmorQuick = (props) => {
     </div>
   ));
 
-  const purchasedWeapons = weaponArray.map((item, index) => (
+  const purchasedWeapons = props.weaponArray.map((item, index) => (
     <div
       key={index}
       className="grid grid-cols-3 text-xs"

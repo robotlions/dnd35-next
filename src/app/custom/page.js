@@ -406,6 +406,7 @@ export default function Custom() {
         setUpdated={setUpdated}
         setArmorArray={setArmorArray}
         weaponsMoney={weaponsMoney}
+        armorArray={armorArray}
       />
     </div>
   );
@@ -430,6 +431,7 @@ export default function Custom() {
         setUpdated={setUpdated}
         setWeaponArray={setWeaponArray}
         armorMoney={armorMoney}
+        weaponArray={weaponArray}
       />
     </div>
   );

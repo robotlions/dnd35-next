@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { AccordionMulti } from "../ui/Accordion";
 import * as CharInfo from "../components/CharInfo";
 import { NewScores } from "../components/AbilityScores";
@@ -16,6 +15,8 @@ import lawfulTile from "../../../public/images/lawfulTile.png";
 import { BannerCard } from "../ui/BannerCard";
 import Modal from "../ui/Modal";
 import Link from "next/link";
+
+
 
 export default function Standard() {
   const [selectedRace, setSelectedRace] = useState("human");
@@ -56,6 +57,7 @@ export default function Standard() {
   const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
   const handlePrint = useReactToPrint({ contentRef });
+
 
   useEffect(() => {
     if (
@@ -112,6 +114,8 @@ export default function Standard() {
       </div>
     ));
   }
+
+  
 
   const charInfoHeader = (
     <div className="accTitle">
@@ -284,6 +288,8 @@ export default function Standard() {
         totalSilver={totalSilver}
         selectedClass={selectedClass}
         setTotalSilver={setTotalSilver}
+        setArmorArray={setArmorArray}
+        setWeaponArray={setWeaponArray}
         munchkinMode={munchkinMode}
       />
     </div>
@@ -401,6 +407,7 @@ export default function Standard() {
         setUpdated={setUpdated}
         setArmorArray={setArmorArray}
         weaponsMoney={weaponsMoney}
+        armorArray={armorArray}
       />
     </div>
   );
@@ -425,9 +432,11 @@ export default function Standard() {
         setUpdated={setUpdated}
         setWeaponArray={setWeaponArray}
         armorMoney={armorMoney}
+        weaponArray={weaponArray}
       />
     </div>
   );
+
 
   // The accordion component iterates over this array to create the standard page layout
 
