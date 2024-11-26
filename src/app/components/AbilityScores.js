@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import * as RaceBonuses from "../Races/AbilBonuses";
-import { Input } from "@material-tailwind/react";
 import { CustomButton } from "../ui/Buttons";
 
 function rando(min, max) {
@@ -39,6 +38,16 @@ function calculateTotal(abil, mod){
 
 
 export const NewScores = (props) => {
+  
+
+  const [newRoll, setNewRoll] = useState(false);
+  const [str, setStr] = useState(10);
+  const [int, setInt] = useState(10);
+  const [wis, setWis] = useState(10);
+  const [con, setCon] = useState(10);
+  const [dex, setDex] = useState(10);
+  const [chr, setChr] = useState(10);
+
   useEffect(() => {
     if (newRoll === true) {
       let conRoll = roll();
@@ -61,15 +70,7 @@ export const NewScores = (props) => {
       props.setWis(wisRoll);
       setNewRoll(false);
     }
-  });
-
-  const [newRoll, setNewRoll] = useState(false);
-  const [str, setStr] = useState(10);
-  const [int, setInt] = useState(10);
-  const [wis, setWis] = useState(10);
-  const [con, setCon] = useState(10);
-  const [dex, setDex] = useState(10);
-  const [chr, setChr] = useState(10);
+  },[newRoll, props]);
 
   const rerollButton = (
    <CustomButton color="blue" label="Roll Abilities"  onClick={() => rollButton()} />

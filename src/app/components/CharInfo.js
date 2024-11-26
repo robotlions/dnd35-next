@@ -99,26 +99,26 @@ export const Level = (props) => {
   return <div>{editing === true ? levelInput : levelDisplay}</div>;
 };
 
-export const HitPoints = (props) => {
-  const racialBonus = RaceBonuses[props.selectedRace];
-  const hpDice = ClassTables.hitDice[props.selectedClass];
-  const mod = calculateModifier(props.con + racialBonus.bonusCon);
+export const HitPoints = ({con, selectedRace, selectedClass, featArray, level, setHP }) => {
+  const racialBonus = RaceBonuses[selectedRace];
+  const hpDice = ClassTables.hitDice[selectedClass];
+  const mod = calculateModifier(con + racialBonus.bonusCon);
   const [printHP, setPrintHP] = useState(1);
   const [toughnessBonus, setToughnessBonus] = useState(0);
 
   useEffect(() => {
-    if (props.featArray.some((item) => item.featName === "Toughness")) {
+    if (featArray.some((item) => item.featName === "Toughness")) {
       setToughnessBonus(3);
     } else {
       setToughnessBonus(0);
     }
-  }, [props.featArray]);
+  }, [featArray]);
 
   useEffect(() => {
     let loading = true;
     if (loading === true) {
       let total = 0;
-      for (let i = 1; i <= props.level; i++) {
+      for (let i = 1; i <= level; i++) {
         if (i === 1) {
           total = parseInt(total) + hpDice + mod;
         } else {
@@ -126,24 +126,23 @@ export const HitPoints = (props) => {
         }
       }
       setPrintHP(total + toughnessBonus);
-      props.setHP(total + toughnessBonus);
+      setHP(total + toughnessBonus);
     }
     return () => {
       loading = false;
     };
-  }, [props.level, hpDice, mod, props.featArray, toughnessBonus]);
+  }, [level, hpDice, mod, featArray, toughnessBonus, setHP]);
 
   return <div>{printHP}</div>;
 };
 
-export const ArmorClass = (props) => {
-  const dexModifier = calculateModifier(props.dex);
-  const sizeModifier = RaceTables.sizeModifier[props.selectedRace].ac;
-  // const printAC = 10 + props.armorBonus + props.shieldBonus + props.dexModifier + props.sizeModifier
-  const printAC = 10 + sizeModifier + dexModifier + props.armorBonusTotal;
+export const ArmorClass = ({dex, selectedRace, armorBonusTotal, setAC}) => {
+  const dexModifier = calculateModifier(dex);
+  const sizeModifier = RaceTables.sizeModifier[selectedRace].ac;
+  const printAC = 10 + sizeModifier + dexModifier + armorBonusTotal;
   useEffect(() => {
-    props.setAC(printAC);
-  }, [printAC, props.armorBonusTotal]);
+    setAC(printAC);
+  }, [printAC, armorBonusTotal, setAC]);
   return <p>{printAC}</p>;
 };
 

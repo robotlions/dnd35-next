@@ -16,7 +16,7 @@ export const FeatsMain = (props) => {
         setFeatSlots(1+lvlCheck-featArray.length);
       }
     }
-  }, [props.selectedRace, featSlots, props.level]);
+  }, [props.selectedRace, featSlots, props.level, lvlCheck]);
 
 
   const maxFeats = props.selectedRace==='human' ? 2+lvlCheck : 1+lvlCheck
