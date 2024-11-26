@@ -13,6 +13,7 @@ import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
 import dndBanner from "../../../public/images/dnd2000Logo.png";
+import chaoticTile from "../../../public/images/chaoticTile.png";
 import Modal from "../ui/Modal";
 import Link from "next/link";
 
@@ -115,7 +116,47 @@ export default function Custom() {
         </p>
       </div>
     ));
-  }
+  };
+
+  const CardWithBackground = ({
+    imageUrl,
+    title,
+    text,
+    buttonText,
+    subtitle,
+    fromColor,
+    toColor,
+    href,
+  }) => {
+    return (
+      <div className="relative h-60 w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg">
+        <div
+          className="absolute inset-0 bg-cover bg-center "
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        ></div>
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center text-white">
+          <h2 className="text-5xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
+            {title}
+          </h2>
+          {/* <h4 className="text-2xl font-bold mb-2 font-[family-name:var(--font-imFell)]">
+            {subtitle}
+          </h4> */}
+
+          <p className="text-xl font-semibold mb-4 font-[family-name:var(--font-imFell)]">
+            {text}
+          </p>
+          {/* <Link href={href}>
+            <button
+              className={`font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${fromColor} ${toColor}`}
+            >
+              {buttonText}
+            </button>
+          </Link> */}
+        </div>
+      </div>
+    );
+  };
 
   const charInfoHeader = (
     <div className="accTitle">
@@ -444,26 +485,23 @@ export default function Custom() {
     { title: "Spells", content: spellsContent },
   ];
   return (
-    <div className="justify-items-center">
+    <div className="justify-items-center mt-10">
+      <CardWithBackground
+          title="Chaotic"
+          text="Manually input level and ability scores, start with a million silver. Pure chaos."
+          imageUrl={chaoticTile.src}
+        />
       <div className="w-10/12 mt-10">
-      <div className="flex justify-center">
-      <Image width={300} src={dndBanner} alt="dungeons and dragons three point five">
-
-      </Image>
-      </div>
-      <div className="text-center mb-10">
-        <h1 className="font-semibold text-4xl font-[family-name:var(--font-imFellSC)] mt-10 mb-2">Chaotic Mode</h1>
-      <h4 className="text-lg font-[family-name:var(--font-imFell)]">Manually set level and abilities. Start with a million silver.</h4>
-      </div>
-        <AccordionMulti accordionItems={accordionItems} />
+     
+        <AccordionMulti accordionItems={accordionItems} hoverFrom="hover:from-chaoticRed" hoverTo="hover:to-red-900" borderColor="border-chaoticRed"/>
       </div>
 
-      {/* start modal test */}
+     
       <div className="flex flex-col items-center justify-center p-4">
         {/* Button to open modal */}
         <button
           onClick={() => setIsModalOpen(true)}
-          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-chaoticRed to-red-900"
         >
           View and Print
         </button>

@@ -13,6 +13,7 @@ import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
 import dndBanner from "../../../public/images/dnd2000Logo.png";
+import lawfulTile from "../../../public/images/lawfulTile.png"
 import Modal from "../ui/Modal";
 import Link from "next/link";
 
@@ -71,6 +72,31 @@ export default function Standard() {
       setSpellCaster(false);
     }
   }, [selectedClass]);
+
+  const CardWithBackground = ({
+    imageUrl,
+    title,
+    text,
+   
+  }) => {
+    return (
+      <div className="relative h-60 w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg">
+        <div
+          className="absolute inset-0 bg-cover bg-center "
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        ></div>
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center text-white">
+          <h2 className="text-5xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
+            {title}
+          </h2>
+          <p className="text-xl font-semibold mb-4 font-[family-name:var(--font-imFell)]">
+            {text}
+          </p>
+        </div>
+      </div>
+    );
+  };
 
   function weaponHeaderDisplay() {
     let counts = {};
@@ -426,6 +452,8 @@ export default function Standard() {
     </div>
   );
 
+  
+
   // The accordion component iterates over this array to create the standard page layout
 
   const accordionItems = [
@@ -439,26 +467,21 @@ export default function Standard() {
     { title: "Spells", content: spellsContent },
   ];
   return (
-    <div className="justify-items-center">
+    <div className="justify-items-center mt-10">
+      <CardWithBackground
+          title="Lawful"
+          text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook"
+          imageUrl={lawfulTile.src}
+        />
       <div className="w-10/12 mt-10">
-      <div className="flex justify-center">
-      <Image width={300} src={dndBanner} alt="dungeons and dragons three point five">
-
-      </Image>
-      </div>
-      <div className="text-center mb-10">
-        <h1 className="font-semibold text-4xl font-[family-name:var(--font-imFellSC)] mt-10 mb-2">Standard Mode</h1>
-      <h4 className="text-lg font-[family-name:var(--font-imFell)]">Roll a first-level character from the 2003 Dungeons and Dragons 3.5 Edition <em>Player's Handbook</em>.</h4>
-      </div>
-        <AccordionMulti accordionItems={accordionItems} />
+     
+        <AccordionMulti accordionItems={accordionItems} hoverFrom="hover:from-lawfulBlue" hoverTo="hover:to-cyan-600" borderColor="border-lawfulBlue"/>
       </div>
 
-      {/* start modal test */}
       <div className="flex flex-col items-center justify-center p-4">
-        {/* Button to open modal */}
         <button
           onClick={() => setIsModalOpen(true)}
-          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-sky-600 to-sky-400"
+          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-lawfulBlue to-cyan-600"
         >
           View and Print
         </button>
@@ -493,7 +516,7 @@ export default function Standard() {
           </div>
           <button
             onClick={() => setIsModalOpen(false)}
-            className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-sky-600 to-sky-400 rounded hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-300"
+            className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-lawfulBlue to-cyan-600 rounded hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-300"
           >
             Close
           </button>

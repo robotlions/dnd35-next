@@ -12,6 +12,8 @@ module.exports = {
         foreground: "var(--foreground)",
         'parchment': '#F5E6C1',
         'flame': '#ff4500',
+        'lawfulBlue':'#0A6583',
+        'chaoticRed': '#883035',
       },
     },
   },

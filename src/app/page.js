@@ -1,37 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import lawfulTile from "../../public/images/lawfulTile.png";
-import neutralTile from "../../public/images/neutralTile.png";
-import chaoticTile from "../../public/images/chaoticTile.png";
+import lawfulTile from "../../public/images/lawfulPortrait.png";
+import neutralTile from "../../public/images/neutralPortrait.png";
+import chaoticTile from "../../public/images/chaoticPortrait.png";
+
 
 export default function Home() {
-  const Card = ({
-    title,
-    subtitle,
-    text,
-    buttonText,
-    href,
-    fromColor,
-    toColor,
-  }) => (
-    <div className="bg-stone-200 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow text-center">
-      <h2 className="text-4xl font-semibold mb-4 font-[family-name:var(--font-imFell)]">
-        {title}
-      </h2>
-      <h4 className="text-xl font-semibold mb-4">{subtitle}</h4>
-
-      <p className="text-gray-600 mb-6">{text}</p>
-      <Link href={href}>
-        <button
-          className={`text-white px-4 py-2 rounded transition bg-gradient-to-b ${fromColor} ${toColor}`}
-        >
-          {buttonText}
-        </button>
-      </Link>
-    </div>
-  );
-
+  
   const CardWithBackground = ({
     imageUrl,
     title,
@@ -43,7 +19,7 @@ export default function Home() {
     href,
   }) => {
     return (
-      <div className="relative h-64 w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg">
+      <div className="relative h-screen w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg">
         <div
           className="absolute inset-0 bg-cover bg-center "
           style={{ backgroundImage: `url(${imageUrl})` }}
