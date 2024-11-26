@@ -310,13 +310,13 @@ export const QuickSpellsMain = (props) => {
   }, [props.selectedClass, props.wis, props.chr, props.int]);
 
   const spellDisplay = spArray.map((item, index) => (
-    <div style={{ fontSize: "small" }} key={index}>
-      {item.spellName}({item.level}) -&nbsp;
+    <div className="text-xs" key={index}>
+      {item.spellName}({item.level})
     </div>
   ));
 
   if (loaded) {
-    return <div className="grid grid-cols-2 md:grid-cols-5 gap-3">{spellDisplay}</div>;
+    return <div className="grid grid-cols-2 md:grid-cols-3 gap-3">{spellDisplay}</div>;
   } else {
     return <div></div>;
   }

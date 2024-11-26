@@ -12,7 +12,7 @@ import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
-import lawfulTile from "../../../public/images/lawfulTile.png"
+import lawfulTile from "../../../public/images/lawfulTile.png";
 import { BannerCard } from "../ui/BannerCard";
 import Modal from "../ui/Modal";
 import Link from "next/link";
@@ -72,8 +72,6 @@ export default function Standard() {
       setSpellCaster(false);
     }
   }, [selectedClass]);
-
-
 
   function weaponHeaderDisplay() {
     let counts = {};
@@ -331,7 +329,7 @@ export default function Standard() {
         selectedClass={selectedClass}
         setLearnedSkillsArray={setLearnedSkillsArray}
         setSkillPoints={setSkillPoints}
-        key={[selectedClass,int]}
+        key={[selectedClass, int]}
       />
     </>
   );
@@ -340,9 +338,11 @@ export default function Standard() {
     <div className="accTitle">
       <h2>Feats</h2>
       <div className="flex gap-3">
-      {featArray.map((item, index) => (
-        <div className="text-lg" key={index}>{item.featName}</div>
-      ))}
+        {featArray.map((item, index) => (
+          <div className="text-lg" key={index}>
+            {item.featName}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -429,8 +429,6 @@ export default function Standard() {
     </div>
   );
 
-  
-
   // The accordion component iterates over this array to create the standard page layout
 
   const accordionItems = [
@@ -446,26 +444,25 @@ export default function Standard() {
   return (
     <div className="justify-items-center mt-10">
       <BannerCard
-          title="Lawful"
-          text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook"
-          imageUrl={lawfulTile.src}
-        />
+        title="Lawful"
+        text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook"
+        imageUrl={lawfulTile.src}
+      />
       <div className="w-10/12 mt-10">
-     
-        <AccordionMulti accordionItems={accordionItems} hoverFrom="hover:from-lawfulBlue" hoverTo="hover:to-cyan-600" borderColor="border-lawfulBlue"/>
+        <AccordionMulti
+          accordionItems={accordionItems}
+          hoverFrom="hover:from-lawfulBlue"
+          hoverTo="hover:to-cyan-600"
+          borderColor="border-lawfulBlue"
+        />
       </div>
 
       <div className="flex flex-col items-center justify-center p-4">
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-lawfulBlue to-cyan-600"
-        >
-          View and Print
-        </button>
-
         {/* Modal */}
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">{charName}</h2>
+          <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">
+            {charName}
+          </h2>
           <div>
             <ComponentToPrint
               ref={contentRef}
@@ -506,12 +503,24 @@ export default function Standard() {
           </button>
         </Modal>
       </div>
-      <div className="mb-32 mt-10">
+      <div className="flex gap-3 justify-center mb-20">
         <Link href="/">
-          <button className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-600 to-gray-400">
-            Start Over
+          <button className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700">
+            Back to Home
           </button>
         </Link>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-cyan-600 to-lawfulBlue hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700"
+        >
+          View and Print
+        </button>
+        <button
+          className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700"
+          onClick={() => window.location.reload()}
+        >
+          New Quick Character
+        </button>
       </div>
     </div>
   );

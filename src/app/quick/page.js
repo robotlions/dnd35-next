@@ -1,25 +1,20 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import { AccordionMulti } from "../ui/Accordion";
+
 import * as CharInfo from "../components/CharInfo";
-import { NewScores } from "../components/AbilityScores";
 import { BaseAttack } from "../components/BaseAttack";
-import { StartingSilver } from "../components/Inventory";
 import * as Skills from "../components/Skills";
 import * as Feats from "../components/Feats";
 import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
-import dndBanner from "../../../public/images/dnd2000Logo.png";
-import lawfulTile from "../../../public/images/lawfulTile.png";
 import { BannerCard } from "../ui/BannerCard";
 import neutralTile from "../../../public/images/neutralTile.png";
 import { QuickScores } from "../components/QuickScores";
 import { charNames } from "../Data/CharNames";
-import Modal from "../ui/Modal";
 import Link from "next/link";
+import Modal from "../ui/Modal";
 
 export default function Quick() {
   const [selectedRace, setSelectedRace] = useState("human");
@@ -45,17 +40,13 @@ export default function Quick() {
   const [weaponArray, setWeaponArray] = useState([]);
   const [spellArray, setSpellArray] = useState([]);
   const [learnedSkillsArray, setLearnedSkillsArray] = useState([]);
-  const [skillPoints, setSkillPoints] = useState([]);
   const [rolled, setRolled] = useState(false);
   const [featArray, setFeatArray] = useState([]);
-  const [featSlots, setFeatSlots] = useState(0);
-  const [munchkinMode, setMunchkinMode] = useState(false);
   const [basicEdited, setBasicEdited] = useState(false);
-  const [spellCaster, setSpellCaster] = useState(false);
-  const [show, setShow] = useState(false);
   const [baseAttack, setBaseAttack] = useState(0);
   const [quickCreate, setQuickCreate] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [characterCreated, setCharacterCreated] = useState(false);
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
@@ -109,6 +100,7 @@ export default function Quick() {
     quickRollStats();
     setQuickCreate(true);
     setTotalSilver(500);
+    setCharacterCreated(true);
   }
 
   return (
@@ -120,57 +112,62 @@ export default function Quick() {
       />
 
       <div className="w-10/12 mt-10">
-        <h5 className="text-center font-semibold text-lg mb-3 font-[family-name:var(--font-imFell)]">
-          Choose your race, class and alignment, then hit Go!
-        </h5>
+        {characterCreated === false && (
+          <>
+            <h5 className="text-center font-semibold text-lg mb-3 font-[family-name:var(--font-imFell)]">
+              Choose your race, class and alignment, then hit Go!
+            </h5>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 font-[family-name:var(--font-imFell)]">
-          <div className="col-span-1 ">
-            <CharInfo.AlignmentSelect
-              alignment={alignment}
-              setAlignment={setAlignment}
-            />
-          </div>
-          <div className="col-span-1">
-            <CharInfo.RaceSelect
-              setBasicEdited={setBasicEdited}
-              setSelectedRace={setSelectedRace}
-            />
-          </div>
-          <div className="col-span-1">
-            <CharInfo.ClassSelect
-              setBasicEdited={setBasicEdited}
-              setSelectedClass={setSelectedClass}
-            />
-          </div>
-        </div>
-        <div className="flex justify-center mt-5 mb-5">
-          <button
-            className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-neutralGreen to-emerald-700 hover:bg-gradient-to-b hover:from-emerald-700 hover:to-emerald-500"
-            onClick={() => createInstantCharacter()}
-          >
-            Go!
-          </button>
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 font-[family-name:var(--font-imFell)]">
+              <div className="col-span-1 ">
+                <CharInfo.AlignmentSelect
+                  alignment={alignment}
+                  setAlignment={setAlignment}
+                />
+              </div>
+              <div className="col-span-1">
+                <CharInfo.RaceSelect
+                  setBasicEdited={setBasicEdited}
+                  setSelectedRace={setSelectedRace}
+                />
+              </div>
+              <div className="col-span-1">
+                <CharInfo.ClassSelect
+                  setBasicEdited={setBasicEdited}
+                  setSelectedClass={setSelectedClass}
+                />
+              </div>
+            </div>
+            <div className="flex justify-center mt-5 mb-5">
+              <button
+                className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-emerald-600 to-neutralGreen hover:bg-gradient-to-b hover:from-emerald-500 hover:to-emerald-700"
+                onClick={() => createInstantCharacter()}
+              >
+                Go!
+              </button>
+            </div>
+          </>
+        )}
         <>
+        <h3 className="text-3xl font-semibold text-center mb-10 font-[family-name:var(--font-imFellSC)]">{charName} the {selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)} {selectedClass}</h3>
           <div className="grid grid-cols-12">
             <div className="col-span-12 md:col-span-4">
-              <p>Name: {charName !== "Basic Info" ? charName : ""}</p>
+              <p className="font-semibold">Name: <span className="font-normal">{charName !== "Basic Info" ? charName : ""}</span></p>
             </div>
             <div className="col-span-6 md:col-span-2">
-              <p>Level: {level}</p>
+              <p className="font-semibold">Level: <span className="font-normal">{level}</span></p>
             </div>
             <div className="col-span-6 md:col-span-2">
-              <p>
-                Race:{" "}
-                {selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)}
+              <p className="font-semibold">
+                Race:{" "}<span className="font-medium">
+                {selectedRace.charAt(0).toUpperCase() + selectedRace.slice(1)}</span>
               </p>
             </div>
             <div className="col-span-6 md:col-span-2">
-              <p>Class: {selectedClass}</p>
+              <p className="font-semibold">Class: <span className="font-medium">{selectedClass}</span></p>
             </div>
             <div className="col-span-6 md:col-span-2">
-              <p>Alignment: {alignment}</p>
+              <p className="font-semibold">Alignment: <span className="font-medium">{alignment}</span></p>
             </div>
           </div>
           <br />
@@ -191,19 +188,18 @@ export default function Quick() {
                 setCon={setCon}
                 selectedRace={selectedRace}
                 setRolled={setRolled}
-                munchkinMode={munchkinMode}
               />
               <div>
-                <button
-                  className="mt-3"
-                  onClick={() => quickRollStats()}
-                >
+                <button className="mt-3" onClick={() => quickRollStats()}>
                   Reroll Stats
                 </button>
               </div>
             </div>
 
-            <div className="col-span-6 md:col-span-2" style={{ textAlign: "center" }}>
+            <div
+              className="col-span-6 md:col-span-2"
+              style={{ textAlign: "center" }}
+            >
               <span style={{ fontWeight: "bold" }}>Hit Points:</span>
               <CharInfo.HitPoints
                 setHP={setHP}
@@ -215,7 +211,10 @@ export default function Quick() {
                 featArray={featArray}
               />
             </div>
-            <div className="col-span-6 md:col-span-2" style={{ textAlign: "center" }}>
+            <div
+              className="col-span-6 md:col-span-2"
+              style={{ textAlign: "center" }}
+            >
               <span style={{ fontWeight: "bold" }}>Armor Class:</span>
               <CharInfo.ArmorClass
                 setAC={setAC}
@@ -225,7 +224,10 @@ export default function Quick() {
                 selectedRace={selectedRace}
               />
             </div>
-            <div className="col-span-6 md:col-span-2" style={{ textAlign: "center" }}>
+            <div
+              className="col-span-6 md:col-span-2"
+              style={{ textAlign: "center" }}
+            >
               <CharInfo.SavingThrows
                 level={level}
                 selectedClass={selectedClass}
@@ -234,7 +236,10 @@ export default function Quick() {
                 wis={wis}
               />
             </div>
-            <div className="col-span-6 md:col-span-2" style={{ textAlign: "center" }}>
+            <div
+              className="col-span-6 md:col-span-2"
+              style={{ textAlign: "center" }}
+            >
               <BaseAttack
                 str={str}
                 level={level}
@@ -250,11 +255,9 @@ export default function Quick() {
               <Inventory.WeaponsAndArmorQuick
                 setArmorBonusTotal={setArmorBonusTotal}
                 totalSilver={totalSilver}
-                setArmorMoney={setArmorMoney}
                 updated={updated}
                 setUpdated={setUpdated}
                 setArmorArray={setArmorArray}
-                weaponsMoney={weaponsMoney}
                 weaponArray={weaponArray}
                 setWeaponArray={setWeaponArray}
                 selectedClass={selectedClass}
@@ -295,45 +298,72 @@ export default function Quick() {
               />
             </div>
           </div>
-          <div className="row justify-content-center" style={{ marginTop: 20 }}>
-            <div className="col-auto">
-              <button
-                name="printCharacterButton"
-                variant="secondary rounded-0 bg-gradient"
-                onClick={(e) => handleShow()}
-              >
-                {/* <Button name="printCharacterButton" variant="secondary rounded-0" onClick={(e)=>{console.log(e)}}> */}
-                View and Print Character
-              </button>
-            </div>
-          </div>
-          <div className="row justify-content-center" style={{ marginTop: 20 }}>
-            <div className="col-auto">
-              <button
-                variant="info rounded-0 bg-gradient"
-                onClick={() => window.location.reload()}
-              >
-                Start Over
-              </button>
-            </div>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-auto">
-              <p style={{ marginTop: 50 }}>
-                &copy;2024 by{" "}
-                <a
-                  style={{
-                    textDecoration: "none",
-                    color: "#779241",
-                    fontWeight: "bold",
-                  }}
-                  href="https://chadmusick.com"
+          <div className="flex flex-col items-center justify-center p-4 mt-14">
+            
+
+            {/* Modal */}
+            
+              <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <h2 className="text-xl font-semibold font-[family-name:var(--font-imFellSC)]">
+                  {charName}
+                </h2>
+                <div>
+                  <ComponentToPrint
+                    ref={contentRef}
+                    charName={charName}
+                    selectedClass={selectedClass}
+                    selectedRace={selectedRace}
+                    level={level}
+                    ac={ac}
+                    str={str}
+                    int={int}
+                    wis={wis}
+                    dex={dex}
+                    con={con}
+                    chr={chr}
+                    alignment={alignment}
+                    hp={hp}
+                    silver={totalSilver}
+                    armorArray={armorArray}
+                    weaponArray={weaponArray}
+                    learnedSkillsArray={learnedSkillsArray}
+                    featArray={featArray}
+                    spellArray={spellArray}
+                    baseAttack={baseAttack}
+                  />
+                </div>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-lawfulBlue to-cyan-600 rounded hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-300"
                 >
-                  Chad Musick
-                </a>
-              </p>
-            </div>
+                  Close
+                </button>
+                &nbsp;
+                <button
+                  onClick={handlePrint}
+                  className="px-4 py-2 mt-4 text-white bg-gradient-to-b from-cyan-600 to-lawfulBlue rounded hover:bg-gradient-to-b hover:from-cyan-500 hover:to-cyan-400"
+                >
+                  Print Character
+                </button>
+              </Modal>
+            
           </div>
+          <div className="flex gap-3 justify-center mb-20">
+              <Link href="/">
+                <button className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700">
+                  Back to Home
+                </button>
+              </Link>
+              <button
+              onClick={() => setIsModalOpen(true)}
+              className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-cyan-600 to-lawfulBlue hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700"
+            >
+              View and Print
+            </button>
+              <button className="min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b from-gray-400 to-gray-600 hover:bg-gradient-to-b hover:from-sky-500 hover:to-sky-700" onClick={()=>window.location.reload()}>
+                  New Quick Character
+                </button>
+           </div>
         </>
       </div>
     </div>
