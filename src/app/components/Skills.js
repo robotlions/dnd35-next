@@ -127,72 +127,70 @@ export const SkillEntry = (props) => {
   );
 };
 
-export const SkillsMain = (props) => {
-  const [skillPoints, setSkillPoints] = useState(
-    classSkillPoints[props.selectedClass] + calculateModifier(props.int)
+export const SkillsMain = ({setLearnedSkillsArray, int, selectedClass, level, selectedRace, setSkillPoints}) => {
+  const [skillPointsTemp, setSkillPointsTemp] = useState(
+    classSkillPoints[selectedClass] + calculateModifier(int)
   );
 
-  let raceSkillBonus = props.selectedRace === "human" ? 4 : 0;
+  let raceSkillBonus = selectedRace === "human" ? 4 : 0;
 
   useEffect(() => {
-    setSkillPoints(
+    setSkillPointsTemp(
       4 *
-        ((classSkillPoints[props.selectedClass] +
-          calculateModifier(props.int)) *
-          props.level) +
+        ((classSkillPoints[selectedClass] +
+          calculateModifier(int)) *
+          level) +
         raceSkillBonus
     );
   }, [
-    props.int,
-    props.selectedClass,
-    props.selectedRace,
+    int,
+    selectedClass,
+    selectedRace,
     raceSkillBonus,
-    props.level,
+    level,
   ]);
 
   useEffect(() => {
-    props.setSkillPoints(skillPoints);
-  }, [skillPoints, props]);
-  // useEffect(()=>{
-  //   props.setLearnedSkillsArray(learnedSkills);
-  // }, [learnedSkills])
+    setSkillPoints(skillPointsTemp);
+  }, [skillPointsTemp, setSkillPoints]);
+ 
 
   function triggerArray() {
-    props.setLearnedSkillsArray(learnedSkills);
+    setLearnedSkillsArray(learnedSkills);
   }
 
   // this is a test of a function to reset the skills array when the user changes the character's class
   useEffect(()=>{
     learnedSkills=[];
-    props.setLearnedSkillsArray([]);
-  },[props.selectedClass])
+    setLearnedSkillsArray([]);
+  },[selectedClass, setLearnedSkillsArray])
 
   const skillDisplayClass = Object.values(skillTables)
-    .filter((item) => item[props.selectedClass] === true)
+    .filter((item) => item[selectedClass] === true)
     .map((item, index) => (
       <div key={index} className="col-4">
         <SkillEntry
           triggerArray={triggerArray}
-          level={props.level}
-          selectedClass={props.selectedClass}
+          level={level}
+          selectedClass={selectedClass}
           item={item}
-          skillPoints={skillPoints}
-          setSkillPoints={setSkillPoints}
+          skillPoints={skillPointsTemp}
+          setSkillPoints={setSkillPointsTemp}
         />
       </div>
     ));
 
   const skillDisplayCrossClass = Object.values(skillTables)
-    .filter((item) => item[props.selectedClass] === false)
+    .filter((item) => item[selectedClass] === false)
     .map((item, index) => (
       <div key={index} className="col-4">
         <SkillEntry
           triggerArray={triggerArray}
-          level={props.level}
-          selectedClass={props.selectedClass}
+          level={level}
+          selectedClass={selectedClass}
           item={item}
-          skillPoints={skillPoints}
-          setSkillPoints={setSkillPoints}
+          skillPoints={skillPointsTemp}
+          setSkillPoints={setSkillPointsTemp}
         />
       </div>
     ));
@@ -200,7 +198,7 @@ export const SkillsMain = (props) => {
   return (
     <>
       <div style={{ fontSize: "large", fontWeight: "bold" }}>
-        Skill Points Remaining: {skillPoints}
+        Skill Points Remaining: {skillPointsTemp}
       </div>
       <br />
       <h5>
@@ -213,7 +211,7 @@ export const SkillsMain = (props) => {
       </h5>
       <br />
       <div style={{ fontSize: "large", fontWeight: "bold" }}>
-        Skill Points Remaining: {skillPoints}
+        Skill Points Remaining: {skillPointsTemp}
       </div>
       <br />
       <div className="grid grid-cols-2 md:grid-cols-4">
