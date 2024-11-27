@@ -221,34 +221,34 @@ export const SkillsMain = ({setLearnedSkillsArray, int, selectedClass, level, se
   );
 };
 
-export const SkillsQuick = (props) => {
+export const SkillsQuick = ({selectedRace, quickCreate, selectedClass, int, setLearnedSkillsArray}) => {
   function rando(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  const racialBonus = RaceBonuses[props.selectedRace];
+  const racialBonus = RaceBonuses[selectedRace];
 
   useEffect(() => {
-    if (props.quickCreate === true) {
+    if (quickCreate === true) {
       learnedSkills = [];
-      props.setLearnedSkillsArray([]);
+      setLearnedSkillsArray([]);
       Object.values(skillTables)
         // .filter((item) => item.startingSkill.includes(props.selectedClass))
-        .filter((item) => item[props.selectedClass] === true)
+        .filter((item) => item[selectedClass] === true)
         .map((item, index) => learnedSkills.push(item));
       learnedSkills.map((item) => (item.skillLevel = 4));
       let difference =
         learnedSkills.length -
-        (quickClassSkillPoints[props.selectedClass] +
-          calculateModifier(props.int + racialBonus.bonusInt));
+        (quickClassSkillPoints[selectedClass] +
+          calculateModifier(int + racialBonus.bonusInt));
       for (let i = 0; i < difference; i++) {
         let v = rando(0, learnedSkills.length - 1);
         learnedSkills.splice(v, 1);
       }
 
-      props.setLearnedSkillsArray(learnedSkills);
+      setLearnedSkillsArray(learnedSkills);
     }
-  }, [props.quickCreate, props.selectedClass, props.selectedRace, props.int]);
+  }, [quickCreate, selectedClass, selectedRace, int, racialBonus.bonusInt]);
 
   const quickSkillsDisplay = learnedSkills.map((item, index) => (
     <span style={{ fontSize: "small" }} key={index}>

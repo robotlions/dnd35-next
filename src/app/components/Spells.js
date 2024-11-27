@@ -123,7 +123,7 @@ export const SpellListing = (props) => {
   );
 };
 
-export const SpellsMain = (props) => {
+export const SpellsMain = ({setSpellArray, setUpdated, updated, selectedClass, int, wis, chr, level, spellCaster}) => {
   const [level0, setLevel0] = useState(null);
   const [level1, setLevel1] = useState(null);
   const [level2, setLevel2] = useState(null);
@@ -142,59 +142,79 @@ export const SpellsMain = (props) => {
   }
 
   function triggerUpdate() {
-    props.setSpellArray(spArray);
-    props.setUpdated(!props.updated);
+    setSpellArray(spArray);
+    setUpdated(!updated);
   }
+
+ 
 
   useEffect(()=>{
     spArray=[];
-    props.setSpellArray([]);
-  },[props.selectedClass, props.int, props.wis, props.chr])
+    setSpellArray([]);
+  },[selectedClass, int, wis, chr])
 
   useEffect(() => {
     // let mod = calculateModifier(props.int);
     let classMod;
     if (
-      props.selectedClass !== "Barbarian" &&
-      props.selectedClass !== "Monk" &&
-      props.selectedClass !== "Rogue" &&
-      props.selectedClass !== "Fighter"
+      selectedClass !== "Barbarian" &&
+      selectedClass !== "Monk" &&
+      selectedClass !== "Rogue" &&
+      selectedClass !== "Fighter"
     ) {
       if (
-        props.selectedClass === "Sorcerer" ||
-        props.selectedClass === "Bard"
+        selectedClass === "Sorcerer" ||
+        selectedClass === "Bard"
       ) {
-        classMod = props.chr;
+        classMod = chr;
       }
-      if (props.selectedClass === "Wizard") {
-        classMod = props.int;
+      if (selectedClass === "Wizard") {
+        classMod = int;
       }
       if (
-        props.selectedClass === "Cleric" ||
-        props.selectedClass === "Druid" ||
-        props.selectedClass === "Paladin" ||
-        props.selectedClass === "Ranger"
+        selectedClass === "Cleric" ||
+        selectedClass === "Druid" ||
+        selectedClass === "Paladin" ||
+        selectedClass === "Ranger"
       ) {
-        classMod = props.wis;
+        classMod = wis;
       }
       let mod = calculateModifier(classMod);
-      Object.entries(KnownSpells[props.selectedClass][props.level]).map(
+      Object.entries(KnownSpells[selectedClass][level]).map(
         ([key, value], index) =>
           value != null && setSpellSlotsInState(`setLevel${key}`, value + mod)
       );
     }
-  }, [props.level, props.selectedClass, props.int]);
+  }, [level, selectedClass, int]);
 
-  let lvlCheck = KnownSpells[props.selectedClass][props.level];
-  let spellObject = SpellLists[props.selectedClass];
+  
 
   function checkLevel(lvlFilter) {
+    if(selectedClass !== "Barbarian" &&
+          
+      selectedClass !== "Monk" &&
+      selectedClass !== "Rogue" &&
+      selectedClass !== "Fighter"){
+    let lvlCheck = KnownSpells[selectedClass][level];
+    let spellObject = SpellLists[selectedClass];
+
     let check = Object.values(spellObject)
       .filter((item) => lvlCheck[item.level] > 0)
       .filter((item) => item.level === lvlFilter)
       return(check)
+      }
+      else{
+        return;
+      }
   }
-
+  if( selectedClass == "Barbarian" ||
+          
+    selectedClass == "Monk" ||
+    selectedClass == "Rogue" ||
+    selectedClass == "Fighter"){
+      return <p>{selectedClass} is not a spellcasting class.</p>
+    }
+else{
   return (
     <div>
       <div className="font-semibold mb-2">
@@ -212,11 +232,7 @@ export const SpellsMain = (props) => {
        <div>{checkLevel(9).length>0 && `Level 9: ${level9}`}</div>
       </div>
       <div>
-        {props.selectedClass !== "Barbarian" &&
-          props.selectedClass !== "Barbarian" &&
-          props.selectedClass !== "Monk" &&
-          props.selectedClass !== "Rogue" &&
-          props.selectedClass !== "Fighter" && (
+        
             <SpellListing
               level0={level0}
               setLevel0={setLevel0}
@@ -238,15 +254,15 @@ export const SpellsMain = (props) => {
               setLevel8={setLevel8}
               level9={level9}
               setLevel9={setLevel9}
-              selectedClass={props.selectedClass}
-              level={props.level}
+              selectedClass={selectedClass}
+              level={level}
               triggerUpdate={triggerUpdate}
-              spellCaster={props.spellCaster}
+              spellCaster={spellCaster}
             />
-          )}
+          
       </div>
     </div>
-  );
+  )};
 };
 
 export const QuickSpellsMain = (props) => {
