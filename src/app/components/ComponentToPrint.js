@@ -33,8 +33,8 @@ export const ComponentToPrint = forwardRef((props, ref) => {
         <div className="col">Max Dex Bonus: {item.maxDexBonus}</div>
         <div className="col">Armor Check: {item.armorCheck}</div>
         <div className="col">Spell Fail: {item.spellFail}</div>
-        <div className="col">Speed 30': {item.speed30}</div>
-        <div className="col">Speed 20': {item.speed20}</div>
+        <div className="col">Speed 30: {item.speed30}</div>
+        <div className="col">Speed 20: {item.speed20}</div>
       </div>
     ));
   }
@@ -441,3 +441,5 @@ export const ComponentToPrint = forwardRef((props, ref) => {
     </div>
   );
 });
+
+ComponentToPrint.displayName = "CharacterPrint"

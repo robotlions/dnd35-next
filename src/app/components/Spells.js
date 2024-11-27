@@ -265,41 +265,46 @@ else{
   )};
 };
 
-export const QuickSpellsMain = (props) => {
+export const QuickSpellsMain = ({setSpellArray, selectedClass, chr, int, wis, level}) => {
   const [loaded, setLoaded] = useState(false);
   let classMod;
 
-  function calculateModifier() {
-    return -5 + Math.floor(1 * (classMod / 2));
-  }
 
-  useEffect(() => {
-    // let mod = calculateModifier(props.int);
+
+  
+
+  
     if (
-      !["Barbarian", "Monk", "Rogue", "Fighter"].includes(props.selectedClass)
+      !["Barbarian", "Monk", "Rogue", "Fighter"].includes(selectedClass)
     ) {
-      if (["Sorcerer", "Bard"].includes(props.selectedClass)) {
-        classMod = props.chr;
-      } else if (props.selectedClass === "Wizard") {
-        classMod = props.int;
+      if (["Sorcerer", "Bard"].includes(selectedClass)) {
+        classMod = chr;
+      } else if (selectedClass === "Wizard") {
+        classMod = int;
       } else if (
-        ["Cleric", "Druid", "Paladin", "Ranger"].includes(props.selectedClass)
+        ["Cleric", "Druid", "Paladin", "Ranger"].includes(selectedClass)
       ) {
-        classMod = props.wis;
+        classMod = wis;
       }
     }
-  }, [props.level, props.selectedClass, props.int, props.wis, props.chr]);
+ 
 
   useEffect(() => {
+    if(loaded===true){
+      return;
+    }
+    function calculateModifier() {
+      return -5 + Math.floor(1 * (classMod / 2));
+    }
     let tempArray = [];
     spArray = [];
     if (
-      ["Fighter", "Monk", "Barbarian", "Rogue"].includes(props.selectedClass)
+      ["Fighter", "Monk", "Barbarian", "Rogue"].includes(selectedClass)
     ) {
       return;
     } else {
-      let spellSlots = KnownSpells[props.selectedClass][props.level];
-      let spellObject = SpellLists[props.selectedClass];
+      let spellSlots = KnownSpells[selectedClass][level];
+      let spellObject = SpellLists[selectedClass];
       Object.entries(spellSlots).forEach(([key, value]) => {
         if (value != null) {
           Object.values(spellObject)
@@ -307,7 +312,7 @@ export const QuickSpellsMain = (props) => {
             .map((item) => tempArray.push(item));
           if (
             ["Bard", "Wizard", "Sorcerer", "Ranger", "Paladin"].includes(
-              props.selectedClass
+              selectedClass
             )
           ) {
             let difference =
@@ -320,10 +325,10 @@ export const QuickSpellsMain = (props) => {
           tempArray.forEach((item) => spArray.push(item));
         }
       });
-      props.setSpellArray(spArray);
+      setSpellArray(spArray);
       setLoaded(true);
     }
-  }, [props.selectedClass, props.wis, props.chr, props.int]);
+  }, [classMod, loaded, selectedClass, wis, chr, int, level, setSpellArray]);
 
   const spellDisplay = spArray.map((item, index) => (
     <div className="text-xs" key={index}>
