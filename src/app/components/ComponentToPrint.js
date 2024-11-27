@@ -80,7 +80,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
         .filter((item) => lvlCheck[item.level] > 0)
         .filter((item) => item.level === lvlFilter)
         .map((item, index) => (
-          <div key={index} className="col-2">
+          <div key={index} className="mb-2">
             {item.spellName}
           </div>
         ));
@@ -148,7 +148,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
             <>
               <br />
               <h6 className="font-semibold">Level 7</h6>
-              <div className="flex gap-2">{displayList(7)}</div>
+              <div className="grid grid-cols-6 text-xs">{displayList(7)}</div>
             </>
           )}
           {displayList(8).length > 0 && (
@@ -435,7 +435,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
       </div>
       {/* <div className="pagebreak"></div> */}
       <div className="text-sm font-semibold">Spells</div>
-      <div className="border-solid border-2 border-gray-500 p-1">
+      <div className="border-solid border-2 border-gray-500">
         {showSpells()}
       </div>
     </div>

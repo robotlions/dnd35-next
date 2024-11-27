@@ -432,21 +432,29 @@ export default function Quick() {
 
       <div className="w-10/12 mt-10">
         {characterCreated === false ? introBlock : characterBlock}
-        <div className="flex gap-3 justify-center mb-20 mt-20">
+        <div className="flex gap-3 flex-col md:flex-row justify-center mb-20">
+        <div>
           <Link href="/">
             <CustomButton color="gray" label="Back to Home" />
           </Link>
-          <CustomButton
-            color="blue"
-            label="View and Print"
-            onClick={() => setIsModalOpen(true)}
-          />
+        </div>
+        <div>
+          {characterCreated === true && (
+            <CustomButton
+              color="blue"
+              label="View and Print"
+              onClick={() => setIsModalOpen(true)}
+            />
+          )}
+        </div>
+        <div>
           <CustomButton
             color="gray"
-            label="New Quick Character"
+            label="Start Over"
             onClick={() => window.location.reload()}
           />
         </div>
+      </div>
       </div>
     </div>
   );

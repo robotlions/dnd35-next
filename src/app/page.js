@@ -38,7 +38,7 @@ export default function Home() {
           </p>
           <Link href={href}>
             <button
-              className={`font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${fromColor} ${toColor}`}
+              className={`font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${fromColor} ${toColor} shadow`}
             >
               {buttonText}
             </button>
@@ -50,15 +50,15 @@ export default function Home() {
 
   const CardRow = () => {
     return (
-      <div className="flex flex-col sm:flex-row gap-2 justify-center mt-32 mx-6">
+      <div className="flex flex-col sm:flex-row gap-2 justify-center mt-32 mx-6 mb-20">
         <CardWithBackground
           title="Lawful"
           subtitle="(Standard Character)"
           text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook"
           buttonText="Create Character"
           href="/standard"
-          fromColor="from-sky-600"
-          toColor="to-sky-400"
+          fromColor="from-sky-400"
+          toColor="to-sky-600"
           imageUrl={lawfulTile.src}
         />
         <CardWithBackground
@@ -67,8 +67,8 @@ export default function Home() {
           text="Choose a race, class and aligment, then create the character with a single click."
           buttonText="Create Character"
           href="/quick"
-          fromColor="from-emerald-600"
-          toColor="to-emerald-400"
+          fromColor="from-emerald-400"
+          toColor="to-emerald-600"
           imageUrl={neutralTile.src}
         />
         <CardWithBackground
@@ -77,8 +77,8 @@ export default function Home() {
           text="Manually input level and ability scores, start with a million silver. Pure chaos."
           buttonText="Create Character"
           href="/custom"
-          fromColor="from-rose-600"
-          toColor="to-rose-400"
+          fromColor="from-rose-400"
+          toColor="to-rose-600"
           imageUrl={chaoticTile.src}
         />
       </div>

@@ -507,20 +507,28 @@ export default function Custom() {
           </div>
         </Modal>
       </div>
-      <div className="flex gap-3 justify-center mb-20">
-        <Link href="/">
-          <CustomButton color="gray" label="Back to Home" />
-        </Link>
-        <CustomButton
-          color="blue"
-          label="View and Print"
-          onClick={() => setIsModalOpen(true)}
-        />
-        <CustomButton
-          color="gray"
-          label="Start Over"
-          onClick={() => window.location.reload()}
-        />
+      <div className="flex gap-3 flex-col md:flex-row justify-center mb-20">
+        <div>
+          <Link href="/">
+            <CustomButton color="gray" label="Back to Home" />
+          </Link>
+        </div>
+        <div>
+          {basicEdited === true && (
+            <CustomButton
+              color="blue"
+              label="View and Print"
+              onClick={() => setIsModalOpen(true)}
+            />
+          )}
+        </div>
+        <div>
+          <CustomButton
+            color="gray"
+            label="Start Over"
+            onClick={() => window.location.reload()}
+          />
+        </div>
       </div>
     </div>
   );

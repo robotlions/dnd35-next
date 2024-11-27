@@ -30,9 +30,12 @@ export const CharName = (props) => {
       placeholder="Character Name"
       onChange={(e) => {
         props.setCharName(e.target.value);
+        setThisState(e.target.value);
       }}
       onBlur={(e) => {
         props.setBasicEdited(true);
+        props.setCharName(e.target.value);
+        setThisState(e.target.value);
       }}
       onKeyDown={handleKeyDown}
     />
