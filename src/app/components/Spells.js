@@ -151,7 +151,7 @@ export const SpellsMain = ({setSpellArray, setUpdated, updated, selectedClass, i
   useEffect(()=>{
     spArray=[];
     setSpellArray([]);
-  },[selectedClass, int, wis, chr])
+  },[selectedClass, int, wis, chr, setSpellArray])
 
   useEffect(() => {
     // let mod = calculateModifier(props.int);
@@ -185,7 +185,7 @@ export const SpellsMain = ({setSpellArray, setUpdated, updated, selectedClass, i
           value != null && setSpellSlotsInState(`setLevel${key}`, value + mod)
       );
     }
-  }, [level, selectedClass, int]);
+  }, [level, selectedClass, int, chr, wis]);
 
   
 

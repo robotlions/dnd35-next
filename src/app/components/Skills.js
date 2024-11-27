@@ -248,7 +248,7 @@ export const SkillsQuick = ({selectedRace, quickCreate, selectedClass, int, setL
 
       setLearnedSkillsArray(learnedSkills);
     }
-  }, [quickCreate, selectedClass, selectedRace, int, racialBonus.bonusInt]);
+  }, [quickCreate, selectedClass, selectedRace, int, racialBonus.bonusInt, setLearnedSkillsArray]);
 
   const quickSkillsDisplay = learnedSkills.map((item, index) => (
     <span style={{ fontSize: "small" }} key={index}>
