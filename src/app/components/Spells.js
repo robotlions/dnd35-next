@@ -219,7 +219,7 @@ else{
     <div>
       <div className="font-semibold mb-2">
         Available Spells:</div>
-        <div className="flex gap-3 mb-2">
+        <div className="grid grid-cols-3 md:grid-cols-6">
         <div>{checkLevel(0).length>0 && `Level 0: ${level0}`}</div>
         <div> {checkLevel(1).length>0 && `Level 1: ${level1}`}</div>
         <div>{checkLevel(2).length>0 && `Level 2: ${level2}`}</div>

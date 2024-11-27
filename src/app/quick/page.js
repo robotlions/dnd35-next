@@ -423,7 +423,7 @@ export default function Quick() {
   );
 
   return (
-    <div className="justify-items-center mt-10 font-[family-name:var(--font-imFell)]">
+    <div className="grid grid-cols-1 justify-items-center mt-10 font-[family-name:var(--font-imFell)]">
       <BannerCard
         title="Neutral"
         text="Choose a race, class and aligment, then create the character with a single click."
@@ -432,7 +432,8 @@ export default function Quick() {
 
       <div className="w-10/12 mt-10">
         {characterCreated === false ? introBlock : characterBlock}
-        <div className="flex gap-3 flex-col md:flex-row justify-center mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-3 justify-items-center mb-20">
+        
         <div>
           <Link href="/">
             <CustomButton color="gray" label="Back to Home" />

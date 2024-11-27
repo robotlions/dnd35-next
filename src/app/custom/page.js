@@ -446,7 +446,7 @@ export default function Custom() {
     { title: "Spells", content: spellsContent },
   ];
   return (
-    <div className="justify-items-center mt-10">
+    <div className="grid grid-cols-1 justify-items-center mt-10">
       <BannerCard
         title="Chaotic"
         text="Manually input level and ability scores, start with a million silver. Pure chaos."
@@ -507,7 +507,8 @@ export default function Custom() {
           </div>
         </Modal>
       </div>
-      <div className="flex gap-3 flex-col md:flex-row justify-center mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-3 justify-items-center mb-20">
+      
         <div>
           <Link href="/">
             <CustomButton color="gray" label="Back to Home" />

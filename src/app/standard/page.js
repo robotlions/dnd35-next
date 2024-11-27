@@ -17,8 +17,6 @@ import Modal from "../ui/Modal";
 import Link from "next/link";
 import { CustomButton } from "../ui/Buttons";
 
-
-
 export default function Standard() {
   const [selectedRace, setSelectedRace] = useState("human");
   const [selectedClass, setSelectedClass] = useState("Fighter");
@@ -57,8 +55,10 @@ export default function Standard() {
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
-  const handlePrint = useReactToPrint({ contentRef, documentTitle: `${charName} the ${selectedClass}` });
-
+  const handlePrint = useReactToPrint({
+    contentRef,
+    documentTitle: `${charName} the ${selectedClass}`,
+  });
 
   useEffect(() => {
     if (
@@ -115,8 +115,6 @@ export default function Standard() {
       </div>
     ));
   }
-
-  
 
   const charInfoHeader = (
     <div className="accTitle">
@@ -439,7 +437,6 @@ export default function Standard() {
     </div>
   );
 
-
   // The accordion component iterates over this array to create the standard page layout
 
   const accordionItems = [
@@ -453,7 +450,7 @@ export default function Standard() {
     { title: "Spells", content: spellsContent },
   ];
   return (
-    <div className="justify-items-center mt-10">
+    <div className="grid grid-cols-1 justify-items-center mt-10">
       <BannerCard
         title="Lawful"
         text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook"
@@ -500,21 +497,42 @@ export default function Standard() {
             />
           </div>
           <div className="mt-5">
-          <CustomButton color="gray" label="Close" onClick={() => setIsModalOpen(false)} />
-          &nbsp;
-          <CustomButton color="blue" label="Print Character" onClick={handlePrint} />
-        </div>
+            <CustomButton
+              color="gray"
+              label="Close"
+              onClick={() => setIsModalOpen(false)}
+            />
+            &nbsp;
+            <CustomButton
+              color="blue"
+              label="Print Character"
+              onClick={handlePrint}
+            />
+          </div>
         </Modal>
-        
       </div>
-      <div className="flex gap-3 flex-col md:flex-row justify-center mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-3 justify-items-center mb-20">
         <div>
-        <Link href="/">
-          <CustomButton color="gray" label="Back to Home" />
-        </Link></div>
-       <div>
-       {basicEdited===true && <CustomButton color="blue" label="View and Print" onClick={() => setIsModalOpen(true)} />}</div>
-       <div><CustomButton color="gray" label="Start Over" onClick={() => window.location.reload()} /></div>
+          <Link href="/">
+            <CustomButton color="gray" label="Back to Home" />
+          </Link>
+        </div>
+        <div>
+          {basicEdited === true && (
+            <CustomButton
+              color="blue"
+              label="View and Print"
+              onClick={() => setIsModalOpen(true)}
+            />
+          )}
+        </div>
+        <div>
+          <CustomButton
+            color="gray"
+            label="Start Over"
+            onClick={() => window.location.reload()}
+          />
+        </div>
       </div>
     </div>
   );

@@ -214,7 +214,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
   );
 
   return (
-    <div className="mx-10 font-[family-name:var(--font-imFell)]" ref={ref}>
+    <div className="font-[family-name:var(--font-imFell)]" ref={ref}>
       <div className="flex justify-center">
         <Image
           alt="vintage d&d logo"
