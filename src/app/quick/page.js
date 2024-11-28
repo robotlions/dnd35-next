@@ -29,12 +29,8 @@ export default function Quick() {
   const [charName, setCharName] = useState("Basic Info");
   const [level, setLevel] = useState(1);
   const [totalSilver, setTotalSilver] = useState(0);
-  const [updated, setUpdated] = useState(false);
-  const [armorMoney, setArmorMoney] = useState(0);
   const [ac, setAC] = useState(10);
-  // const [armorBonusTotal, setArmorBonusTotal] = useState(0);
   const [baseAC, setBaseAC] = useState(0);
-  const [weaponsMoney, setWeaponsMoney] = useState(0);
   const [alignment, setAlignment] = useState("Lawful Good");
   const [hp, setHP] = useState(0);
   const [armorArray, setArmorArray] = useState([]);
@@ -49,7 +45,6 @@ export default function Quick() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [characterCreated, setCharacterCreated] = useState(false);
 
-  const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
   const handlePrint = useReactToPrint({
     contentRef,
@@ -60,9 +55,7 @@ export default function Quick() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  // function armorBonusTotal() {
-  //   return armorArray.reduce((a, b) => a + b.armorBonus, 0);
-  // }
+  
 
   const armorBonusTotal = armorArray.reduce((a, b) => a + b.armorBonus, 0);
 
