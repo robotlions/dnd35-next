@@ -214,7 +214,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
   );
 
   return (
-    <div className="font-[family-name:var(--font-imFell)]" ref={ref}>
+    <div className="sm:p-8 md:p-8 font-[family-name:var(--font-imFell)]" ref={ref}>
       <div className="flex justify-center">
         <Image
           alt="vintage d&d logo"
@@ -435,7 +435,7 @@ export const ComponentToPrint = forwardRef((props, ref) => {
       </div>
       {/* <div className="pagebreak"></div> */}
       <div className="text-sm font-semibold">Spells</div>
-      <div className="border-solid border-2 border-gray-500">
+      <div className="border-solid border-2 border-gray-500 p-1">
         {showSpells()}
       </div>
     </div>
