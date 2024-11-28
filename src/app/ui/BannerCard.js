@@ -5,7 +5,7 @@ export const BannerCard = ({
    
   }) => {
     return (
-      <div className="relative h-60 w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg">
+      <div className="relative h-60 w-full max-w-md mx-auto overflow-hidden rounded-none md:rounded-lg shadow-lg">
         <div
           className="absolute inset-0 bg-cover bg-center "
           style={{ backgroundImage: `url(${imageUrl})` }}

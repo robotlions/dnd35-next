@@ -108,21 +108,23 @@ export const SkillEntry = (props) => {
   }
 
   return (
-    <div>
+    <div className="grid grid-cols-12">
+      <div className="col-span-2">
       <button
         className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
         onClick={() => addSkillRank()}
       >
         +
-      </button>{" "}
-      {skillRank}{" "}
+      </button></div>
+      <div className="text-3xl col-span-2 text-center">{skillRank}{" "}</div>
+      <div className="col-span-2">
       <button
         className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
         onClick={() => subtractSkillRank()}
       >
         -
-      </button>{" "}
-      {props.item.skillName}
+      </button>{" "}</div>
+      <div className="col-span-6">{props.item.skillName}</div>
     </div>
   );
 };
@@ -204,7 +206,7 @@ export const SkillsMain = ({setLearnedSkillsArray, int, selectedClass, level, se
       <h5>
         Class Skills <em>(Spend 1 point)</em>
       </h5>
-      <div className="grid grid-cols-2 md:grid-cols-4">{skillDisplayClass}</div>
+      <div className="grid grid-cols-1 md:grid-cols-4">{skillDisplayClass}</div>
       <br />
       <h5>
         Cross-Class Skills <em>(Spend 2 points)</em>
@@ -214,7 +216,7 @@ export const SkillsMain = ({setLearnedSkillsArray, int, selectedClass, level, se
         Skill Points Remaining: {skillPointsTemp}
       </div>
       <br />
-      <div className="grid grid-cols-2 md:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-4">
         {skillDisplayCrossClass}
       </div>
     </>
