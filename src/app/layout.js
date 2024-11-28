@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${raleway.variable} ${imFellSC.variable} ${imFell.variable} bg-gray-50 antialiased`}>
-      <h1 className="hidden">Rolled School character creator for third edtion dungeons and dragons version 3.5. Free character generator for D&D 3.5 from the Player's Handbook. TSR Wizards of the Coast, role playing game, rpg, old school.</h1>
+      <h1 className="hidden">Rolled School character creator for third edtion dungeons and dragons version 3.5. Free character generator for D&D 3.5 from the Player&apos;s Handbook. TSR Wizards of the Coast, role playing game, rpg, old school.</h1>
       <GoogleAnalytics gaId="G-XFYYE6YFJB" />
         <TopNav />
         {children}
