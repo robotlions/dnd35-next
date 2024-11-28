@@ -53,7 +53,10 @@ export default function Custom() {
 
   const nameCheck = charName !== "" ? charName : "Basic Info";
   const contentRef = useRef(null);
-  const handlePrint = useReactToPrint({ contentRef });
+  const handlePrint = useReactToPrint({
+    contentRef,
+    documentTitle: `${charName} the ${selectedClass}`,
+  });
 
   useEffect(() => {
     if (
