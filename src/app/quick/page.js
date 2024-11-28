@@ -61,17 +61,10 @@ export default function Quick() {
   //   return armorArray.reduce((a, b) => a + b.armorBonus, 0);
   // }
 
-  const armorBonusTotal =
-    armorArray.reduce((a, b) => a + b.armorBonus, 0);
-  
+  const armorBonusTotal = armorArray.reduce((a, b) => a + b.armorBonus, 0);
 
- 
   const purchasedArmor = armorArray.map((item, index) => (
-    <div
-      key={index}
-      className="grid grid-cols-3 text-xs"
-      
-    >
+    <div key={index} className="grid grid-cols-3 text-xs">
       <div>
         <p className="font-semibold">{item.armorName}</p>
       </div>
@@ -86,11 +79,7 @@ export default function Quick() {
   ));
 
   const purchasedWeapons = weaponArray.map((item, index) => (
-    <div
-      key={index}
-      className="grid grid-cols-3 text-xs"
-      
-    >
+    <div key={index} className="grid grid-cols-3 text-xs">
       <div>
         <p className="font-semibold">{item.weaponName}</p>
       </div>
@@ -102,8 +91,6 @@ export default function Quick() {
       </div>
     </div>
   ));
-  
-  
 
   function quickRollStats() {
     let statArray = [];
@@ -152,9 +139,8 @@ export default function Quick() {
     setCharacterCreated(true);
   }
 
-
   const introBlock = (
-    <>
+    <div className="mb-20">
       <h5 className="text-center font-semibold text-lg mb-3 font-[family-name:var(--font-imFell)]">
         Choose your race, class and alignment, then hit Go!
       </h5>
@@ -186,7 +172,7 @@ export default function Quick() {
           onClick={() => createInstantCharacter()}
         />
       </div>
-    </>
+    </div>
   );
 
   const characterBlock = (
@@ -326,16 +312,16 @@ export default function Quick() {
           quickCreate={quickCreate}
 
         /> */}
-        <GenerateWeaponsAndArmorQuick
-          // setArmorBonusTotal={setArmorBonusTotal}
-          weaponArray={weaponArray}
-          selectedClass={selectedClass}
-          armorArray={armorArray}
-          setArmorArray={setArmorArray}
-          setWeaponArray={setWeaponArray}
-
-        />
-         {purchasedArmor}{purchasedWeapons}
+          <GenerateWeaponsAndArmorQuick
+            // setArmorBonusTotal={setArmorBonusTotal}
+            weaponArray={weaponArray}
+            selectedClass={selectedClass}
+            armorArray={armorArray}
+            setArmorArray={setArmorArray}
+            setWeaponArray={setWeaponArray}
+          />
+          {purchasedArmor}
+          {purchasedWeapons}
         </div>
 
         <div className="col-span-12 md:col-span-3">
@@ -432,8 +418,8 @@ export default function Quick() {
 
       <div className="w-10/12 mt-10">
         {characterCreated === false ? introBlock : characterBlock}
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-3 justify-items-center mb-20">
-        
         <div>
           <Link href="/">
             <CustomButton color="gray" label="Back to Home" />
@@ -455,7 +441,6 @@ export default function Quick() {
             onClick={() => window.location.reload()}
           />
         </div>
-      </div>
       </div>
     </div>
   );
