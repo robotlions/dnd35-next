@@ -5,7 +5,7 @@ import dnd2000Logo from "../../../public/images/dnd2000Logo.png";
 export default function About() {
   return (
     <div className="flex justify-center font-[family-name:var(--font-imFell)] mb-20">
-      <div className="w-11/12 justify-items-center mt-20">
+      <div className="w-11/12 justify-items-center mt-20 text-center">
         <Image
           src={dnd2000Logo}
           alt="vintage dungeons and dragons shield"
@@ -15,17 +15,17 @@ export default function About() {
           Rolled School
         </h2>
         <br />
-        <h5 className="text-lg font-semibold">
+        <h5 className="text-lg font-semibold text-center">
           Character Creator for Dungeons and Dragons edition 3.5
         </h5>
 
         <br />
-        <p>
-          Based on{" "}
+        <p className="text-center">
+          Based on
           <em>Dungeons and Dragons Players Handbook Core Rulebook 1 v3.5</em>
         </p>
         <p>by</p>
-        <p>Monte Cook, Jonathan Tweet and Skip Williams</p>
+        <p className="text-center">Monte Cook, Jonathan Tweet and Skip Williams</p>
 
         <p>Copyright 2003 by Wizards of the Coast, Inc</p>
         <br />

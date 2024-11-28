@@ -15,6 +15,7 @@ module.exports = {
         'lawfulBlue':'#0A6583',
         'chaoticRed': '#883035',
         'neutralGreen': '#173C23',
+        'buttonBlue': "#356c98",
       },
     },
   },

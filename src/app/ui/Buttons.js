@@ -3,7 +3,7 @@ export function CustomButton(props) {
 
   switch (props.color) {
     case "gray":
-      color = "from-gray-600 to-gray-400";
+      color = "from-gray-500 to-gray-800";
       break;
     case "lawful":
       color = "from-cyan-600 to-lawfulBlue";
@@ -15,13 +15,13 @@ export function CustomButton(props) {
       color = "from-red-700 to-chaoticRed";
       break;
     case "blue":
-      color = " from-sky-500 to-sky-700";
+      color = "from-buttonBlue to-buttonBlue";
       break;
   }
 
   return (
     <button
-      className={`min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${color} hover:bg-gradient-to-b hover:from-sky-400 hover:to-sky-600`}
+      className={`min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${color} hover:bg-gradient-to-b hover:from-zinc-400 hover:to-zinc-500`}
       onClick={props.onClick}
     >
       {props.label}

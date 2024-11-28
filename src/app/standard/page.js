@@ -462,6 +462,7 @@ export default function Standard() {
           hoverFrom="hover:from-lawfulBlue"
           hoverTo="hover:to-cyan-600"
           borderColor="border-lawfulBlue"
+          fromColor="from-lawfulBlue"
         />
       </div>
 

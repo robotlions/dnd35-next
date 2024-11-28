@@ -458,6 +458,7 @@ export default function Custom() {
           hoverFrom="hover:from-chaoticRed"
           hoverTo="hover:to-red-900"
           borderColor="border-chaoticRed"
+          fromColor="from-chaoticRed"
         />
       </div>
 
