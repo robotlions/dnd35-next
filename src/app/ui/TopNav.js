@@ -119,7 +119,9 @@ const TopNav = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-[family-name:var(--font-imFell)]">
+          {/* <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-[family-name:var(--font-imFell)]"> */}
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3" style={{fontFamily: "IMFell"}}>
+            
             <Link
               href="/"
               className="block text-white px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
