@@ -29,11 +29,11 @@ const currentDate = new Date();
 export const metadata = {
   title: "Rolled School",
   description: "Dungeons and Dragons 3.5 Character Creator",
-  metadataBase: new URL('https://dnd35.robotlions.com'),
+  metadataBase: new URL('https://nextjs-demo-ae894.web.app/'),
   openGraph: {
     title:"Rolled School: Dungeons and Dragons 3.5 Character Creator",
     description: "Roll up an old-school D&D character based on the 2003 third edition Player's Handbook",
-    url: "https://dnd35.robotlions.com",
+    url: "https://nextjs-demo-ae894.web.app/",
     type: "website",
     siteName: "Rolled School",
   }
