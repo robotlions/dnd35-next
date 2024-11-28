@@ -497,7 +497,8 @@ export default function Standard() {
               baseAttack={baseAttack}
             />
           </div>
-          <div className="mt-5">
+          
+          <div className="mt-5 flex gap-3 flex-col md:flex-row justify-center">
             <CustomButton
               color="gray"
               label="Close"
@@ -510,6 +511,7 @@ export default function Standard() {
               onClick={handlePrint}
             />
           </div>
+          
         </Modal>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-3 justify-items-center mb-20">

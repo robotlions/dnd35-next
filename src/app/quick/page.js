@@ -393,7 +393,8 @@ export default function Quick() {
               baseAttack={baseAttack}
             />
           </div>
-          <div className="mt-5">
+          <div className="mt-5 flex gap-3 flex-col md:flex-row justify-center">
+
             <CustomButton
               color="gray"
               label="Close"
