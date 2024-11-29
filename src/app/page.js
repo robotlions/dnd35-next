@@ -57,8 +57,8 @@ export default function Home() {
           text="Roll a first-level character in accordance with the D&D 3.5 Player's Handbook"
           buttonText="Create Character"
           href="/standard"
-          fromColor="from-sky-400"
-          toColor="to-sky-600"
+          fromColor="from-gray-300"
+          toColor="to-lawfulButtonTo"
           imageUrl={lawfulTile2.src}
         />
         <CardWithBackground
@@ -67,8 +67,8 @@ export default function Home() {
           text="Choose a race, class and aligment, then create the character with a single click."
           buttonText="Create Character"
           href="/quick"
-          fromColor="from-emerald-400"
-          toColor="to-emerald-600"
+          fromColor="from-gray-300"
+          toColor="to-neutralButtonTo"
           imageUrl={neutralTile2.src}
         />
         <CardWithBackground
@@ -77,8 +77,8 @@ export default function Home() {
           text="Manually input level and ability scores, start with a million silver. Pure chaos."
           buttonText="Create Character"
           href="/custom"
-          fromColor="from-rose-400"
-          toColor="to-rose-600"
+          fromColor="from-gray-300"
+          toColor="to-chaoticButtonTo"
           imageUrl={chaoticTile2.src}
         />
       </div>
