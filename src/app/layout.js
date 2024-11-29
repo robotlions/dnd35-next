@@ -3,6 +3,8 @@ import "./globals.css";
 import TopNav from "./ui/TopNav";
 import Link from "next/link";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { BottomNav } from "./ui/BottomNav";
+
 
 
 const raleway = localFont({
@@ -50,6 +52,7 @@ export default function RootLayout({ children }) {
         <TopNav />
         {children}
         <p className="font-[family-name:var(--font-imFell)] mt-30 mb-20 text-center">Copyright {currentYear} by <Link href="https://chadmusick.com" className="font-semibold text-lawfulBlue">Chad Musick</Link></p>
+      <BottomNav />
       </body>
     </html>
   );
