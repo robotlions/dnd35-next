@@ -17,6 +17,7 @@ const TopNav = () => {
     { linkName: "Custom Character", href: "/custom" },
 
     { linkName: "About This Site", href: "/about" },
+    {linkName: "robotlions.com", href:"https://robotlions.com"}
   ];
 
   function LinkMap() {
@@ -105,12 +106,12 @@ const TopNav = () => {
           <div className="hidden md:flex md:items-center md:space-x-4">
             <ul className="flex justify-between items-center mx-5 text-base">
               <LinkMap />
-              <Link
+              {/* <Link
                 href="https://robotlions.com"
-                className="font-bold text-xl mb-2 font-[family-name:var(--font-imFell)] ml-5"
+                className="hover:bg-gray-500 rounded px-4 py-2 font-bold text-xl mb-2 font-[family-name:var(--font-imFell)] ml-5"
               >
                 robotlions.com
-              </Link>
+              </Link> */}
             </ul>
           </div>
         </div>
