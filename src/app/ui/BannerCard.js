@@ -12,7 +12,7 @@ export const BannerCard = ({
         ></div>
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center text-white">
-          <h2 className="text-5xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
+          <h2 className="mt-10 text-5xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
             {title}
           </h2>
           <p className="text-xl font-semibold mb-4 font-[family-name:var(--font-imFell)]">

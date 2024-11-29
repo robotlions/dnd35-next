@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import lawfulTile from "../../public/images/lawfulPortrait.png";
-import neutralTile from "../../public/images/neutralPortrait.png";
-import chaoticTile from "../../public/images/chaoticPortrait.png";
+
+import lawfulTile2 from "../../public/images/lawfulPortraitComic.png";
+import neutralTile2 from "../../public/images/neutralPortraitComic.png";
+import chaoticTile2 from "../../public/images/chaoticPortraitComic.png";
 
 
 export default function Home() {
@@ -59,7 +59,7 @@ export default function Home() {
           href="/standard"
           fromColor="from-sky-400"
           toColor="to-sky-600"
-          imageUrl={lawfulTile.src}
+          imageUrl={lawfulTile2.src}
         />
         <CardWithBackground
           title="Neutral"
@@ -69,7 +69,7 @@ export default function Home() {
           href="/quick"
           fromColor="from-emerald-400"
           toColor="to-emerald-600"
-          imageUrl={neutralTile.src}
+          imageUrl={neutralTile2.src}
         />
         <CardWithBackground
           title="Chaotic"
@@ -79,7 +79,7 @@ export default function Home() {
           href="/custom"
           fromColor="from-rose-400"
           toColor="to-rose-600"
-          imageUrl={chaoticTile.src}
+          imageUrl={chaoticTile2.src}
         />
       </div>
     );

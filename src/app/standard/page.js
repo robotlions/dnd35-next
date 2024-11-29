@@ -11,7 +11,7 @@ import * as Spells from "../components/Spells";
 import * as Inventory from "../components/Inventory";
 import { ComponentToPrint } from "../components/ComponentToPrint";
 import { useReactToPrint } from "react-to-print";
-import lawfulTile from "../../../public/images/lawfulTile.png";
+import lawfulTile from "../../../public/images/lawfulBannerComic.png";
 import { BannerCard } from "../ui/BannerCard";
 import Modal from "../ui/Modal";
 import Link from "next/link";
