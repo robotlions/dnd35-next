@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-import lawfulTile2 from "../../public/images/lawfulPortraitComic.png";
+import lawfulTile2 from "../../public/images/lawfulPortraitComic2.png";
 import neutralTile2 from "../../public/images/neutralPortraitComic.png";
 import chaoticTile2 from "../../public/images/chaoticPortraitComic.png";
 
@@ -26,7 +26,7 @@ export default function Home() {
         ></div>
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center text-white">
-          <h2 className="text-4xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
+          <h2 className="text-6xl font-bold mb-2 font-[family-name:var(--font-imFellSC)]">
             {title}
           </h2>
           <h4 className="text-2xl font-bold mb-2 font-[family-name:var(--font-imFell)]">
