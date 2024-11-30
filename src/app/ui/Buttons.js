@@ -9,7 +9,7 @@ export function CustomButton(props) {
       color = "from-cyan-600 to-lawfulBlue";
       break;
     case "neutral":
-      color = "from-emerald-600 to-neutralGreen";
+      color = "from-emerald-400 to-emerald-800";
       break;
     case "chaotic":
       color = "from-red-700 to-chaoticRed";

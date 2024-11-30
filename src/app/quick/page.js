@@ -163,7 +163,7 @@ export default function Quick() {
       <div className="flex justify-center mt-5 mb-5">
         <CustomButton
           label="Go!"
-          color="neutral"
+          color="blue"
           onClick={() => createInstantCharacter()}
         />
       </div>
@@ -229,7 +229,7 @@ export default function Quick() {
             selectedRace={selectedRace}
             setRolled={setRolled}
           />
-          <div className="mt-3">
+          <div className="mt-3 mb-5">
             <CustomButton
               label="Reroll Stats"
               color="blue"
