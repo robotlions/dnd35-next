@@ -292,7 +292,7 @@ export default function Quick() {
       </div>
       <br />
       <div className="grid grid-cols-12">
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 md:col-span-3 mb-3">
           <p style={{ fontWeight: "bold" }}>Weapons and Armor</p>
           {/* <Inventory.WeaponsAndArmorQuick
           setArmorBonusTotal={setArmorBonusTotal}
@@ -319,8 +319,9 @@ export default function Quick() {
           {purchasedWeapons}
         </div>
 
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 md:col-span-3 gap-3">
           <p style={{ fontWeight: "bold" }}>Skills</p>
+          <div className="grid grid-cols-3">
           <Skills.SkillsQuick
             learnedSkillsArray={learnedSkillsArray}
             setLearnedSkillsArray={setLearnedSkillsArray}
@@ -328,17 +329,18 @@ export default function Quick() {
             quickCreate={quickCreate}
             int={int}
             selectedRace={selectedRace}
-          />
+          /></div>
         </div>
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 md:col-span-3 mb-3">
           <p style={{ fontWeight: "bold" }}>Feats</p>
+          <div className="grid grid-cols-3">
           <Feats.FeatsQuick
             featArray={featArray}
             setFeatArray={setFeatArray}
             selectedClass={selectedClass}
             quickCreate={quickCreate}
             selectedRace={selectedRace}
-          />
+          /></div>
         </div>
         <div className="col-span-12 md:col-span-3">
           <p style={{ fontWeight: "bold" }}>Spells(level)</p>

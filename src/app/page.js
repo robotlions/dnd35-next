@@ -2,7 +2,7 @@ import Link from "next/link";
 
 
 import lawfulTile2 from "../../public/images/lawfulPortraitComic2.png";
-import neutralTile2 from "../../public/images/neutralPortraitComic.png";
+import neutralTile2 from "../../public/images/neutralPortraitComic2.png";
 import chaoticTile2 from "../../public/images/chaoticPortraitComic.png";
 
 
