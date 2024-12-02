@@ -21,6 +21,7 @@ export function CustomButton(props) {
 
   return (
     <button
+      id={"Button"+" "+props.label}
       className={`min-w-52 font-[family-name:var(--font-imFell)] px-4 py-2 text-white font-semibold rounded bg-gradient-to-b ${color} hover:bg-gradient-to-b hover:from-zinc-400 hover:to-zinc-500`}
       onClick={props.onClick}
     >
